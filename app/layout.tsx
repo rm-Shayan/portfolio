@@ -6,6 +6,9 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Rao Muhammad Shayan - Portfolio",
   description: "Full Stack Developer Portfolio",
+  other: {
+    'google-adsense-account': 'ca-pub-4708776309734586',
+  },
 };
 
 export default function RootLayout({
