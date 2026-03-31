@@ -7,22 +7,22 @@ export const createCustomTheme = (mode: 'light' | 'dark') => {
     palette: {
       mode,
       primary: {
-        main: '#00f5ff', // Cyan
-        light: '#00b8c8',
+        main: isDark ? '#00f5ff' : '#0284c7', // Neon Cyan vs Deep Sky Blue
+        light: isDark ? '#00b8c8' : '#38bdf8',
         contrastText: isDark ? '#000' : '#fff',
       },
       secondary: {
-        main: '#ff00c8', // Magenta
+        main: isDark ? '#ff00c8' : '#c026d3', // Neon Magenta vs Deep Fuchsia
       },
       background: {
-        default: isDark ? '#020508' : '#f0f4f8',
+        default: isDark ? '#020508' : '#ffffff',
         paper: isDark ? '#050c12' : '#ffffff',
       },
       text: {
-        primary: isDark ? '#cde8f0' : '#1a202c',
-        secondary: isDark ? '#6a9aaa' : '#4a5568',
+        primary: isDark ? '#cde8f0' : '#0f172a',
+        secondary: isDark ? '#6a9aaa' : '#475569',
       },
-      divider: isDark ? 'rgba(0, 245, 255, 0.18)' : 'rgba(0, 184, 200, 0.12)',
+      divider: isDark ? 'rgba(0, 245, 255, 0.18)' : 'rgba(15, 23, 42, 0.08)',
     },
     typography: {
       fontFamily: 'var(--font-rajdhani), sans-serif',
@@ -82,17 +82,17 @@ export const createCustomTheme = (mode: 'light' | 'dark') => {
             transition: 'all 0.25s ease-in-out',
           },
           containedPrimary: {
-            boxShadow: isDark ? '0 0 20px rgba(0, 245, 255, 0.35)' : '0 4px 12px rgba(0, 245, 255, 0.2)',
+            boxShadow: isDark ? '0 0 20px rgba(0, 245, 255, 0.35)' : '0 4px 14px rgba(2, 132, 199, 0.25)',
             '&:hover': {
-              boxShadow: isDark ? '0 0 40px rgba(0, 245, 255, 0.6)' : '0 6px 16px rgba(0, 245, 255, 0.3)',
+              boxShadow: isDark ? '0 0 40px rgba(0, 245, 255, 0.6)' : '0 6px 20px rgba(2, 132, 199, 0.35)',
               transform: 'translateY(-2px)',
             },
           },
           outlinedPrimary: {
             borderWidth: '1px !important',
             '&:hover': {
-              background: isDark ? 'rgba(0, 245, 255, 0.1)' : 'rgba(0, 245, 255, 0.05)',
-              boxShadow: isDark ? '0 0 20px rgba(0, 245, 255, 0.25)' : '0 2px 8px rgba(0, 245, 255, 0.1)',
+              background: isDark ? 'rgba(0, 245, 255, 0.1)' : 'rgba(2, 132, 199, 0.05)',
+              boxShadow: isDark ? '0 0 20px rgba(0, 245, 255, 0.25)' : '0 4px 12px rgba(2, 132, 199, 0.1)',
               transform: 'translateY(-2px)',
             },
           },
@@ -103,9 +103,9 @@ export const createCustomTheme = (mode: 'light' | 'dark') => {
           root: {
             backgroundImage: 'none',
             backgroundColor: isDark ? '#091520' : '#ffffff',
-            border: `1px solid ${isDark ? 'rgba(0, 245, 255, 0.18)' : 'rgba(0, 184, 200, 0.12)'}`,
+            border: `1px solid ${isDark ? 'rgba(0, 245, 255, 0.18)' : 'rgba(15, 23, 42, 0.06)'}`,
             clipPath: 'polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px))',
-            boxShadow: isDark ? 'none' : '0 10px 30px rgba(0, 0, 0, 0.05)',
+            boxShadow: isDark ? 'none' : '0 10px 40px -10px rgba(15, 23, 42, 0.06)',
           },
         },
       },

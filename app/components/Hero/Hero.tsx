@@ -1,11 +1,14 @@
+
+
 'use client';
 
 import React from 'react';
 import { Box, Typography, Container, Button, Stack, useTheme, useMediaQuery } from '@mui/material';
 import { motion, Variants } from 'framer-motion';
-import TerminalWidget from './TerminalWidget';
+// TerminalWidget import assumed to be correct in your project structure
+import TerminalWidget from './TerminalWidget'; 
 import { useSelector } from 'react-redux';
-import { RootState } from '../../../lib/store';
+import { RootState } from '../../../lib/store'; // Adjust import path as needed
 
 // Define variants with explicit typing to resolve the "variant property" error
 const containerVariants: Variants = {
@@ -30,6 +33,7 @@ const itemVariants: Variants = {
 const Hero = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  // Assumes Redux state setup exists
   const mode = useSelector((state: RootState) => state.ui.mode);
   const isDark = mode === 'dark';
 
@@ -45,7 +49,7 @@ const Hero = () => {
         padding: { xs: '6rem 0 3rem', md: '8rem 0 4rem' },
         overflow: 'hidden',
         zIndex: 1,
-        backgroundColor: isDark ? 'var(--bg0)' : '#f8fafc',
+        backgroundColor: isDark ? 'var(--bg0)' : '#ffffff',
       }}
     >
       {/* Ambient Orbs - ONLY in Dark Mode */}
@@ -71,17 +75,6 @@ const Hero = () => {
         </Box>
       )}
 
-      {/* Background Pattern - Light Mode */}
-      {!isDark && (
-        <Box
-          sx={{
-            position: 'absolute', inset: 0, pointerEvents: 'none',
-            background: 'radial-gradient(circle at 50% 50%, rgba(0, 245, 255, 0.03), transparent 70%)',
-            opacity: 0.5,
-          }}
-        />
-      )}
-
       <Container maxWidth="lg">
         <motion.div
           variants={containerVariants}
@@ -89,18 +82,18 @@ const Hero = () => {
           animate="visible"
           style={{ width: '100%' }}
         >
-          {/* Main Flex Layout */}
+          {/* Main Grid Layout */}
           <Box
             sx={{
-                display: 'flex',
-                flexDirection: isMobile ? 'column' : 'row',
+                display: 'grid',
+                gridTemplateColumns: isMobile ? '1fr' : '1.4fr 1fr',
                 alignItems: 'center',
                 gap: isMobile ? '3rem' : '5rem',
             }}
           >
             {/* Left Column (Content) */}
             <Box sx={{ 
-                flex: isMobile ? '1' : '1.4', 
+                width: '100%', 
                 display: 'flex', 
                 flexDirection: 'column', 
                 gap: '1.6rem', 
@@ -262,9 +255,9 @@ const Hero = () => {
                 </motion.div>
             </Box>
 
-            {/* Right Column (Avatar) */}
+            {/* Right Column (Avatar and Rings) */}
             <Box sx={{ 
-                flex: isMobile ? '1' : '1', 
+                width: '100%', 
                 display: 'flex', 
                 justifyContent: 'center', 
                 alignItems: 'center' 
@@ -279,6 +272,9 @@ const Hero = () => {
                       position: 'relative',
                       width: { xs: 280, sm: 340, md: 400 },
                       height: { xs: 280, sm: 340, md: 400 },
+                      // MODIFIED: Combined and simplified negative margins to move the whole avatar group up.
+                      // This ensures a clean look where the avatar and rings are positioned vertically on the grid.
+                      mt: { xs: -4, md: -12, lg: -20 },
                     }}
                   >
                     {/* Glowing Aura */}
@@ -299,8 +295,8 @@ const Hero = () => {
                     <Box
                       sx={{
                         position: 'absolute', inset: -30,
-                        clipPath: 'polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%)',
-                        border: `1px solid ${isDark ? 'rgba(255, 0, 200, 0.4)' : 'rgba(255, 0, 200, 0.2)'}`,
+                        borderRadius: '50%',
+                        border: `2px dashed ${isDark ? 'rgba(255, 0, 200, 0.4)' : 'rgba(192, 38, 211, 0.15)'}`,
                         animation: 'ringRotate 15s linear infinite reverse',
                         '@keyframes ringRotate': { from: { transform: 'rotate(0deg)' }, to: { transform: 'rotate(360deg)' } },
                       }}
@@ -308,21 +304,24 @@ const Hero = () => {
                     <Box
                       sx={{
                         position: 'absolute', inset: -15,
-                        clipPath: 'polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%)',
-                        border: `2px solid ${theme.palette.primary.main}`,
+                        borderRadius: '50%',
+                        border: `2px dashed ${isDark ? theme.palette.primary.main : 'rgba(2, 132, 199, 0.2)'}`,
                         animation: 'ringRotate 10s linear infinite',
                         boxShadow: isDark ? 'inset 0 0 20px rgba(0, 245, 255, 0.2), 0 0 20px rgba(0, 245, 255, 0.2)' : 'none',
                       }}
                     />
 
-                    {/* Hex Avatar Container */}
+                    {/* Circle Avatar Container */}
                     <Box
                       sx={{
                         width: '100%',
                         height: '100%',
-                        clipPath: 'polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%)',
+                        borderRadius: '50%',
                         overflow: 'hidden',
                         position: 'relative',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
                         background: isDark ? 'var(--bg2)' : '#e2e8f0',
                         border: isDark ? 'none' : '2px solid #fff',
                         boxShadow: isDark ? 'none' : '0 10px 40px rgba(0, 0, 0, 0.1)',
@@ -330,6 +329,8 @@ const Hero = () => {
                           width: '100%',
                           height: '100%',
                           objectFit: 'cover',
+                          objectPosition: 'center 10%',
+                          transform: 'scale(1.15)',
                           filter: isDark ? 'saturate(0.9) contrast(1.1)' : 'none',
                         },
                         '&::after': {
@@ -342,7 +343,7 @@ const Hero = () => {
                         },
                       }}
                     >
-                      {/* USER IMAGE PATH */}
+                      {/* Placeholder image. Correct path required. */}
                       <img
                         src="/assets/shayan_portrait.jpg"
                         alt="Rao Muhammad Shayan"
@@ -444,5 +445,6 @@ const Hero = () => {
     </Box>
   );
 };
+
 
 export default Hero;

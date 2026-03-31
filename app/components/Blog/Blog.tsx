@@ -4,6 +4,8 @@ import React from 'react';
 import { Box, Typography, Container, Grid, Button, Stack, useTheme } from '@mui/material';
 import { motion } from 'framer-motion';
 import SectionHeader from '../SectionHeader/SectionHeader';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../lib/store';
 
 const blogPosts = [
     {
@@ -30,8 +32,11 @@ const blogPosts = [
 ];
 
 const Blog = () => {
+    const mode = useSelector((state: RootState) => state.ui.mode);
+    const isDark = mode === 'dark';
+
     return (
-        <Box id="blog" sx={{ py: '7rem', background: 'var(--bg1)' }}>
+        <Box id="blog" sx={{ py: '7rem', background: isDark ? 'var(--bg1)' : '#ffffff' }}>
             <Container maxWidth="lg">
                 <SectionHeader num="06" title="Digital Insights" />
 
@@ -45,8 +50,8 @@ const Blog = () => {
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.6, delay: index * 0.1 }}
                                 sx={{
-                                    background: 'var(--bg2)',
-                                    border: '1px solid var(--border)',
+                                    background: isDark ? 'var(--bg2)' : '#ffffff',
+                                    border: `1px solid ${isDark ? 'var(--border)' : 'rgba(15, 23, 42, 0.05)'}`,
                                     overflow: 'hidden',
                                     transition: 'all 0.35s',
                                     height: '100%',
@@ -62,7 +67,7 @@ const Blog = () => {
                                 <Box
                                     sx={{
                                         height: '140px',
-                                        background: 'linear-gradient(135deg, var(--bg3), var(--bg0))',
+                                        background: isDark ? 'linear-gradient(135deg, var(--bg3), var(--bg0))' : '#ffffff',
                                         display: 'flex',
                                         alignItems: 'center',
                                         justifyContent: 'center',
@@ -101,7 +106,7 @@ const Blog = () => {
                                             fontFamily: 'var(--font-orbitron)',
                                             fontSize: '0.85rem',
                                             fontWeight: 700,
-                                            color: '#fff',
+                                            color: isDark ? '#fff' : '#0f172a',
                                             marginBottom: '0.5rem',
                                             lineHeight: 1.4,
                                         }}
@@ -124,7 +129,7 @@ const Blog = () => {
                                         fontFamily: 'var(--font-share-tech-mono)',
                                         fontSize: '0.6rem',
                                         color: 'text.secondary',
-                                        borderTop: '1px solid rgba(0, 245, 255, 0.05)',
+                                        borderTop: `1px solid ${isDark ? 'rgba(0, 245, 255, 0.05)' : 'rgba(15, 23, 42, 0.05)'}`,
                                     }}
                                 >
                                     <span>{post.date}</span>

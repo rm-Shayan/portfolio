@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Box, Typography, Container, Grid, TextField, Button, Stack, useTheme, IconButton, Paper } from '@mui/material';
+import { Box, Typography, Container, TextField, Button, Stack, useTheme, IconButton, Paper } from '@mui/material';
 import { motion } from 'framer-motion';
 import SectionHeader from '../SectionHeader/SectionHeader';
 import EmailIcon from '@mui/icons-material/Email';
@@ -35,9 +35,9 @@ const Contact = () => {
             <Container maxWidth="lg">
                 <SectionHeader num="07" title="Get In Touch" />
 
-                <Grid container spacing={10}>
+                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: { xs: 6, md: 10 } }}>
                     {/* Left Column - Info */}
-                    <Grid item xs={12} md={5}>
+                    <Box sx={{ width: { xs: '100%', md: 'calc(41.666% - 40px)' }, flexShrink: 0 }}>
                         <Box
                             component={motion.div}
                             initial={{ opacity: 0, x: -30 }}
@@ -118,10 +118,10 @@ const Contact = () => {
                                 ))}
                             </Stack>
                         </Box>
-                    </Grid>
+                    </Box>
 
                     {/* Right Column - Form */}
-                    <Grid item xs={12} md={7}>
+                    <Box sx={{ width: { xs: '100%', md: 'calc(58.333% - 40px)' }, flexShrink: 0 }}>
                         <Box
                             component={motion.form}
                             onSubmit={handleSubmit}
@@ -140,13 +140,16 @@ const Contact = () => {
                                     boxShadow: isDark ? 'none' : '0 20px 40px rgba(0,0,0,0.05)',
                                 }}
                             >
-                                <Grid container spacing={3}>
+                                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 3 }}>
                                     {[
                                         { label: 'Your Name', placeholder: 'John Doe', xs: 6 },
                                         { label: 'Email Address', placeholder: 'john@company.com', type: 'email', xs: 6 },
                                         { label: 'Project Type', placeholder: 'e.g. E-Commerce / SaaS', xs: 12 },
                                     ].map((field) => (
-                                        <Grid item xs={field.xs} key={field.label}>
+                                        <Box 
+                                            key={field.label} 
+                                            sx={{ width: { xs: '100%', sm: field.xs === 6 ? 'calc(50% - 12px)' : '100%' } }}
+                                        >
                                             <Stack spacing={1}>
                                                 <Typography
                                                     sx={{
@@ -184,10 +187,10 @@ const Contact = () => {
                                                     }}
                                                 />
                                             </Stack>
-                                        </Grid>
+                                        </Box>
                                     ))}
 
-                                    <Grid item xs={12}>
+                                    <Box sx={{ width: '100%' }}>
                                         <Stack spacing={1}>
                                             <Typography
                                                 sx={{
@@ -226,9 +229,9 @@ const Contact = () => {
                                                 }}
                                             />
                                         </Stack>
-                                    </Grid>
+                                    </Box>
 
-                                    <Grid item xs={12}>
+                                    <Box sx={{ width: '100%' }}>
                                         <Button
                                             type="submit"
                                             variant="contained"
@@ -248,12 +251,12 @@ const Contact = () => {
                                         >
                                             {status}
                                         </Button>
-                                    </Grid>
-                                </Grid>
+                                    </Box>
+                                </Box>
                             </Paper>
                         </Box>
-                    </Grid>
-                </Grid>
+                    </Box>
+                </Box>
             </Container>
         </Box>
     );

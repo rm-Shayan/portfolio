@@ -1,9 +1,11 @@
 'use client';
 
 import React from 'react';
-import { Box, Typography, Container, Grid, Paper, Stack, useTheme } from '@mui/material';
+import { Box, Typography, Container, Paper, Stack, useTheme } from '@mui/material';
 import { motion } from 'framer-motion';
 import SectionHeader from '../SectionHeader/SectionHeader';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../lib/store';
 
 const testimonials = [
     {
@@ -38,15 +40,17 @@ const testimonials = [
 
 const Testimonials = () => {
     const theme = useTheme();
+    const mode = useSelector((state: RootState) => state.ui.mode);
+    const isDark = mode === 'dark';
 
     return (
-        <Box id="testimonials" sx={{ py: '7rem' }}>
+        <Box id="testimonials" sx={{ py: '7rem', background: isDark ? 'transparent' : '#ffffff' }}>
             <Container maxWidth="lg">
                 <SectionHeader num="05" title="Client Voices" />
 
-                <Grid container spacing={3}>
+                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 3 }}>
                     {testimonials.map((t, index) => (
-                        <Grid item xs={12} md={6} key={index}>
+                        <Box key={index} sx={{ width: { xs: '100%', md: 'calc(50% - 12px)' }, display: 'flex' }}>
                             <Box
                                 component={motion.div}
                                 initial={{ opacity: 0, scale: 0.95 }}
@@ -54,8 +58,8 @@ const Testimonials = () => {
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.6, delay: index * 0.1 }}
                                 sx={{
-                                    background: 'var(--bg2)',
-                                    border: '1px solid var(--border)',
+                                    background: isDark ? 'var(--bg2)' : '#ffffff',
+                                    border: `1px solid ${isDark ? 'var(--border)' : 'rgba(15, 23, 42, 0.05)'}`,
                                     padding: '2rem',
                                     position: 'relative',
                                     overflow: 'hidden',
@@ -72,8 +76,9 @@ const Testimonials = () => {
                                         lineHeight: 1,
                                     },
                                     '&:hover': {
-                                        borderColor: '#00f5ff',
-                                        background: 'rgba(0, 245, 255, 0.03)',
+                                        borderColor: 'primary.main',
+                                        background: isDark ? 'rgba(0, 245, 255, 0.03)' : 'rgba(2, 132, 199, 0.02)',
+                                        boxShadow: isDark ? 'none' : '0 10px 40px rgba(15, 23, 42, 0.06)',
                                     },
                                 }}
                             >
@@ -135,9 +140,9 @@ const Testimonials = () => {
                                     </Box>
                                 </Stack>
                             </Box>
-                        </Grid>
+                        </Box>
                     ))}
-                </Grid>
+                </Box>
             </Container>
         </Box>
     );

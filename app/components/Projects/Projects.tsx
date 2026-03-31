@@ -13,36 +13,40 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 const projects = [
   {
-    title: 'NexShop — MERN Multi-Vendor',
-    category: 'Full-Stack · E-Commerce',
-    desc: 'Scalable multi-vendor platform with Redux state, JWT auth, and Stripe integration. Features a complex admin dashboard for inventory oversight.',
-    tech: ['React', 'Node.js', 'MongoDB', 'Postgres', 'Redux'],
-    icon: '🛒',
-    image: 'https://images.unsplash.com/photo-1557821552-17105176677c?auto=format&fit=crop&q=80&w=800',
+    title: 'Namaz Tracker',
+    category: 'React · Firebase',
+    desc: 'React + Firebase app for tracking daily prayers. Users can log their prayers and monitor progress. Designed for seamless user experience and easy tracking of Islamic prayers.',
+    tech: ['React', 'Firebase', 'Material-UI'],
+    icon: '🕌',
+    image: 'https://s0.wp.com/mshots/v1/https://celebrated-gelato-f04291.netlify.app/?w=1000',
+    url: 'https://celebrated-gelato-f04291.netlify.app/',
   },
   {
-    title: 'ChatterBox — Real-Time Hub',
-    category: 'Full-Stack · WebSockets',
-    desc: 'High-concurrency messaging engine using Socket.io and Redis. Supports group rooms, real-time presence, and binary file sharing.',
-    tech: ['React', 'Socket.io', 'Node.js', 'Redis', 'Docker'],
-    icon: '💬',
-    image: 'https://images.unsplash.com/photo-1611746872915-64382b5c76db?auto=format&fit=crop&q=80&w=800',
+    title: 'Investocrafy — AI Advisor',
+    category: 'AI · FinTech',
+    desc: 'AI-powered platform providing investment suggestions. Users receive predictive analysis and market insights for better decision-making along with dynamic charts and portfolio tracking.',
+    tech: ['React', 'AI', 'Charts.js', 'Node.js'],
+    icon: '📈',
+    image: 'https://s0.wp.com/mshots/v1/https://ai-saas-inky-eight.vercel.app/?w=1000',
+    url: 'https://ai-saas-inky-eight.vercel.app/',
   },
   {
-    title: 'PulseAnalytics — SaaS Dashboard',
-    category: 'SaaS · Data Visualization',
-    desc: 'Enterprise-grade analytics dashboard with dynamic Recharts, multi-tenant auth, and comprehensive subscription management via Stripe.',
-    tech: ['Next.js', 'Tailwind', 'Prisma', 'Stripe', 'shadcn'],
-    icon: '📊',
-    image: 'https://images.unsplash.com/photo-1551288049-bbbda536639a?auto=format&fit=crop&q=80&w=800',
+    title: 'FinTech Fraud Reporting',
+    category: 'Full-Stack · RBAC',
+    desc: 'Multi-tenant web app for reporting banking fraud to the State Bank of Pakistan. Includes Role-Based Access Control (RBAC) for users, banks, and admin ensuring secure handling.',
+    tech: ['React', 'Node.js', 'MongoDB', 'RBAC'],
+    icon: '🛡️',
+    image: 'https://s0.wp.com/mshots/v1/https://finetech-frontened.vercel.app/?w=1000',
+    url: 'https://finetech-frontened.vercel.app/',
   },
   {
-    title: 'SynthMind — GPT-4 Assistant',
-    category: 'AI · Vector Database',
-    desc: 'Smart AI assistant using LangChain and Pinecone vector storage. Features persistent chat memory and structured output generation.',
-    tech: ['Next.js', 'OpenAI', 'Pinecone', 'LangChain'],
-    icon: '🤖',
-    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800',
+    title: 'HealthMate',
+    category: 'HealthTech · Gemini AI',
+    desc: 'Family ki medical reports manage karna ab mushkil nahi. HealthMate mein sab mehfooz hai aur Gemini AI inhein asaan Roman Urdu mein explain karta hai.',
+    tech: ['React', 'Gemini AI', 'Tailwind'],
+    icon: '⚕️',
+    image: 'https://s0.wp.com/mshots/v1/https://healthmate-azure.vercel.app/?w=1000',
+    url: 'https://healthmate-azure.vercel.app/',
   },
 ];
 
@@ -63,49 +67,49 @@ const Projects = () => {
   return (
     <Box id="projects" sx={{ py: '10rem', position: 'relative', overflow: 'hidden', background: isDark ? 'transparent' : '#f1f5f9' }}>
       {/* Background Decorative Grid */}
-      <Box 
-        sx={{ 
+      <Box
+        sx={{
           position: 'absolute', inset: 0, opacity: isDark ? 0.03 : 0.05, pointerEvents: 'none',
           backgroundImage: 'radial-gradient(var(--primary) 1px, transparent 1px)',
           backgroundSize: '30px 30px',
-        }} 
+        }}
       />
 
       <Container maxWidth="lg">
         <Stack direction="row" alignItems="flex-end" justifyContent="space-between" sx={{ mb: 6, position: 'relative', zIndex: 1 }}>
           <Box>
-              <SectionHeader num="03" title="Production Artifacts" />
-              <Typography sx={{ 
-                  fontFamily: 'var(--font-rajdhani)', 
-                  color: 'primary.main', 
-                  fontSize: '0.8rem', 
-                  fontWeight: 600, 
-                  letterSpacing: '0.3em',
-                  mt: -3, mb: 2 
-              }}>
-                  EXPLORE SYSTEMS
-              </Typography>
+            <SectionHeader num="03" title="Production Artifacts" />
+            <Typography sx={{
+              fontFamily: 'var(--font-rajdhani)',
+              color: 'primary.main',
+              fontSize: '0.8rem',
+              fontWeight: 600,
+              letterSpacing: '0.3em',
+              mt: -3, mb: 2
+            }}>
+              EXPLORE SYSTEMS
+            </Typography>
           </Box>
-          
+
           <Stack direction="row" spacing={1.5} sx={{ display: { xs: 'none', md: 'flex' }, pb: 4 }}>
-            <IconButton 
+            <IconButton
               onClick={() => scroll('left')}
-              sx={{ 
-                  color: 'primary.main', 
-                  border: '1px solid rgba(0, 245, 255, 0.2)', 
-                  borderRadius: 0,
-                  '&:hover': { background: 'rgba(0, 245, 255, 0.1)', borderColor: 'primary.main' }
+              sx={{
+                color: 'primary.main',
+                border: '1px solid rgba(0, 245, 255, 0.2)',
+                borderRadius: 0,
+                '&:hover': { background: 'rgba(0, 245, 255, 0.1)', borderColor: 'primary.main' }
               }}
             >
               <ArrowBackIosNewIcon fontSize="small" />
             </IconButton>
-            <IconButton 
+            <IconButton
               onClick={() => scroll('right')}
-              sx={{ 
-                  color: 'primary.main', 
-                  border: '1px solid rgba(0, 245, 255, 0.2)', 
-                  borderRadius: 0,
-                  '&:hover': { background: 'rgba(0, 245, 255, 0.1)', borderColor: 'primary.main' }
+              sx={{
+                color: 'primary.main',
+                border: '1px solid rgba(0, 245, 255, 0.2)',
+                borderRadius: 0,
+                '&:hover': { background: 'rgba(0, 245, 255, 0.1)', borderColor: 'primary.main' }
               }}
             >
               <ArrowForwardIosIcon fontSize="small" />
@@ -113,23 +117,23 @@ const Projects = () => {
           </Stack>
         </Stack>
 
-        <Box 
+        <Box
           ref={scrollRef}
-          sx={{ 
-            display: 'flex', 
-            gap: 3.5, 
-            overflowX: 'auto', 
+          sx={{
+            display: 'flex',
+            gap: 3.5,
+            overflowX: 'auto',
             pb: 6,
             px: { xs: 2, md: 0 },
             scrollSnapType: 'x mandatory',
-            '&::-webkit-scrollbar': { 
-                height: '6px',
-                background: isDark ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.03)',
+            '&::-webkit-scrollbar': {
+              height: '6px',
+              background: isDark ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.03)',
             },
             '&::-webkit-scrollbar-thumb': {
-                background: isDark ? 'rgba(0, 245, 255, 0.3)' : 'rgba(0, 184, 200, 0.2)',
-                borderRadius: '3px',
-                '&:hover': { background: 'primary.main' }
+              background: isDark ? 'rgba(0, 245, 255, 0.3)' : 'rgba(0, 184, 200, 0.2)',
+              borderRadius: '3px',
+              '&:hover': { background: 'primary.main' }
             },
             scrollbarWidth: 'thin',
             position: 'relative',
@@ -138,9 +142,9 @@ const Projects = () => {
         >
           <AnimatePresence mode="popLayout">
             {projects.map((project, index) => (
-              <Box 
+              <Box
                 key={project.title}
-                sx={{ 
+                sx={{
                   flex: { xs: '0 0 100%', sm: '0 0 550px', md: '0 0 650px' },
                   scrollSnapAlign: 'start',
                 }}
@@ -170,8 +174,8 @@ const Projects = () => {
                         '&::after': { width: '100%', left: 0 }
                       },
                       '&::after': {
-                          content: '""', position: 'absolute', bottom: 0, left: '50%', width: 0, height: '3px', 
-                          background: 'linear-gradient(to right, primary.main, secondary.main)', transition: 'all 0.5s',
+                        content: '""', position: 'absolute', bottom: 0, left: '50%', width: 0, height: '3px',
+                        background: 'linear-gradient(to right, primary.main, secondary.main)', transition: 'all 0.5s',
                       }
                     }}
                   >
@@ -182,7 +186,7 @@ const Projects = () => {
                         flex: { xs: '0 0 240px', md: '0 0 280px' },
                         position: 'relative',
                         overflow: 'hidden',
-                        background: 'var(--bg1)',
+                        background: isDark ? 'var(--bg1)' : '#ffffff',
                       }}
                     >
                       <Box
@@ -198,7 +202,7 @@ const Projects = () => {
                         }}
                       />
                       <Box sx={{ position: 'absolute', top: 15, left: 15, fontSize: '1.5rem', filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.5))' }}>
-                          {project.icon}
+                        {project.icon}
                       </Box>
                     </Box>
 
@@ -264,25 +268,27 @@ const Projects = () => {
                       </Stack>
 
                       <Stack direction="row" spacing={2}>
-                          <Button 
-                              variant="outlined" 
-                              size="small" 
-                              startIcon={<CodeIcon />}
-                              sx={{ 
-                                  fontSize: '0.7rem', fontWeight: 700, borderRadius: 0, 
-                                  borderColor: 'rgba(0,245,255,0.3)', color: 'text.primary' 
-                              }}
-                          >
-                              Artifact
-                          </Button>
-                          <Button 
-                              variant="contained" 
-                              size="small" 
-                              startIcon={<VisibilityIcon />}
-                              sx={{ fontSize: '0.7rem', fontWeight: 900, borderRadius: 0 }}
-                          >
-                              Initiate
-                          </Button>
+                        <Button
+                          variant="outlined"
+                          size="small"
+                          startIcon={<CodeIcon />}
+                          sx={{
+                            fontSize: '0.7rem', fontWeight: 700, borderRadius: 0,
+                            borderColor: 'rgba(0,245,255,0.3)', color: 'text.primary'
+                          }}
+                        >
+                          Artifact
+                        </Button>
+                        <Button
+                          variant="contained"
+                          size="small"
+                          href={project.url}
+                          target="_blank"
+                          startIcon={<VisibilityIcon />}
+                          sx={{ fontSize: '0.7rem', fontWeight: 900, borderRadius: 0 }}
+                        >
+                          Initiate
+                        </Button>
                       </Stack>
                     </Box>
                   </Box>

@@ -1,29 +1,33 @@
 'use client';
 
 import React from 'react';
-import { Box, Container, Grid, Typography, Paper, useTheme, useMediaQuery, Stack, LinearProgress } from '@mui/material';
+import { Box, Container, Typography, Paper, useTheme, useMediaQuery, Stack, LinearProgress } from '@mui/material';
 import { motion, Variants } from 'framer-motion';
 import SectionHeader from '../SectionHeader/SectionHeader';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../lib/store';
-import { 
-  SiReact, SiNextdotjs, SiNodedotjs, SiMongodb, SiTailwindcss, SiTypescript, 
-  SiExpress, SiPostgresql, SiDocker, SiGit, SiFramer, SiJavascript, SiRedux, SiFirebase
+import {
+    SiReact, SiNextdotjs, SiNodedotjs, SiMongodb, SiTailwindcss, SiTypescript,
+    SiExpress, SiPostgresql, SiDocker, SiGit, SiFramer, SiJavascript, SiRedux, SiFirebase,
+    SiHtml5, SiCss3, SiAmazonwebservices
 } from 'react-icons/si';
 
 const skills = [
-  { name: 'React.js', icon: <SiReact />, color: '#61DAFB', pct: 95 },
-  { name: 'Next.js', icon: <SiNextdotjs />, color: '#fff', pct: 95 },
-  { name: 'Redux', icon: <SiRedux />, color: '#764ABC', pct: 90 },
-  { name: 'JavaScript', icon: <SiJavascript />, color: '#F7DF1E', pct: 95 },
-  { name: 'TypeScript', icon: <SiTypescript />, color: '#3178C6', pct: 82 },
-  { name: 'Node.js', icon: <SiNodedotjs />, color: '#339933', pct: 90 },
-  { name: 'Express', icon: <SiExpress />, color: '#fff', pct: 88 },
-  { name: 'MongoDB', icon: <SiMongodb />, color: '#47A248', pct: 85 },
-  { name: 'PostgreSQL', icon: <SiPostgresql />, color: '#4169E1', pct: 75 },
-  { name: 'Tailwind', icon: <SiTailwindcss />, color: '#06B6D4', pct: 92 },
-  { name: 'Git', icon: <SiGit />, color: '#F05032', pct: 88 },
-  { name: 'Firebase', icon: <SiFirebase />, color: '#FFCA28', pct: 80 },
+    { name: 'React.js', icon: <SiReact />, color: '#61DAFB', pct: 95 },
+    { name: 'Next.js', icon: <SiNextdotjs />, color: '#fff', pct: 95 },
+    { name: 'Redux', icon: <SiRedux />, color: '#764ABC', pct: 90 },
+    { name: 'JavaScript', icon: <SiJavascript />, color: '#F7DF1E', pct: 95 },
+    { name: 'TypeScript', icon: <SiTypescript />, color: '#3178C6', pct: 82 },
+    { name: 'Node.js', icon: <SiNodedotjs />, color: '#339933', pct: 90 },
+    { name: 'Express', icon: <SiExpress />, color: '#fff', pct: 88 },
+    { name: 'MongoDB', icon: <SiMongodb />, color: '#47A248', pct: 85 },
+    { name: 'PostgreSQL', icon: <SiPostgresql />, color: '#4169E1', pct: 75 },
+    { name: 'Tailwind', icon: <SiTailwindcss />, color: '#06B6D4', pct: 92 },
+    { name: 'Git', icon: <SiGit />, color: '#F05032', pct: 88 },
+    { name: 'Firebase', icon: <SiFirebase />, color: '#FFCA28', pct: 80 },
+    { name: 'HTML5', icon: <SiHtml5 />, color: '#E34F26', pct: 95 },
+    { name: 'CSS', icon: <SiCss3 />, color: '#1572B6', pct: 90 },
+    { name: 'AWS', icon: <SiAmazonwebservices />, color: '#FF9900', pct: 75 },
 ];
 
 const stats = [
@@ -57,9 +61,9 @@ const About = () => {
             <Container maxWidth="lg">
                 <SectionHeader num="01" title="About & Systems" />
 
-                <Grid container spacing={isMobile ? 6 : 8} alignItems="start">
-                    {/* Left Column - Biography */}
-                    <Grid item xs={12} md={5}>
+                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                    {/* Top Section - Biography */}
+                    <Box sx={{ width: '100%' }}>
                         <motion.div
                             variants={containerVariants}
                             initial="hidden"
@@ -80,7 +84,7 @@ const About = () => {
                             >
                                 Designing <span>Digital Fortresses</span> for the Modern Web.
                             </Typography>
-                            
+
                             <Typography
                                 variant="body1"
                                 sx={{
@@ -95,9 +99,9 @@ const About = () => {
                             </Typography>
 
                             {/* Stats Grid */}
-                            <Grid container spacing={2}>
+                            <Box sx={{ mt: 6, display: 'grid', gridTemplateColumns: { xs: 'repeat(2, 1fr)', md: 'repeat(4, 1fr)' }, gap: 3 }}>
                                 {stats.map((stat, i) => (
-                                    <Grid item xs={6} key={i}>
+                                    <Box key={i} sx={{ width: '100%' }}>
                                         <Box
                                             sx={{
                                                 padding: '1.4rem',
@@ -134,15 +138,15 @@ const About = () => {
                                                 {stat.label}
                                             </Typography>
                                         </Box>
-                                    </Grid>
+                                    </Box>
                                 ))}
-                            </Grid>
+                            </Box>
                         </motion.div>
-                    </Grid>
+                    </Box>
 
-                    {/* Right Column - Expansive Skill Grid */}
-                    <Grid item xs={12} md={7}>
-                        <Box sx={{ pl: { md: 4 } }}>
+                    {/* Bottom Section - Expansive Skill Grid */}
+                    <Box sx={{ width: '100%' }}>
+                        <Box>
                             <Box
                                 component={motion.div}
                                 variants={containerVariants}
@@ -151,8 +155,8 @@ const About = () => {
                                 viewport={{ once: true }}
                                 sx={{
                                     display: 'grid',
-                                    gridTemplateColumns: { xs: 'repeat(2, 1fr)', sm: 'repeat(3, 1fr)', lg: 'repeat(4, 1fr)' },
-                                    gap: 2.5,
+                                    gridTemplateColumns: { xs: 'repeat(2, 1fr)', sm: 'repeat(3, 1fr)', lg: 'repeat(5, 1fr)' },
+                                    gap: { xs: 3, md: 5, lg: 3.5 },
                                     width: '100%',
                                 }}
                             >
@@ -211,28 +215,28 @@ const About = () => {
                                                 {skill.name}
                                             </Typography>
                                         </Stack>
-                                        
+
                                         <Box>
-                                          <Stack direction="row" justifyContent="space-between" sx={{ mb: 1 }}>
-                                              <Typography sx={{ fontSize: '0.6rem', fontFamily: 'var(--font-share-tech-mono)', color: 'text.secondary' }}>PROFICIENCY</Typography>
-                                              <Typography sx={{ fontSize: '0.6rem', fontFamily: 'var(--font-share-tech-mono)', color: 'primary.main', fontWeight: 900 }}>{skill.pct}%</Typography>
-                                          </Stack>
-                                          <Box sx={{ height: '3px', background: isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)', borderRadius: '2px', overflow: 'hidden' }}>
-                                              <motion.div
-                                                initial={{ width: 0 }}
-                                                whileInView={{ width: `${skill.pct}%` }}
-                                                viewport={{ once: true }}
-                                                transition={{ duration: 1, delay: 0.5 }}
-                                                style={{ height: '100%', background: skill.color, boxShadow: `0 0 10px ${skill.color}` }}
-                                              />
-                                          </Box>
+                                            <Stack direction="row" justifyContent="space-between" sx={{ mb: 1 }}>
+                                                <Typography sx={{ fontSize: '0.6rem', fontFamily: 'var(--font-share-tech-mono)', color: 'text.secondary' }}>PROFICIENCY</Typography>
+                                                <Typography sx={{ fontSize: '0.6rem', fontFamily: 'var(--font-share-tech-mono)', color: 'primary.main', fontWeight: 900 }}>{skill.pct}%</Typography>
+                                            </Stack>
+                                            <Box sx={{ height: '3px', background: isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)', borderRadius: '2px', overflow: 'hidden' }}>
+                                                <motion.div
+                                                    initial={{ width: 0 }}
+                                                    whileInView={{ width: `${skill.pct}%` }}
+                                                    viewport={{ once: true }}
+                                                    transition={{ duration: 1, delay: 0.5 }}
+                                                    style={{ height: '100%', background: skill.color, boxShadow: `0 0 10px ${skill.color}` }}
+                                                />
+                                            </Box>
                                         </Box>
                                     </Box>
                                 ))}
                             </Box>
                         </Box>
-                    </Grid>
-                </Grid>
+                    </Box>
+                </Box>
             </Container>
         </Box>
     );

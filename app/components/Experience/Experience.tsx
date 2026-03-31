@@ -4,6 +4,8 @@ import React from 'react';
 import { Box, Typography, Container, Stack } from '@mui/material';
 import { motion } from 'framer-motion';
 import SectionHeader from '../SectionHeader/SectionHeader';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../lib/store';
 
 const experiences = [
   {
@@ -30,8 +32,11 @@ const experiences = [
 ];
 
 const Experience = () => {
+  const mode = useSelector((state: RootState) => state.ui.mode);
+  const isDark = mode === 'dark';
+
   return (
-    <Box id="experience" sx={{ py: '7rem', background: 'var(--bg1)' }}>
+    <Box id="experience" sx={{ py: '7rem', background: isDark ? 'var(--bg1)' : '#ffffff' }}>
       <Container maxWidth="lg">
         <SectionHeader num="04" title="My Journey" />
 
@@ -72,8 +77,8 @@ const Experience = () => {
                   width: '10px',
                   height: '10px',
                   background: '#00f5ff',
-                  border: '2px solid var(--bg1)',
-                  boxShadow: '0 0 16px #00f5ff',
+                  border: `2px solid ${isDark ? 'var(--bg1)' : '#ffffff'}`,
+                  boxShadow: isDark ? '0 0 16px #00f5ff' : '0 4px 10px rgba(0,0,0,0.1)',
                   clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)',
                 }}
               />
@@ -82,7 +87,7 @@ const Experience = () => {
                 sx={{
                   fontFamily: 'var(--font-share-tech-mono)',
                   fontSize: '0.65rem',
-                  color: 'secondary.main',
+                  color: isDark ? 'secondary.main' : 'primary.main',
                   letterSpacing: '0.15em',
                   marginBottom: '0.4rem',
                 }}
@@ -95,7 +100,7 @@ const Experience = () => {
                   fontFamily: 'var(--font-orbitron)',
                   fontSize: '1.1rem',
                   fontWeight: 700,
-                  color: '#fff',
+                  color: isDark ? '#fff' : '#0f172a',
                   marginBottom: '0.25rem',
                 }}
               >
