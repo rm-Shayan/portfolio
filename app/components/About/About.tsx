@@ -1,169 +1,241 @@
 'use client';
 
-import { Box, Typography, Container, Paper, Avatar } from '@mui/material';
-import { motion } from 'framer-motion';
-import {
-  SiJavascript,
-  SiTypescript,
-  SiReact,
-  SiNextdotjs,
-  SiTailwindcss,
-  SiMui,
-  SiMongodb,
-  SiPostgresql,
-  SiDocker,
-  SiNodedotjs,
-  SiAmazonec2,
+import React from 'react';
+import { Box, Container, Grid, Typography, Paper, useTheme, useMediaQuery, Stack, LinearProgress } from '@mui/material';
+import { motion, Variants } from 'framer-motion';
+import SectionHeader from '../SectionHeader/SectionHeader';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../lib/store';
+import { 
+  SiReact, SiNextdotjs, SiNodedotjs, SiMongodb, SiTailwindcss, SiTypescript, 
+  SiExpress, SiPostgresql, SiDocker, SiGit, SiFramer, SiJavascript, SiRedux, SiFirebase
 } from 'react-icons/si';
 
 const skills = [
-  { name: 'JavaScript', icon: <SiJavascript size={22} /> },
-  { name: 'TypeScript', icon: <SiTypescript size={22} /> },
-  { name: 'React.js', icon: <SiReact size={22} /> },
-  { name: 'Next.js', icon: <SiNextdotjs size={22} /> },
-  { name: 'Tailwind CSS', icon: <SiTailwindcss size={22} /> },
-  { name: 'MUI', icon: <SiMui size={22} /> },
-  { name: 'Node.js', icon: <SiNodedotjs size={22} /> },
-  { name: 'MongoDB', icon: <SiMongodb size={22} /> },
-  { name: 'Postgres', icon: <SiPostgresql size={22} /> },
-  { name: 'Docker', icon: <SiDocker size={22} /> },
-  { name: 'AWS', icon: <SiAmazonec2 size={22} /> },
+  { name: 'React.js', icon: <SiReact />, color: '#61DAFB', pct: 95 },
+  { name: 'Next.js', icon: <SiNextdotjs />, color: '#fff', pct: 95 },
+  { name: 'Redux', icon: <SiRedux />, color: '#764ABC', pct: 90 },
+  { name: 'JavaScript', icon: <SiJavascript />, color: '#F7DF1E', pct: 95 },
+  { name: 'TypeScript', icon: <SiTypescript />, color: '#3178C6', pct: 82 },
+  { name: 'Node.js', icon: <SiNodedotjs />, color: '#339933', pct: 90 },
+  { name: 'Express', icon: <SiExpress />, color: '#fff', pct: 88 },
+  { name: 'MongoDB', icon: <SiMongodb />, color: '#47A248', pct: 85 },
+  { name: 'PostgreSQL', icon: <SiPostgresql />, color: '#4169E1', pct: 75 },
+  { name: 'Tailwind', icon: <SiTailwindcss />, color: '#06B6D4', pct: 92 },
+  { name: 'Git', icon: <SiGit />, color: '#F05032', pct: 88 },
+  { name: 'Firebase', icon: <SiFirebase />, color: '#FFCA28', pct: 80 },
 ];
 
-export default function About() {
-  return (
-    <Box id="about" sx={{ py: 12, bgcolor: 'background.default' }}>
-      <Container maxWidth="lg">
-        <Typography
-          variant="h3"
-          align="center"
-          gutterBottom
-          sx={{ mb: 8, fontWeight: 700 }}
-        >
-          About Me
-        </Typography>
+const stats = [
+    { label: 'Projects Delivered', val: '20+' },
+    { label: 'Years Experience', val: '2+' },
+    { label: 'Client Satisfaction', val: '100%' },
+    { label: 'Tech Mastered', val: '15+' },
+];
 
-        {/* Flex Row with 2 Cards */}
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: { xs: 'column', md: 'row' },
-            gap: 6,
-            alignItems: 'stretch', // make both cards equal height
-            justifyContent: 'center',
-          }}
-        >
-          {/* Left Card: Profile + About */}
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            style={{ flex: 1 }}
-          >
-            <Paper elevation={6} sx={{ p: 4, borderRadius: 3, height: '100%' }}>
-              <Box
-                sx={{
-                  display: 'flex',
-                  flexDirection: { xs: 'column', sm: 'row' },
-                  alignItems: 'center',
-                  gap: 3,
-                  mb: 3,
-                }}
-              >
-                <Avatar
-                  src="https://res.cloudinary.com/dfqk1mldk/image/upload/v1770046096/avatars/ilhtpi8oejns9scno0bs.jpg"
-                  alt="Rao Muhammad Shayan"
-                  sx={{
-                    width: 140,
-                    height: 140,
-                    border: '4px solid #22c55e',
-                    boxShadow: 4,
-                  }}
-                />
-                <Box>
-                  <Typography variant="h5" fontWeight={700}>
-                    Rao Muhammad Shayan
-                  </Typography>
-                  <Typography variant="subtitle1" color="text.secondary">
-                    Full Stack Web Developer
-                  </Typography>
-                </Box>
-              </Box>
+const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: { staggerChildren: 0.1 },
+    },
+};
 
-              <Typography variant="body1" paragraph sx={{ lineHeight: 1.8 }}>
-                Impact-driven Full-Stack Developer with expertise in the MERN stack and TypeScript.
-                Skilled in designing RESTful APIs, implementing secure OAuth2/JWT authentication flows,
-                optimizing NoSQL schemas, and modernizing frontend workflows using Tailwind CSS and SSR.
-                Experienced in Docker, GitHub Actions (CI/CD), and AWS deployments.
-              </Typography>
+const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } },
+};
 
-              <Typography variant="body2" paragraph sx={{ lineHeight: 1.6 }}>
-                <strong>Education:</strong> Intermediate in Computer Science from Superior Science College (2024),
-                and Web & Mobile App Development from Saylani Institute (2024). Completed matriculation from Ideal English Grammar School (2022).
-              </Typography>
+const About = () => {
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+    const mode = useSelector((state: RootState) => state.ui.mode);
+    const isDark = mode === 'dark';
 
-              <Typography variant="body2" paragraph sx={{ lineHeight: 1.6 }}>
-                <strong>Contact:</strong> Shah Faisal Green Town, Karachi | raomuhammadshayan897@gmail.com | +92 318 119624 |{' '}
-                <a href="https://github.com/rm-Shayan" target="_blank" rel="noopener noreferrer">
-                  GitHub
-                </a>
-              </Typography>
-            </Paper>
-          </motion.div>
+    return (
+        <Box id="about" sx={{ py: { xs: '5rem', md: '10rem' }, background: isDark ? 'transparent' : '#f8fafc', overflow: 'hidden' }}>
+            <Container maxWidth="lg">
+                <SectionHeader num="01" title="About & Systems" />
 
-          {/* Right Card: Skills */}
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            style={{ flex: 1 }}
-          >
-            <Paper elevation={6} sx={{ p: 4, borderRadius: 3, height: '100%', display: 'flex', flexDirection: 'column' }}>
-              <Typography variant="h6" fontWeight={700} gutterBottom>
-                Technical Skills
-              </Typography>
-              <Box
-                sx={{
-                  display: 'flex',
-                  flexWrap: 'wrap',
-                  gap: 2,
-                  mt: 2,
-                  justifyContent: 'center',
-                  flexGrow: 1, // make the skills box grow
-                }}
-              >
-                {skills.map((skill, index) => (
-                  <Box
-                    key={index}
-                    sx={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 1,
-                      px: 3,
-                      py: 1.5,
-                      bgcolor: 'primary.main',
-                      color: 'primary.contrastText',
-                      borderRadius: 2,
-                      fontWeight: 'bold',
-                      transition: '0.3s',
-                      cursor: 'default',
-                      '&:hover': {
-                        transform: 'translateY(-3px)',
-                        boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
-                      },
-                    }}
-                  >
-                    {skill.icon}
-                    <Typography variant="body2">{skill.name}</Typography>
-                  </Box>
-                ))}
-              </Box>
-            </Paper>
-          </motion.div>
+                <Grid container spacing={isMobile ? 6 : 8} alignItems="start">
+                    {/* Left Column - Biography */}
+                    <Grid item xs={12} md={5}>
+                        <motion.div
+                            variants={containerVariants}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                        >
+                            <Typography
+                                variant="h4"
+                                sx={{
+                                    fontFamily: 'var(--font-orbitron)',
+                                    fontSize: { xs: '1.5rem', md: '2.1rem' },
+                                    fontWeight: 900,
+                                    color: isDark ? '#fff' : '#1a202c',
+                                    mb: 3,
+                                    lineHeight: 1.2,
+                                    '& span': { color: 'primary.main', textShadow: isDark ? '0 0 20px #00f5ff' : 'none' },
+                                }}
+                            >
+                                Designing <span>Digital Fortresses</span> for the Modern Web.
+                            </Typography>
+                            
+                            <Typography
+                                variant="body1"
+                                sx={{
+                                    color: 'text.secondary',
+                                    mb: 4,
+                                    fontSize: '1.05rem',
+                                    lineHeight: 1.9,
+                                    '& strong': { color: 'primary.main', fontWeight: 600 },
+                                }}
+                            >
+                                I'm <strong>Rao Muhammad Shayan</strong>, based in Karachi. I specialize in building highly scalable, performant MERN applications that don't just work — they dominate. I believe every line of code should be a strategic asset.
+                            </Typography>
+
+                            {/* Stats Grid */}
+                            <Grid container spacing={2}>
+                                {stats.map((stat, i) => (
+                                    <Grid item xs={6} key={i}>
+                                        <Box
+                                            sx={{
+                                                padding: '1.4rem',
+                                                border: `1px solid ${isDark ? 'rgba(0, 245, 255, 0.1)' : 'rgba(0, 0, 0, 0.05)'}`,
+                                                background: isDark ? 'rgba(255, 255, 255, 0.02)' : '#fff',
+                                                clipPath: 'polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px)',
+                                                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                                                '&:hover': {
+                                                    borderColor: 'primary.main',
+                                                    transform: 'translateY(-4px)',
+                                                }
+                                            }}
+                                        >
+                                            <Typography
+                                                sx={{
+                                                    fontFamily: 'var(--font-orbitron)',
+                                                    fontSize: '1.6rem',
+                                                    fontWeight: 900,
+                                                    color: 'primary.main',
+                                                    mb: 0.5,
+                                                }}
+                                            >
+                                                {stat.val}
+                                            </Typography>
+                                            <Typography
+                                                sx={{
+                                                    fontFamily: 'var(--font-share-tech-mono)',
+                                                    fontSize: '0.6rem',
+                                                    color: 'text.secondary',
+                                                    letterSpacing: '0.15em',
+                                                    textTransform: 'uppercase',
+                                                }}
+                                            >
+                                                {stat.label}
+                                            </Typography>
+                                        </Box>
+                                    </Grid>
+                                ))}
+                            </Grid>
+                        </motion.div>
+                    </Grid>
+
+                    {/* Right Column - Expansive Skill Grid */}
+                    <Grid item xs={12} md={7}>
+                        <Box sx={{ pl: { md: 4 } }}>
+                            <Box
+                                component={motion.div}
+                                variants={containerVariants}
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true }}
+                                sx={{
+                                    display: 'grid',
+                                    gridTemplateColumns: { xs: 'repeat(2, 1fr)', sm: 'repeat(3, 1fr)', lg: 'repeat(4, 1fr)' },
+                                    gap: 2.5,
+                                    width: '100%',
+                                }}
+                            >
+                                {skills.map((skill, i) => (
+                                    <Box
+                                        key={skill.name}
+                                        component={motion.div}
+                                        variants={itemVariants}
+                                        whileHover={{ y: -5, scale: 1.02 }}
+                                        sx={{
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            gap: 2,
+                                            padding: '1.5rem',
+                                            paddingBottom: '1.2rem',
+                                            background: isDark ? 'rgba(255,255,255,0.03)' : '#fff',
+                                            border: `1px solid ${isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.03)'}`,
+                                            transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+                                            position: 'relative',
+                                            cursor: 'pointer',
+                                            boxShadow: isDark ? 'none' : '0 10px 30px rgba(0,0,0,0.03)',
+                                            '&:hover': {
+                                                borderColor: 'primary.main',
+                                                background: isDark ? 'rgba(0, 245, 255, 0.04)' : 'rgba(0, 245, 255, 0.01)',
+                                                '& .skill-icon': {
+                                                    color: skill.color,
+                                                    filter: isDark ? `drop-shadow(0 0 10px ${skill.color})` : 'none',
+                                                }
+                                            }
+                                        }}
+                                    >
+                                        <Stack direction="row" alignItems="center" spacing={2}>
+                                            <Box
+                                                className="skill-icon"
+                                                sx={{
+                                                    fontSize: '1.8rem',
+                                                    color: isDark ? 'text.secondary' : '#4a5568',
+                                                    transition: 'all 0.3s',
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    justifyContent: 'center'
+                                                }}
+                                            >
+                                                {skill.icon}
+                                            </Box>
+                                            <Typography
+                                                sx={{
+                                                    fontFamily: 'var(--font-share-tech-mono)',
+                                                    fontSize: '0.75rem',
+                                                    fontWeight: 700,
+                                                    color: 'text.primary',
+                                                    letterSpacing: '0.05em',
+                                                    textTransform: 'uppercase'
+                                                }}
+                                            >
+                                                {skill.name}
+                                            </Typography>
+                                        </Stack>
+                                        
+                                        <Box>
+                                          <Stack direction="row" justifyContent="space-between" sx={{ mb: 1 }}>
+                                              <Typography sx={{ fontSize: '0.6rem', fontFamily: 'var(--font-share-tech-mono)', color: 'text.secondary' }}>PROFICIENCY</Typography>
+                                              <Typography sx={{ fontSize: '0.6rem', fontFamily: 'var(--font-share-tech-mono)', color: 'primary.main', fontWeight: 900 }}>{skill.pct}%</Typography>
+                                          </Stack>
+                                          <Box sx={{ height: '3px', background: isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)', borderRadius: '2px', overflow: 'hidden' }}>
+                                              <motion.div
+                                                initial={{ width: 0 }}
+                                                whileInView={{ width: `${skill.pct}%` }}
+                                                viewport={{ once: true }}
+                                                transition={{ duration: 1, delay: 0.5 }}
+                                                style={{ height: '100%', background: skill.color, boxShadow: `0 0 10px ${skill.color}` }}
+                                              />
+                                          </Box>
+                                        </Box>
+                                    </Box>
+                                ))}
+                            </Box>
+                        </Box>
+                    </Grid>
+                </Grid>
+            </Container>
         </Box>
-      </Container>
-    </Box>
-  );
-}
+    );
+};
+
+export default About;

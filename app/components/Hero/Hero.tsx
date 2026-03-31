@@ -1,77 +1,448 @@
 'use client';
 
-import { Box, Typography, Button, Container } from '@mui/material';
-import { motion } from 'framer-motion';
-import { portfolioData } from '../../../data/mockData';
+import React from 'react';
+import { Box, Typography, Container, Button, Stack, useTheme, useMediaQuery } from '@mui/material';
+import { motion, Variants } from 'framer-motion';
+import TerminalWidget from './TerminalWidget';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../lib/store';
 
-export default function Hero() {
-    return (
-        <Box
-            id="hero"
+// Define variants with explicit typing to resolve the "variant property" error
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+    },
+  },
+};
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] },
+  },
+};
+
+const Hero = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const mode = useSelector((state: RootState) => state.ui.mode);
+  const isDark = mode === 'dark';
+
+  return (
+    <Box
+      id="hero"
+      sx={{
+        position: 'relative',
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: { xs: '6rem 0 3rem', md: '8rem 0 4rem' },
+        overflow: 'hidden',
+        zIndex: 1,
+        backgroundColor: isDark ? 'var(--bg0)' : '#f8fafc',
+      }}
+    >
+      {/* Ambient Orbs - ONLY in Dark Mode */}
+      {isDark && (
+        <Box sx={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}>
+          <Box
             sx={{
-                height: 'calc(100vh - 64px)', // Adjust for navbar height
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                textAlign: 'center',
-                background: 'linear-gradient(45deg, rgba(37,99,235,0.1) 0%, rgba(147,51,234,0.1) 100%)',
+              position: 'absolute', width: 520, height: 520, left: -160, top: -100,
+              background: 'radial-gradient(circle, rgba(0, 245, 255, 0.12), transparent 70%)',
+              filter: 'blur(90px)',
+              animation: 'orbPulse 6s ease-in-out infinite',
+              '@keyframes orbPulse': { '0%, 100%': { transform: 'scale(1)' }, '50%': { transform: 'scale(1.15)' } },
             }}
-        >
-            <Container maxWidth="md">
-                <motion.div
-                    initial={{ opacity: 0, y: 50 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
-                >
-                    <Typography variant="h2" component="h1" gutterBottom sx={{ fontWeight: 'bold' }}>
-                        Hi, I'm <Box component="span" sx={{ color: 'primary.main' }}>{portfolioData.hero.name}</Box>
-                    </Typography>
-                </motion.div>
-
-                <motion.div
-                    initial={{ opacity: 0, y: 50 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.2 }}
-                >
-                    <Typography variant="h4" component="h2" color="text.secondary" gutterBottom>
-                        {portfolioData.hero.role}
-                    </Typography>
-                </motion.div>
-
-                <motion.div
-                    initial={{ opacity: 0, y: 50 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.4 }}
-                >
-                    <Typography variant="h6" color="text.secondary" paragraph sx={{ mb: 4 }}>
-                        {portfolioData.hero.description}
-                    </Typography>
-                </motion.div>
-
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.5 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.5, delay: 0.6 }}
-                >
-                    <Button
-                        variant="contained"
-                        size="large"
-                        color="primary"
-                        href="#projects"
-                        sx={{ mr: 2 }}
-                    >
-                        View Work
-                    </Button>
-                    <Button
-                        variant="outlined"
-                        size="large"
-                        color="secondary"
-                        href="#contact"
-                    >
-                        Contact Me
-                    </Button>
-                </motion.div>
-            </Container>
+          />
+          <Box
+            sx={{
+              position: 'absolute', width: 400, height: 400, right: -100, bottom: 60,
+              background: 'radial-gradient(circle, rgba(255, 0, 200, 0.10), transparent 70%)',
+              filter: 'blur(90px)',
+              animation: 'orbPulse 6s ease-in-out infinite 3s',
+            }}
+          />
         </Box>
-    );
-}
+      )}
+
+      {/* Background Pattern - Light Mode */}
+      {!isDark && (
+        <Box
+          sx={{
+            position: 'absolute', inset: 0, pointerEvents: 'none',
+            background: 'radial-gradient(circle at 50% 50%, rgba(0, 245, 255, 0.03), transparent 70%)',
+            opacity: 0.5,
+          }}
+        />
+      )}
+
+      <Container maxWidth="lg">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          style={{ width: '100%' }}
+        >
+          {/* Main Flex Layout */}
+          <Box
+            sx={{
+                display: 'flex',
+                flexDirection: isMobile ? 'column' : 'row',
+                alignItems: 'center',
+                gap: isMobile ? '3rem' : '5rem',
+            }}
+          >
+            {/* Left Column (Content) */}
+            <Box sx={{ 
+                flex: isMobile ? '1' : '1.4', 
+                display: 'flex', 
+                flexDirection: 'column', 
+                gap: '1.6rem', 
+                textAlign: { xs: 'center', md: 'left' } 
+            }}>
+                <motion.div variants={itemVariants}>
+                  <Box
+                    sx={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '0.8rem',
+                      fontFamily: 'var(--font-share-tech-mono)',
+                      fontSize: '0.75rem',
+                      color: 'primary.main',
+                      letterSpacing: '0.22em',
+                      textTransform: 'uppercase',
+                      fontWeight: 700,
+                      justifyContent: { xs: 'center', md: 'flex-start' },
+                      '&::before': {
+                        content: '""',
+                        width: '32px',
+                        height: '2px',
+                        background: theme.palette.primary.main,
+                        boxShadow: isDark ? '0 0 8px #00f5ff' : 'none',
+                      },
+                    }}
+                  >
+                    Full-Stack MERN Developer
+                  </Box>
+                </motion.div>
+
+                <motion.div variants={itemVariants}>
+                  <Typography
+                    variant="h1"
+                    sx={{
+                      lineHeight: 1.05,
+                      letterSpacing: '-0.02em',
+                      mb: 1,
+                      '& .line1': {
+                        fontSize: { xs: '2.8rem', sm: '3.5rem', md: '5rem' },
+                        color: isDark ? '#fff' : '#1a202c',
+                        display: 'block',
+                        textShadow: isDark ? '0 0 40px rgba(255, 255, 255, 0.12)' : 'none',
+                      },
+                      '& .line2': {
+                        fontSize: { xs: '2.8rem', sm: '3.5rem', md: '5rem' },
+                        color: 'primary.main',
+                        display: 'block',
+                        textShadow: isDark ? '0 0 60px #00f5ff, 0 0 120px rgba(0, 245, 255, 0.3)' : 'none',
+                      },
+                      '& .line3': {
+                        fontSize: { xs: '1.1rem', sm: '1.4rem', md: '1.8rem' },
+                        color: 'secondary.main',
+                        display: 'block',
+                        marginTop: '0.4rem',
+                        textShadow: isDark ? '0 0 30px #ff00c8' : 'none',
+                        fontFamily: 'var(--font-share-tech-mono)',
+                      },
+                    }}
+                  >
+                    <span className="line1">RAO MUHAMMAD</span>
+                    <span className="line2 glitch-text" data-text="SHAYAN">SHAYAN</span>
+                    <span className="line3">{"< DIGITAL ARCHITECT />"}</span>
+                  </Typography>
+                </motion.div>
+
+                <motion.div variants={itemVariants}>
+                  <Typography
+                    variant="body1"
+                    sx={{
+                      color: 'text.secondary',
+                      maxWidth: 540,
+                      mx: { xs: 'auto', md: 0 },
+                      fontSize: { xs: '1rem', md: '1.1rem' },
+                      lineHeight: 1.8,
+                    }}
+                  >
+                    I engineer <Box component="span" sx={{ color: 'primary.main', fontWeight: 600 }}>high-performance web products</Box> that blend cutting-edge aesthetics with robust backend logic. Passionate about <Box component="span" sx={{ color: 'secondary.main', fontWeight: 500 }}>scalability, speed, and user experience</Box>.
+                  </Typography>
+                </motion.div>
+
+                <motion.div variants={itemVariants}>
+                  <Stack
+                    direction="row"
+                    flexWrap="wrap"
+                    gap={1.2}
+                    justifyContent={{ xs: 'center', md: 'flex-start' }}
+                  >
+                    {['React.js', 'Next.js', 'Node.js', 'MongoDB', 'Tailwind', 'typescript'].map((tech) => (
+                      <Box
+                        key={tech}
+                        sx={{
+                          fontFamily: 'var(--font-share-tech-mono)',
+                          fontSize: '0.68rem',
+                          color: isDark ? 'primary.light' : 'primary.main',
+                          border: `1px solid ${isDark ? 'rgba(0, 245, 255, 0.22)' : 'rgba(0, 184, 200, 0.2)'}`,
+                          padding: '0.4rem 1rem',
+                          letterSpacing: '0.1em',
+                          fontWeight: 700,
+                          textTransform: 'uppercase',
+                          clipPath: 'polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%)',
+                          background: isDark ? 'rgba(0, 245, 255, 0.04)' : 'rgba(0, 184, 200, 0.03)',
+                          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                          '&:hover': {
+                            background: isDark ? 'rgba(0, 245, 255, 0.12)' : 'rgba(0, 184, 200, 0.08)',
+                            color: 'primary.main',
+                            boxShadow: isDark ? '0 0 16px rgba(0, 245, 255, 0.2)' : '0 4px 12px rgba(0, 245, 255, 0.1)',
+                            transform: 'translateY(-2px)',
+                          },
+                        }}
+                      >
+                        {tech}
+                      </Box>
+                    ))}
+                  </Stack>
+                </motion.div>
+
+                <motion.div variants={itemVariants}>
+                  <Box sx={{ width: '100%', maxWidth: 500, mx: { xs: 'auto', md: 0 } }}>
+                    <TerminalWidget />
+                  </Box>
+                </motion.div>
+
+                <motion.div variants={itemVariants}>
+                  <Stack
+                    direction={{ xs: 'column', sm: 'row' }}
+                    spacing={3}
+                    justifyContent={{ xs: 'center', md: 'flex-start' }}
+                    alignItems={{ xs: 'center', sm: 'center' }}
+                  >
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      href="#projects"
+                      sx={{
+                        padding: '1rem 2.8rem',
+                        fontSize: '0.85rem',
+                        fontWeight: 900,
+                        minWidth: 180,
+                      }}
+                    >
+                      View Projects
+                    </Button>
+                    <Button
+                      variant="outlined"
+                      color="primary"
+                      href="#contact"
+                      sx={{
+                        padding: '1rem 2.8rem',
+                        fontSize: '0.85rem',
+                        fontWeight: 700,
+                        minWidth: 180,
+                        borderWidth: '2px !important',
+                      }}
+                    >
+                      Hire Me
+                    </Button>
+                  </Stack>
+                </motion.div>
+            </Box>
+
+            {/* Right Column (Avatar) */}
+            <Box sx={{ 
+                flex: isMobile ? '1' : '1', 
+                display: 'flex', 
+                justifyContent: 'center', 
+                alignItems: 'center' 
+            }}>
+                <motion.div
+                  initial={{ scale: 0.8, opacity: 0, rotate: -5 }}
+                  animate={{ scale: 1, opacity: 1, rotate: 0 }}
+                  transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  <Box
+                    sx={{
+                      position: 'relative',
+                      width: { xs: 280, sm: 340, md: 400 },
+                      height: { xs: 280, sm: 340, md: 400 },
+                    }}
+                  >
+                    {/* Glowing Aura */}
+                    {isDark && (
+                      <Box
+                        sx={{
+                          position: 'absolute',
+                          inset: '-20%',
+                          background: 'radial-gradient(circle, rgba(0, 245, 255, 0.15), transparent 70%)',
+                          zIndex: -1,
+                          animation: 'pulse 4s ease-in-out infinite',
+                          '@keyframes pulse': { '0%, 100%': { transform: 'scale(1)', opacity: 0.8 }, '50%': { transform: 'scale(1.1)', opacity: 1 } },
+                        }}
+                      />
+                    )}
+
+                    {/* Rotating Rings */}
+                    <Box
+                      sx={{
+                        position: 'absolute', inset: -30,
+                        clipPath: 'polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%)',
+                        border: `1px solid ${isDark ? 'rgba(255, 0, 200, 0.4)' : 'rgba(255, 0, 200, 0.2)'}`,
+                        animation: 'ringRotate 15s linear infinite reverse',
+                        '@keyframes ringRotate': { from: { transform: 'rotate(0deg)' }, to: { transform: 'rotate(360deg)' } },
+                      }}
+                    />
+                    <Box
+                      sx={{
+                        position: 'absolute', inset: -15,
+                        clipPath: 'polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%)',
+                        border: `2px solid ${theme.palette.primary.main}`,
+                        animation: 'ringRotate 10s linear infinite',
+                        boxShadow: isDark ? 'inset 0 0 20px rgba(0, 245, 255, 0.2), 0 0 20px rgba(0, 245, 255, 0.2)' : 'none',
+                      }}
+                    />
+
+                    {/* Hex Avatar Container */}
+                    <Box
+                      sx={{
+                        width: '100%',
+                        height: '100%',
+                        clipPath: 'polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%)',
+                        overflow: 'hidden',
+                        position: 'relative',
+                        background: isDark ? 'var(--bg2)' : '#e2e8f0',
+                        border: isDark ? 'none' : '2px solid #fff',
+                        boxShadow: isDark ? 'none' : '0 10px 40px rgba(0, 0, 0, 0.1)',
+                        '& img': {
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'cover',
+                          filter: isDark ? 'saturate(0.9) contrast(1.1)' : 'none',
+                        },
+                        '&::after': {
+                          content: '""',
+                          position: 'absolute',
+                          inset: 0,
+                          background: isDark
+                            ? 'linear-gradient(135deg, rgba(0, 245, 255, 0.1) 0%, transparent 50%, rgba(255, 0, 200, 0.08) 100%)'
+                            : 'none',
+                        },
+                      }}
+                    >
+                      {/* USER IMAGE PATH */}
+                      <img
+                        src="/assets/shayan_portrait.jpg"
+                        alt="Rao Muhammad Shayan"
+                      />
+                    </Box>
+
+                    {/* Interactive Stat Chips */}
+                    <Stack
+                      sx={{
+                        position: 'absolute',
+                        width: '100%',
+                        height: '100%',
+                        top: 0,
+                        left: 0,
+                        pointerEvents: 'none',
+                        zIndex: 2,
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          position: 'absolute', top: '15%', right: -30,
+                          fontFamily: 'var(--font-share-tech-mono)', fontSize: '0.7rem',
+                          color: 'primary.main', letterSpacing: '0.1em',
+                          background: isDark ? 'rgba(0, 10, 15, 0.95)' : 'rgba(255, 255, 255, 0.95)',
+                          border: `1px solid ${theme.palette.divider}`,
+                          padding: '0.5rem 1rem', clipPath: 'polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%)',
+                          boxShadow: isDark ? '0 0 15px rgba(0, 245, 255, 0.15)' : '0 4px 12px rgba(0, 0, 0, 0.05)',
+                        }}
+                      >
+                        ⚡ MERN Specialist
+                      </Box>
+                      <Box
+                        sx={{
+                          position: 'absolute', bottom: '25%', left: -40,
+                          fontFamily: 'var(--font-share-tech-mono)', fontSize: '0.7rem',
+                          color: 'primary.main', letterSpacing: '0.1em',
+                          background: isDark ? 'rgba(0, 10, 15, 0.95)' : 'rgba(255, 255, 255, 0.95)',
+                          border: `1px solid ${theme.palette.divider}`,
+                          padding: '0.5rem 1rem', clipPath: 'polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%)',
+                          boxShadow: isDark ? '0 0 15px rgba(0, 245, 255, 0.15)' : '0 4px 12px rgba(0, 0, 0, 0.05)',
+                        }}
+                      >
+                        🚀 Startup Ready
+                      </Box>
+                    </Stack>
+                  </Box>
+                </motion.div>
+            </Box>
+          </Box>
+        </motion.div>
+      </Container>
+
+      {/* Floating Particles - Dark Mode Only */}
+      {isDark && (
+        <Box sx={{ position: 'absolute', inset: 0, zIndex: -1, pointerEvents: 'none', opacity: 0.3 }}>
+          {[...Array(12)].map((_, i) => (
+             <motion.div
+               key={i}
+               animate={{
+                 y: [Math.random() * 800, Math.random() * 800],
+                 x: [Math.random() * 1200, Math.random() * 1200],
+                 opacity: [0.1, 0.4, 0.1],
+               }}
+               transition={{
+                 duration: 10 + Math.random() * 10,
+                 repeat: Infinity,
+                 ease: "linear"
+               }}
+               style={{
+                 position: 'absolute',
+                 width: '2px',
+                 height: '2px',
+                 backgroundColor: '#00f5ff',
+                 boxShadow: '0 0 8px #00f5ff',
+               }}
+             />
+          ))}
+        </Box>
+      )}
+
+      {/* Scroll Hint */}
+      <Box
+        sx={{
+          position: 'absolute', bottom: '2.5rem', left: '50%', transform: 'translateX(-50%)',
+          display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.6rem',
+          fontFamily: 'var(--font-share-tech-mono)', fontSize: '0.65rem',
+          color: isDark ? 'text.secondary' : 'primary.main',
+          letterSpacing: '0.3em', animation: 'bounce2 2s ease-in-out infinite',
+          '@keyframes bounce2': { '0%, 100%': { transform: 'translateX(-50%) translateY(0)' }, '50%': { transform: 'translateX(-50%) translateY(10px)' } },
+          '&::after': {
+            content: '""', width: '2px', height: '50px',
+            background: `linear-gradient(to bottom, ${theme.palette.primary.main}, transparent)`,
+            boxShadow: isDark ? '0 0 10px #00f5ff' : 'none',
+          },
+        }}
+      >
+        DISCOVER
+      </Box>
+    </Box>
+  );
+};
+
+export default Hero;
