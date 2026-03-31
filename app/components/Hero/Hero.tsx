@@ -343,14 +343,14 @@ const Hero = () => {
                         },
                       }}
                     >
-                      {/* Placeholder image. Correct path required. */}
+                      
                       <img
                         src="/assets/shayan_portrait.jpg"
                         alt="Rao Muhammad Shayan"
                       />
                     </Box>
 
-                    {/* Interactive Stat Chips */}
+                    
                     <Stack
                       sx={{
                         position: 'absolute',
@@ -396,7 +396,7 @@ const Hero = () => {
         </motion.div>
       </Container>
 
-      {/* Floating Particles - Dark Mode Only */}
+     
       {isDark && (
         <Box sx={{ position: 'absolute', inset: 0, zIndex: -1, pointerEvents: 'none', opacity: 0.3 }}>
           {[...Array(12)].map((_, i) => (
