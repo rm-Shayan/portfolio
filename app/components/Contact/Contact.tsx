@@ -1,7 +1,5 @@
-'use client';
-
 import React, { useState } from 'react';
-import { Box, Typography, Container, TextField, Button, Stack, useTheme, IconButton, Paper } from '@mui/material';
+import { Box, Typography, Container, TextField, Button, Stack, useTheme, IconButton, Paper, CircularProgress } from '@mui/material';
 import { motion } from 'framer-motion';
 import SectionHeader from '../SectionHeader/SectionHeader';
 import EmailIcon from '@mui/icons-material/Email';
@@ -11,6 +9,8 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import SendIcon from '@mui/icons-material/Send';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../lib/store';
+import { sendEmail } from '../../actions/contactForm';
+import CustomAlert from './CustomAlert';
 
 const contactLinks = [
     { icon: <EmailIcon />, label: 'shayan@email.com', href: 'mailto:shayan@email.com', color: '#00f5ff' },
@@ -21,14 +21,59 @@ const contactLinks = [
 
 const Contact = () => {
     const theme = useTheme();
-    const [status, setStatus] = useState('Send Message');
+    const [loading, setLoading] = useState(false);
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        projectType: '',
+        details: ''
+    });
+    
+    const [alert, setAlert] = useState<{ open: boolean; type: 'success' | 'error'; message: string }>({
+        open: false,
+        type: 'success',
+        message: ''
+    });
+
     const mode = useSelector((state: RootState) => state.ui.mode);
     const isDark = mode === 'dark';
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({ ...prev, [name]: value }));
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setStatus('Message Sent! ✔');
-        setTimeout(() => setStatus('Send Message'), 3000);
+        if (loading) return;
+        
+        setLoading(true);
+        try {
+            const result = await sendEmail(formData);
+            if (result.success) {
+                setAlert({
+                    open: true,
+                    type: 'success',
+                    message: 'Thanks for reaching out! I typically respond within 24 hours.'
+                });
+                setFormData({ name: '', email: '', projectType: '', details: '' });
+            } else {
+                setAlert({
+                    open: true,
+                    type: 'error',
+                    message: result.message || 'Something went wrong. Please try again.'
+                });
+            }
+        } catch (error) {
+            console.error('Submission error:', error);
+            setAlert({
+                open: true,
+                type: 'error',
+                message: 'Internal connection error. Please try again later.'
+            });
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -147,94 +192,69 @@ const Contact = () => {
                                 }}
                             >
                                 <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 3 }}>
-                                    {[
-                                        { label: 'Your Name', placeholder: 'John Doe', xs: 6 },
-                                        { label: 'Email Address', placeholder: 'john@company.com', type: 'email', xs: 6 },
-                                        { label: 'Project Type', placeholder: 'e.g. E-Commerce / SaaS', xs: 12 },
-                                    ].map((field) => (
-                                        <Box 
-                                            key={field.label} 
-                                            sx={{ width: { xs: '100%', sm: field.xs === 6 ? 'calc(50% - 12px)' : '100%' } }}
-                                        >
-                                            <Stack spacing={1}>
-                                                <Typography
-                                                    sx={{
-                                                        fontFamily: 'var(--font-inter), sans-serif',
-                                                        fontSize: '0.75rem',
-                                                        color: 'primary.main',
-                                                        letterSpacing: '0.05em',
-                                                        textTransform: 'uppercase',
-                                                        fontWeight: 700,
-                                                    }}
-                                                >
-                                                    {field.label}
-                                                </Typography>
-                                                <TextField
-                                                    fullWidth
-                                                    variant="standard"
-                                                    placeholder={field.placeholder}
-                                                    type={field.type || 'text'}
-                                                    InputProps={{
-                                                        disableUnderline: true,
-                                                        sx: {
-                                                            fontFamily: 'var(--font-inter), sans-serif',
-                                                            fontSize: '0.95rem',
-                                                            color: 'text.primary',
-                                                            background: isDark ? 'rgba(255, 255, 255, 0.03)' : 'rgba(15, 23, 42, 0.03)',
-                                                            border: `1px solid ${theme.palette.divider}`,
-                                                            padding: '0.9rem 1.4rem',
-                                                            clipPath: 'polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%)',
-                                                            transition: 'all 0.3s',
-                                                            '&:focus-within': {
-                                                                borderColor: 'primary.main',
-                                                                background: isDark ? 'rgba(0, 245, 255, 0.03)' : '#ffffff',
-                                                                boxShadow: isDark ? 'none' : '0 10px 20px -10px rgba(3, 105, 161, 0.1)',
-                                                            },
-                                                        },
-                                                    }}
-                                                />
-                                            </Stack>
-                                        </Box>
-                                    ))}
-
-                                    <Box sx={{ width: '100%' }}>
+                                    <Box sx={{ width: { xs: '100%', sm: 'calc(50% - 12px)' } }}>
                                         <Stack spacing={1}>
-                                            <Typography
-                                                sx={{
-                                                    fontFamily: 'var(--font-inter), sans-serif',
-                                                    fontSize: '0.75rem',
-                                                    color: 'primary.main',
-                                                    letterSpacing: '0.05em',
-                                                    textTransform: 'uppercase',
-                                                    fontWeight: 700,
-                                                }}
-                                            >
-                                                Project Details
-                                            </Typography>
+                                            <Typography sx={fieldLabelStyles}>Your Name</Typography>
                                             <TextField
                                                 fullWidth
+                                                required
+                                                name="name"
+                                                value={formData.name}
+                                                onChange={handleInputChange}
+                                                variant="standard"
+                                                placeholder="John Doe"
+                                                disabled={loading}
+                                                InputProps={customInputProps(isDark, theme)}
+                                            />
+                                        </Stack>
+                                    </Box>
+                                    <Box sx={{ width: { xs: '100%', sm: 'calc(50% - 12px)' } }}>
+                                        <Stack spacing={1}>
+                                            <Typography sx={fieldLabelStyles}>Email Address</Typography>
+                                            <TextField
+                                                fullWidth
+                                                required
+                                                type="email"
+                                                name="email"
+                                                value={formData.email}
+                                                onChange={handleInputChange}
+                                                variant="standard"
+                                                placeholder="john@company.com"
+                                                disabled={loading}
+                                                InputProps={customInputProps(isDark, theme)}
+                                            />
+                                        </Stack>
+                                    </Box>
+                                    <Box sx={{ width: '100%' }}>
+                                        <Stack spacing={1}>
+                                            <Typography sx={fieldLabelStyles}>Project Type</Typography>
+                                            <TextField
+                                                fullWidth
+                                                name="projectType"
+                                                value={formData.projectType}
+                                                onChange={handleInputChange}
+                                                variant="standard"
+                                                placeholder="e.g. E-Commerce / SaaS"
+                                                disabled={loading}
+                                                InputProps={customInputProps(isDark, theme)}
+                                            />
+                                        </Stack>
+                                    </Box>
+                                    <Box sx={{ width: '100%' }}>
+                                        <Stack spacing={1}>
+                                            <Typography sx={fieldLabelStyles}>Project Details</Typography>
+                                            <TextField
+                                                fullWidth
+                                                required
                                                 multiline
                                                 rows={4}
+                                                name="details"
+                                                value={formData.details}
+                                                onChange={handleInputChange}
                                                 variant="standard"
                                                 placeholder="Describe your goals, timeline, and budget..."
-                                                InputProps={{
-                                                    disableUnderline: true,
-                                                    sx: {
-                                                        fontFamily: 'var(--font-inter), sans-serif',
-                                                        fontSize: '0.95rem',
-                                                        color: 'text.primary',
-                                                        background: isDark ? 'rgba(255, 255, 255, 0.03)' : 'rgba(15, 23, 42, 0.03)',
-                                                        border: `1px solid ${theme.palette.divider}`,
-                                                        padding: '0.9rem 1.4rem',
-                                                        clipPath: 'polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%)',
-                                                        transition: 'all 0.3s',
-                                                        '&:focus-within': {
-                                                            borderColor: 'primary.main',
-                                                            background: isDark ? 'rgba(0, 245, 255, 0.03)' : '#ffffff',
-                                                            boxShadow: isDark ? 'none' : '0 10px 20px -10px rgba(3, 105, 161, 0.1)',
-                                                        },
-                                                    },
-                                                }}
+                                                disabled={loading}
+                                                InputProps={customInputProps(isDark, theme)}
                                             />
                                         </Stack>
                                     </Box>
@@ -245,32 +265,80 @@ const Contact = () => {
                                             variant="contained"
                                             color="primary"
                                             fullWidth
-                                            endIcon={<SendIcon />}
+                                            disabled={loading}
+                                            endIcon={loading ? null : <SendIcon />}
                                             sx={{
                                                 padding: '1.2rem',
                                                 fontSize: '1rem',
                                                 fontWeight: 800,
                                                 fontFamily: 'var(--font-outfit), sans-serif',
                                                 color: '#fff',
-                                                background: status.includes('Sent') ? '#00c896' : 'primary.main',
+                                                background: alert.open && alert.type === 'success' ? '#00c896' : 'primary.main',
                                                 '&:hover': {
-                                                    background: status.includes('Sent') ? '#00c896' : 'primary.main',
+                                                    background: alert.open && alert.type === 'success' ? '#00c896' : 'primary.main',
                                                     transform: 'translateY(-3px)',
                                                     boxShadow: isDark ? '0 0 30px rgba(0, 184, 200, 0.3)' : '0 10px 20px rgba(3, 105, 161, 0.25)',
+                                                },
+                                                '&:disabled': {
+                                                    background: 'rgba(255, 255, 255, 0.1)',
+                                                    color: 'rgba(255, 255, 255, 0.3)'
                                                 }
                                             }}
                                         >
-                                            {status}
+                                            {loading ? <CircularProgress size={24} color="inherit" /> : (alert.open && alert.type === 'success' ? 'Message Sent!' : 'Send Message')}
                                         </Button>
                                     </Box>
                                 </Box>
+                                <Typography sx={{ mt: 2, fontSize: '0.7rem', color: 'text.secondary', textAlign: 'center' }}>
+                                    I typically respond to project inquiries within 24 hours.
+                                </Typography>
                             </Paper>
                         </Box>
                     </Box>
                 </Box>
             </Container>
+
+            {/* Custom Alert */}
+            <CustomAlert 
+                open={alert.open} 
+                type={alert.type} 
+                message={alert.message} 
+                onClose={() => setAlert(prev => ({ ...prev, open: false }))} 
+            />
         </Box>
     );
 };
+
+const fieldLabelStyles = {
+    fontFamily: 'var(--font-inter), sans-serif',
+    fontSize: '0.75rem',
+    color: 'primary.main',
+    letterSpacing: '0.05em',
+    textTransform: 'uppercase',
+    fontWeight: 700,
+};
+
+const customInputProps = (isDark: boolean, theme: any) => ({
+    disableUnderline: true,
+    sx: {
+        fontFamily: 'var(--font-inter), sans-serif',
+        fontSize: '0.95rem',
+        color: 'text.primary',
+        background: isDark ? 'rgba(255, 255, 255, 0.03)' : 'rgba(15, 23, 42, 0.03)',
+        border: `1px solid ${theme.palette.divider}`,
+        padding: '0.9rem 1.4rem',
+        clipPath: 'polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%)',
+        transition: 'all 0.3s',
+        '&:focus-within': {
+            borderColor: 'primary.main',
+            background: isDark ? 'rgba(0, 245, 255, 0.03)' : '#ffffff',
+            boxShadow: isDark ? 'none' : '0 10px 20px -10px rgba(3, 105, 161, 0.1)',
+        },
+        '&.Mui-disabled': {
+            opacity: 0.6,
+            cursor: 'not-allowed'
+        }
+    },
+});
 
 export default Contact;

@@ -33,9 +33,21 @@ const itemVariants: Variants = {
 const Hero = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  
+  const [mounted, setMounted] = React.useState(false);
+  React.useEffect(() => {
+      setMounted(true);
+  }, []);
+
   // Assumes Redux state setup exists
   const mode = useSelector((state: RootState) => state.ui.mode);
   const isDark = mode === 'dark';
+
+  if (!mounted) {
+      return (
+          <Box id="hero" sx={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'background.default' }} />
+      );
+  }
 
   return (
     <Box

@@ -11,6 +11,17 @@ interface SectionHeaderProps {
 }
 
 const SectionHeader = ({ num, title, subtitle }: SectionHeaderProps) => {
+    const [mounted, setMounted] = React.useState(false);
+    React.useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    if (!mounted) {
+        return (
+            <Box sx={{ height: '80px', marginBottom: '4rem' }} /> // Placeholder with same dimensions
+        );
+    }
+
     return (
         <Box
             component={motion.div}
