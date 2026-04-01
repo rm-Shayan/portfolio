@@ -7,49 +7,49 @@ export const createCustomTheme = (mode: 'light' | 'dark') => {
     palette: {
       mode,
       primary: {
-        main: isDark ? '#00f5ff' : '#0284c7', // Neon Cyan vs Deep Sky Blue
-        light: isDark ? '#00b8c8' : '#38bdf8',
+        main: isDark ? '#00f5ff' : '#0369a1', // Neon Cyan vs Deep Blue (slightly darker for better contrast)
+        light: isDark ? '#00b8c8' : '#0ea5e9',
         contrastText: isDark ? '#000' : '#fff',
       },
       secondary: {
-        main: isDark ? '#ff00c8' : '#c026d3', // Neon Magenta vs Deep Fuchsia
+        main: isDark ? '#ff00c8' : '#9333ea', // Neon Magenta vs Vibrant Purple
       },
       background: {
-        default: isDark ? '#020508' : '#ffffff',
+        default: isDark ? '#020508' : '#f8fafc', // Slate 50 for light mode
         paper: isDark ? '#050c12' : '#ffffff',
       },
       text: {
-        primary: isDark ? '#cde8f0' : '#0f172a',
-        secondary: isDark ? '#6a9aaa' : '#475569',
+        primary: isDark ? '#cde8f0' : '#0f172a', // Slate 900 for deep legibility
+        secondary: isDark ? '#6a9aaa' : '#475569', // Slate 600
       },
       divider: isDark ? 'rgba(0, 245, 255, 0.18)' : 'rgba(15, 23, 42, 0.08)',
     },
     typography: {
-      fontFamily: 'var(--font-rajdhani), sans-serif',
+      fontFamily: 'var(--font-inter), sans-serif',
       h1: {
-        fontFamily: 'var(--font-orbitron), sans-serif',
+        fontFamily: 'var(--font-outfit), sans-serif',
         fontWeight: 900,
-        letterSpacing: '0.02em',
+        letterSpacing: '-0.02em',
       },
       h2: {
-        fontFamily: 'var(--font-orbitron), sans-serif',
+        fontFamily: 'var(--font-outfit), sans-serif',
         fontWeight: 700,
-        letterSpacing: '0.04em',
+        letterSpacing: '-0.01em',
       },
       h3: {
-        fontFamily: 'var(--font-orbitron), sans-serif',
+        fontFamily: 'var(--font-outfit), sans-serif',
         fontWeight: 700,
       },
       h4: {
-        fontFamily: 'var(--font-orbitron), sans-serif',
+        fontFamily: 'var(--font-outfit), sans-serif',
         fontWeight: 600,
       },
       h5: {
-        fontFamily: 'var(--font-orbitron), sans-serif',
+        fontFamily: 'var(--font-outfit), sans-serif',
         fontWeight: 600,
       },
       h6: {
-        fontFamily: 'var(--font-orbitron), sans-serif',
+        fontFamily: 'var(--font-outfit), sans-serif',
         fontWeight: 600,
       },
       subtitle1: {
@@ -59,17 +59,17 @@ export const createCustomTheme = (mode: 'light' | 'dark') => {
         fontFamily: 'var(--font-share-tech-mono), monospace',
       },
       body1: {
-        fontSize: '1.05rem',
-        lineHeight: 1.8,
+        fontSize: '1rem',
+        lineHeight: 1.7,
       },
       body2: {
         fontFamily: 'var(--font-share-tech-mono), monospace',
         fontSize: '0.85rem',
       },
       button: {
-        fontFamily: 'var(--font-share-tech-mono), monospace',
+        fontFamily: 'var(--font-outfit), sans-serif',
         fontWeight: 700,
-        letterSpacing: '0.12em',
+        letterSpacing: '0.05em',
         textTransform: 'uppercase',
       },
     },
@@ -103,9 +103,10 @@ export const createCustomTheme = (mode: 'light' | 'dark') => {
           root: {
             backgroundImage: 'none',
             backgroundColor: isDark ? '#091520' : '#ffffff',
-            border: `1px solid ${isDark ? 'rgba(0, 245, 255, 0.18)' : 'rgba(15, 23, 42, 0.06)'}`,
+            border: `1px solid ${isDark ? 'rgba(0, 245, 255, 0.18)' : 'rgba(15, 23, 42, 0.08)'}`,
             clipPath: 'polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px))',
-            boxShadow: isDark ? 'none' : '0 10px 40px -10px rgba(15, 23, 42, 0.06)',
+            boxShadow: isDark ? 'none' : '0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05)',
+            transition: 'all 0.3s ease-in-out',
           },
         },
       },

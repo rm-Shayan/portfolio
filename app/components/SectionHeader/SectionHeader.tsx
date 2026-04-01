@@ -22,10 +22,12 @@ const SectionHeader = ({ num, title, subtitle }: SectionHeaderProps) => {
         >
             <Typography
                 sx={{
-                    fontFamily: 'var(--font-share-tech-mono)',
-                    fontSize: '0.65rem',
-                    color: 'secondary.main',
-                    letterSpacing: '0.2em',
+                    fontFamily: 'var(--font-outfit), sans-serif',
+                    fontSize: '0.8rem',
+                    color: 'primary.main',
+                    letterSpacing: '0.15em',
+                    fontWeight: 800,
+                    textTransform: 'uppercase',
                 }}
             >
                 {num}
@@ -33,10 +35,16 @@ const SectionHeader = ({ num, title, subtitle }: SectionHeaderProps) => {
             <Typography
                 variant="h2"
                 sx={{
-                    fontSize: { xs: '1.8rem', md: '2.6rem' },
-                    color: '#fff',
-                    letterSpacing: '0.04em',
-                    '& span': { color: 'primary.main', textShadow: '0 0 30px #00f5ff' },
+                    fontFamily: 'var(--font-outfit), sans-serif',
+                    fontSize: { xs: '1.8rem', md: '2.8rem' },
+                    color: 'text.primary',
+                    letterSpacing: '-0.03em',
+                    fontWeight: 900,
+                    lineHeight: 1.1,
+                    '& span': { 
+                      color: 'primary.main', 
+                      textShadow: (theme) => theme.palette.mode === 'dark' ? '0 0 40px rgba(0, 245, 255, 0.4)' : 'none' 
+                    },
                 }}
             >
                 {title.split(' ').map((word, i) => (
@@ -49,7 +57,9 @@ const SectionHeader = ({ num, title, subtitle }: SectionHeaderProps) => {
                 sx={{
                     flex: 1,
                     height: '1px',
-                    background: 'linear-gradient(to right, rgba(0, 245, 255, 0.18), transparent)',
+                    background: (theme) => theme.palette.mode === 'dark' 
+                      ? 'linear-gradient(to right, rgba(0, 245, 255, 0.18), transparent)'
+                      : 'linear-gradient(to right, rgba(15, 23, 42, 0.1), transparent)',
                 }}
             />
         </Box>

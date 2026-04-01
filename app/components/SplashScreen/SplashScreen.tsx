@@ -44,7 +44,7 @@ const SplashScreen = ({ finishLoading }: { finishLoading: () => void }) => {
         alignItems: 'center',
         justifyContent: 'center',
         color: '#00f5ff',
-        fontFamily: 'var(--font-share-tech-mono)',
+        fontFamily: 'var(--font-outfit), sans-serif',
         textAlign: 'center',
       }}
     >
@@ -90,11 +90,12 @@ const SplashScreen = ({ finishLoading }: { finishLoading: () => void }) => {
           <Stack spacing={2} alignItems="center">
             <Typography
               sx={{
-                fontFamily: 'var(--font-share-tech-mono)',
-                fontSize: '0.85rem',
-                letterSpacing: '0.15em',
+                fontFamily: 'var(--font-outfit), sans-serif',
+                fontSize: '1rem',
+                letterSpacing: '0.05em',
                 textTransform: 'uppercase',
-                opacity: 0.8,
+                fontWeight: 600,
+                opacity: 0.9,
               }}
             >
               {loadingText}
@@ -126,9 +127,11 @@ const SplashScreen = ({ finishLoading }: { finishLoading: () => void }) => {
 
             <Typography
               sx={{
-                fontFamily: 'var(--font-share-tech-mono)',
-                fontSize: '0.65rem',
+                fontFamily: 'var(--font-outfit), sans-serif',
+                fontSize: '0.85rem',
                 color: 'text.secondary',
+                fontWeight: 700,
+                letterSpacing: '0.1em',
               }}
             >
               {progress.toFixed(0)}% LOADED

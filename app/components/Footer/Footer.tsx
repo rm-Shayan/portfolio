@@ -18,7 +18,7 @@ const Footer = () => {
         <Box
             component="footer"
             sx={{
-                background: isDark ? 'var(--bg1)' : '#fff',
+                background: 'background.paper',
                 borderTop: `1px solid ${theme.palette.divider}`,
                 padding: '4rem 0',
                 position: 'relative',
@@ -37,11 +37,11 @@ const Footer = () => {
                         <Typography
                             variant="h6"
                             sx={{
-                                fontFamily: 'var(--font-orbitron)',
-                                fontSize: '1.2rem',
+                                fontFamily: 'var(--font-outfit), sans-serif',
+                                fontSize: '1.4rem',
                                 fontWeight: 900,
                                 color: 'primary.main',
-                                letterSpacing: '0.1em',
+                                letterSpacing: '-0.02em',
                                 '& span': { color: 'secondary.main' },
                             }}
                         >
@@ -50,10 +50,10 @@ const Footer = () => {
                         <Typography
                             variant="body2"
                             sx={{
-                                fontFamily: 'var(--font-share-tech-mono)',
-                                fontSize: '0.7rem',
+                                fontFamily: 'var(--font-inter), sans-serif',
+                                fontSize: '0.85rem',
                                 color: 'text.secondary',
-                                letterSpacing: '0.1em',
+                                fontWeight: 500,
                                 textAlign: { xs: 'center', md: 'left' },
                             }}
                         >
@@ -64,12 +64,12 @@ const Footer = () => {
                     {/* Copy */}
                     <Typography
                         sx={{
-                            fontFamily: 'var(--font-share-tech-mono)',
-                            fontSize: '0.7rem',
+                            fontFamily: 'var(--font-inter), sans-serif',
+                            fontSize: '0.85rem',
                             color: 'text.secondary',
-                            letterSpacing: '0.1em',
                             textAlign: 'center',
-                            '& span': { color: 'primary.main' },
+                            fontWeight: 500,
+                            '& span': { color: 'primary.main', fontWeight: 700 },
                         }}
                     >
                         © 2024 <span>Rao Muhammad Shayan</span> · Karachi, Pakistan
@@ -95,7 +95,7 @@ const Footer = () => {
                                     color: 'text.secondary',
                                     transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                                     clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)',
-                                    background: isDark ? 'rgba(255, 255, 255, 0.03)' : '#f8fafc',
+                                    background: isDark ? 'rgba(255, 255, 255, 0.03)' : 'rgba(15, 23, 42, 0.03)',
                                     '&:hover': {
                                         borderColor: 'primary.main',
                                         color: 'primary.main',

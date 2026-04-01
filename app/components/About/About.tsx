@@ -57,7 +57,7 @@ const About = () => {
     const isDark = mode === 'dark';
 
     return (
-        <Box id="about" sx={{ py: { xs: '5rem', md: '10rem' }, background: isDark ? 'transparent' : '#f8fafc', overflow: 'hidden' }}>
+        <Box id="about" sx={{ py: { xs: '5rem', md: '10rem' }, background: 'background.default', overflow: 'hidden' }}>
             <Container maxWidth="lg">
                 <SectionHeader num="01" title="About & Systems" />
 
@@ -73,13 +73,17 @@ const About = () => {
                             <Typography
                                 variant="h4"
                                 sx={{
-                                    fontFamily: 'var(--font-orbitron)',
-                                    fontSize: { xs: '1.5rem', md: '2.1rem' },
+                                    fontFamily: 'var(--font-outfit), sans-serif',
+                                    fontSize: { xs: '1.8rem', md: '2.8rem' },
                                     fontWeight: 900,
-                                    color: isDark ? '#fff' : '#1a202c',
+                                    color: 'text.primary',
                                     mb: 3,
-                                    lineHeight: 1.2,
-                                    '& span': { color: 'primary.main', textShadow: isDark ? '0 0 20px #00f5ff' : 'none' },
+                                    lineHeight: 1.1,
+                                    letterSpacing: '-0.02em',
+                                    '& span': { 
+                                        color: 'primary.main', 
+                                        textShadow: isDark ? '0 0 40px rgba(0, 245, 255, 0.4)' : 'none' 
+                                    },
                                 }}
                             >
                                 Designing <span>Digital Fortresses</span> for the Modern Web.
@@ -90,9 +94,10 @@ const About = () => {
                                 sx={{
                                     color: 'text.secondary',
                                     mb: 4,
-                                    fontSize: '1.05rem',
-                                    lineHeight: 1.9,
-                                    '& strong': { color: 'primary.main', fontWeight: 600 },
+                                    fontSize: '1.1rem',
+                                    lineHeight: 1.8,
+                                    fontFamily: 'var(--font-inter), sans-serif',
+                                    '& strong': { color: 'primary.main', fontWeight: 700 },
                                 }}
                             >
                                 I'm <strong>Rao Muhammad Shayan</strong>, based in Karachi. I specialize in building highly scalable, performant MERN applications that don't just work — they dominate. I believe every line of code should be a strategic asset.
@@ -104,35 +109,39 @@ const About = () => {
                                     <Box key={i} sx={{ width: '100%' }}>
                                         <Box
                                             sx={{
-                                                padding: '1.4rem',
-                                                border: `1px solid ${isDark ? 'rgba(0, 245, 255, 0.1)' : 'rgba(0, 0, 0, 0.05)'}`,
-                                                background: isDark ? 'rgba(255, 255, 255, 0.02)' : '#fff',
+                                                padding: '1.6rem',
+                                                border: `1px solid ${theme.palette.divider}`,
+                                                background: 'background.paper',
                                                 clipPath: 'polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px)',
-                                                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                                                boxShadow: isDark ? 'none' : '0 15px 30px -10px rgba(0, 0, 0, 0.08)',
+                                                transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
                                                 '&:hover': {
                                                     borderColor: 'primary.main',
-                                                    transform: 'translateY(-4px)',
+                                                    transform: 'translateY(-6px)',
+                                                    boxShadow: isDark ? `0 0 20px ${theme.palette.primary.main}22` : '0 20px 40px -10px rgba(0, 0, 0, 0.12)',
                                                 }
                                             }}
                                         >
                                             <Typography
                                                 sx={{
-                                                    fontFamily: 'var(--font-orbitron)',
-                                                    fontSize: '1.6rem',
+                                                    fontFamily: 'var(--font-outfit), sans-serif',
+                                                    fontSize: '2rem',
                                                     fontWeight: 900,
                                                     color: 'primary.main',
                                                     mb: 0.5,
+                                                    lineHeight: 1,
                                                 }}
                                             >
                                                 {stat.val}
                                             </Typography>
                                             <Typography
                                                 sx={{
-                                                    fontFamily: 'var(--font-share-tech-mono)',
-                                                    fontSize: '0.6rem',
+                                                    fontFamily: 'var(--font-inter), sans-serif',
+                                                    fontSize: '0.75rem',
                                                     color: 'text.secondary',
-                                                    letterSpacing: '0.15em',
+                                                    letterSpacing: '0.05em',
                                                     textTransform: 'uppercase',
+                                                    fontWeight: 600,
                                                 }}
                                             >
                                                 {stat.label}
@@ -172,12 +181,12 @@ const About = () => {
                                             gap: 2,
                                             padding: '1.5rem',
                                             paddingBottom: '1.2rem',
-                                            background: isDark ? 'rgba(255,255,255,0.03)' : '#fff',
-                                            border: `1px solid ${isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.03)'}`,
+                                            background: 'background.paper',
+                                            border: `1px solid ${theme.palette.divider}`,
                                             transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
                                             position: 'relative',
                                             cursor: 'pointer',
-                                            boxShadow: isDark ? 'none' : '0 10px 30px rgba(0,0,0,0.03)',
+                                            boxShadow: isDark ? 'none' : '0 4px 15px rgba(0, 0, 0, 0.03)',
                                             '&:hover': {
                                                 borderColor: 'primary.main',
                                                 background: isDark ? 'rgba(0, 245, 255, 0.04)' : 'rgba(0, 245, 255, 0.01)',
@@ -204,11 +213,11 @@ const About = () => {
                                             </Box>
                                             <Typography
                                                 sx={{
-                                                    fontFamily: 'var(--font-share-tech-mono)',
-                                                    fontSize: '0.75rem',
+                                                    fontFamily: 'var(--font-outfit), sans-serif',
+                                                    fontSize: '0.85rem',
                                                     fontWeight: 700,
                                                     color: 'text.primary',
-                                                    letterSpacing: '0.05em',
+                                                    letterSpacing: '0.01em',
                                                     textTransform: 'uppercase'
                                                 }}
                                             >
@@ -218,8 +227,8 @@ const About = () => {
 
                                         <Box>
                                             <Stack direction="row" justifyContent="space-between" sx={{ mb: 1 }}>
-                                                <Typography sx={{ fontSize: '0.6rem', fontFamily: 'var(--font-share-tech-mono)', color: 'text.secondary' }}>PROFICIENCY</Typography>
-                                                <Typography sx={{ fontSize: '0.6rem', fontFamily: 'var(--font-share-tech-mono)', color: 'primary.main', fontWeight: 900 }}>{skill.pct}%</Typography>
+                                                <Typography sx={{ fontSize: '0.65rem', fontFamily: 'var(--font-inter), sans-serif', color: 'text.secondary', fontWeight: 600, letterSpacing: '0.05em' }}>PROFICIENCY</Typography>
+                                                <Typography sx={{ fontSize: '0.75rem', fontFamily: 'var(--font-outfit), sans-serif', color: 'primary.main', fontWeight: 800 }}>{skill.pct}%</Typography>
                                             </Stack>
                                             <Box sx={{ height: '3px', background: isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)', borderRadius: '2px', overflow: 'hidden' }}>
                                                 <motion.div

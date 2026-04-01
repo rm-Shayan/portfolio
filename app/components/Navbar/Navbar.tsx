@@ -32,10 +32,10 @@ const Navbar = () => {
     <AppBar
       position="fixed"
       sx={{
-        background: isDark ? 'rgba(2, 5, 8, 0.85)' : 'rgba(255, 255, 255, 0.85)',
-        backdropFilter: 'blur(20px) saturate(1.5)',
+        background: isDark ? 'rgba(2, 5, 8, 0.85)' : 'rgba(248, 250, 252, 0.85)',
+        backdropFilter: 'blur(24px) saturate(1.8)',
         borderBottom: `1px solid ${theme.palette.divider}`,
-        boxShadow: 'none',
+        boxShadow: isDark ? 'none' : '0 4px 20px rgba(0, 0, 0, 0.03)',
         height: '68px',
         justifyContent: 'center',
         zIndex: 1100,
@@ -60,6 +60,11 @@ const Navbar = () => {
               display: 'flex',
               alignItems: 'center',
               gap: 0.5,
+              transition: 'all 0.3s',
+              '&:hover': {
+                 transform: 'scale(1.05)',
+                 textShadow: isDark ? '0 0 25px rgba(0, 245, 255, 0.5)' : 'none',
+              }
             }}
           >
             RMS<span>.</span>DEV
@@ -78,12 +83,13 @@ const Navbar = () => {
                 component="a"
                 href={link.href}
                 sx={{
-                  fontFamily: 'var(--font-share-tech-mono)',
-                  fontSize: '0.75rem',
+                  fontFamily: 'var(--font-outfit), sans-serif',
+                  fontSize: '0.85rem',
+                  fontWeight: 600,
                   color: 'text.secondary',
                   textDecoration: 'none',
-                  letterSpacing: '0.12em',
-                  textTransform: 'uppercase',
+                  letterSpacing: '0.02em',
+                  textTransform: 'capitalize',
                   position: 'relative',
                   transition: 'all 0.3s',
                   '&::after': {
@@ -99,7 +105,7 @@ const Navbar = () => {
                   },
                   '&:hover': {
                     color: 'primary.main',
-                    textShadow: isDark ? '0 0 12px #00f5ff' : 'none',
+                    textShadow: isDark ? '0 0 12px rgba(0, 245, 255, 0.3)' : 'none',
                     '&::after': { width: '100%' },
                   },
                 }}
@@ -132,22 +138,27 @@ const Navbar = () => {
               component="a"
               href="#contact"
               sx={{
-                fontFamily: 'var(--font-share-tech-mono)',
-                fontSize: '0.75rem',
-                color: isDark ? 'primary.main' : '#fff',
-                background: isDark ? 'transparent' : 'primary.main',
+                fontFamily: 'var(--font-outfit), sans-serif',
+                fontSize: '0.8rem',
+                color: isDark ? 'primary.main' : 'text.primary',
+                background: isDark ? 'transparent' : 'rgba(15, 23, 42, 0.04)',
                 border: `1px solid ${theme.palette.primary.main}`,
-                padding: '0.5rem 1.4rem',
+                padding: '0.7rem 1.8rem',
                 textDecoration: 'none',
-                letterSpacing: '0.1em',
+                letterSpacing: '0.05em',
                 textTransform: 'uppercase',
-                fontWeight: 700,
+                fontWeight: 800,
                 clipPath: 'polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%)',
-                transition: 'all 0.3s',
+                transition: 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
+                boxShadow: isDark ? 'none' : '0 2px 8px rgba(0, 0, 0, 0.05)',
                 '&:hover': {
-                  background: 'primary.main',
-                  color: '#000',
-                  boxShadow: isDark ? '0 0 24px #00f5ff' : '0 4px 12px rgba(0, 245, 255, 0.3)',
+                  background: isDark ? 'primary.main' : 'rgba(3, 105, 161, 0.06)',
+                  color: isDark ? '#000' : 'primary.main',
+                  boxShadow: isDark 
+                    ? '0 0 24px rgba(0, 245, 255, 0.5)' 
+                    : '0 8px 30px -10px rgba(3, 105, 161, 0.15)',
+                  transform: 'translateY(-2px) scale(1.02)',
+                  letterSpacing: '0.04em',
                 },
               }}
             >
@@ -204,11 +215,11 @@ const Navbar = () => {
               <ListItemText
                 primary={link.name}
                 primaryTypographyProps={{
-                  fontFamily: 'var(--font-share-tech-mono)',
-                  fontSize: '0.9rem',
+                  fontFamily: 'var(--font-outfit), sans-serif',
+                  fontSize: '1.1rem',
+                  fontWeight: 600,
                   color: 'text.primary',
-                  letterSpacing: '0.1rem',
-                  textTransform: 'uppercase',
+                  textTransform: 'capitalize',
                 }}
               />
             </ListItem>

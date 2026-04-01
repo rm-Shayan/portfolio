@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Box, Typography, Container, Grid, Button, Stack, useTheme } from '@mui/material';
+import { Box, Typography, Container, useTheme } from '@mui/material';
 import { motion } from 'framer-motion';
 import SectionHeader from '../SectionHeader/SectionHeader';
 import { useSelector } from 'react-redux';
@@ -32,124 +32,160 @@ const blogPosts = [
 ];
 
 const Blog = () => {
+    const theme = useTheme();
     const mode = useSelector((state: RootState) => state.ui.mode);
     const isDark = mode === 'dark';
 
     return (
-        <Box id="blog" sx={{ py: '7rem', background: isDark ? 'var(--bg1)' : '#ffffff' }}>
+        <Box id="blog" sx={{ py: '7rem', background: 'background.default' }}>
             <Container maxWidth="lg">
                 <SectionHeader num="06" title="Digital Insights" />
 
-                <Grid container spacing={3}>
+                {/* --- FLEX CONTAINER --- */}
+                <Box 
+                    sx={{ 
+                        display: 'flex', 
+                        flexWrap: 'wrap', 
+                        gap: 3, // Maintains consistent spacing between cards
+                        justifyContent: 'center' 
+                    }}
+                >
                     {blogPosts.map((post, index) => (
-                        <Grid item xs={12} sm={6} md={4} key={index}>
+                        <Box
+                            key={index}
+                            component={motion.div}
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6, delay: index * 0.1 }}
+                            sx={{
+                                // Responsive Flex Basis (Replaces xs, sm, md)
+                                flex: {
+                                    xs: '1 1 100%',            // Full width on mobile
+                                    sm: '1 1 calc(50% - 24px)', // 2 columns (gap adjustment)
+                                    md: '1 1 calc(33.333% - 24px)' // 3 columns
+                                },
+                                maxWidth: {
+                                    xs: '100%',
+                                    md: 'calc(33.333% - 24px)'
+                                },
+                                background: 'background.paper',
+                                border: `1px solid ${theme.palette.divider}`,
+                                overflow: 'hidden',
+                                transition: 'all 0.35s',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                clipPath: 'polygon(0 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%)',
+                                '&:hover': {
+                                    borderColor: 'primary.main',
+                                    transform: 'translateY(-5px)',
+                                    boxShadow: isDark ? 'none' : '0 20px 40px -10px rgba(0, 0, 0, 0.05)',
+                                },
+                            }}
+                        >
+                            {/* Card Media Section */}
                             <Box
-                                component={motion.div}
-                                initial={{ opacity: 0, y: 30 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.6, delay: index * 0.1 }}
                                 sx={{
-                                    background: isDark ? 'var(--bg2)' : '#ffffff',
-                                    border: `1px solid ${isDark ? 'var(--border)' : 'rgba(15, 23, 42, 0.05)'}`,
-                                    overflow: 'hidden',
-                                    transition: 'all 0.35s',
-                                    height: '100%',
+                                    height: '140px',
+                                    background: isDark ? 'linear-gradient(135deg, var(--bg3), var(--bg0))' : '#f8fafc',
                                     display: 'flex',
-                                    flexDirection: 'column',
-                                    clipPath: 'polygon(0 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%)',
-                                    '&:hover': {
-                                        borderColor: '#00f5ff',
-                                        transform: 'translateY(-5px)',
-                                    },
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    fontSize: '2.5rem',
+                                    position: 'relative',
                                 }}
                             >
+                                {post.icon}
                                 <Box
                                     sx={{
-                                        height: '140px',
-                                        background: isDark ? 'linear-gradient(135deg, var(--bg3), var(--bg0))' : '#ffffff',
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'center',
-                                        fontSize: '2.5rem',
-                                        position: 'relative',
-                                        overflow: 'hidden',
+                                        position: 'absolute',
+                                        bottom: 0,
+                                        left: 0,
+                                        right: 0,
+                                        height: '1px',
+                                        background: 'linear-gradient(to right, transparent, #ff00c8, transparent)',
                                     }}
-                                >
-                                    {post.icon}
-                                    <Box
-                                        sx={{
-                                            position: 'absolute',
-                                            bottom: 0,
-                                            left: 0,
-                                            right: 0,
-                                            height: '1px',
-                                            background: 'linear-gradient(to right, transparent, #ff00c8, transparent)',
-                                        }}
-                                    />
-                                </Box>
-                                <Box sx={{ padding: '1.4rem', flexGrow: 1 }}>
-                                    <Typography
-                                        sx={{
-                                            fontFamily: 'var(--font-share-tech-mono)',
-                                            fontSize: '0.6rem',
-                                            color: 'secondary.main',
-                                            letterSpacing: '0.15em',
-                                            marginBottom: '0.5rem',
-                                        }}
-                                    >
-                                        {post.cat}
-                                    </Typography>
-                                    <Typography
-                                        variant="h4"
-                                        sx={{
-                                            fontFamily: 'var(--font-orbitron)',
-                                            fontSize: '0.85rem',
-                                            fontWeight: 700,
-                                            color: isDark ? '#fff' : '#0f172a',
-                                            marginBottom: '0.5rem',
-                                            lineHeight: 1.4,
-                                        }}
-                                    >
-                                        {post.title}
-                                    </Typography>
-                                    <Typography
-                                        variant="body2"
-                                        sx={{ color: 'text.secondary', lineHeight: 1.65, fontSize: '0.8rem' }}
-                                    >
-                                        {post.excerpt}
-                                    </Typography>
-                                </Box>
-                                <Box
+                                />
+                            </Box>
+
+                            {/* Card Content */}
+                            <Box sx={{ padding: '1.4rem', flexGrow: 1 }}>
+                                 <Typography
                                     sx={{
-                                        padding: '1rem 1.4rem',
-                                        display: 'flex',
-                                        justifyContent: 'space-between',
-                                        alignItems: 'center',
-                                        fontFamily: 'var(--font-share-tech-mono)',
-                                        fontSize: '0.6rem',
-                                        color: 'text.secondary',
-                                        borderTop: `1px solid ${isDark ? 'rgba(0, 245, 255, 0.05)' : 'rgba(15, 23, 42, 0.05)'}`,
+                                        fontFamily: 'var(--font-inter), sans-serif',
+                                        fontSize: '0.75rem',
+                                        color: 'primary.main',
+                                        letterSpacing: '0.05em',
+                                        marginBottom: '0.6rem',
+                                        fontWeight: 700,
+                                        textTransform: 'uppercase',
                                     }}
                                 >
-                                    <span>{post.date}</span>
-                                    <Box
-                                        component="a"
-                                        href="#"
-                                        sx={{
-                                            color: 'primary.main',
-                                            textDecoration: 'none',
-                                            transition: 'text-shadow 0.2s',
-                                            '&:hover': { textShadow: '0 0 12px #00f5ff' },
-                                        }}
-                                    >
-                                        Read →
-                                    </Box>
+                                    {post.cat}
+                                </Typography>
+                                <Typography
+                                    variant="h4"
+                                    sx={{
+                                        fontFamily: 'var(--font-outfit), sans-serif',
+                                        fontSize: '1.15rem',
+                                        fontWeight: 800,
+                                        color: 'text.primary',
+                                        marginBottom: '0.8rem',
+                                        lineHeight: 1.3,
+                                        letterSpacing: '-0.01em',
+                                    }}
+                                >
+                                    {post.title}
+                                </Typography>
+                                <Typography
+                                    variant="body2"
+                                    sx={{ 
+                                        color: 'text.secondary', 
+                                        lineHeight: 1.6, 
+                                        fontSize: '0.9rem',
+                                        fontFamily: 'var(--font-inter), sans-serif',
+                                    }}
+                                >
+                                    {post.excerpt}
+                                </Typography>
+                            </Box>
+
+                            {/* Card Footer */}
+                            <Box
+                                sx={{
+                                    padding: '1rem 1.4rem',
+                                    display: 'flex',
+                                    justifyContent: 'space-between',
+                                    alignItems: 'center',
+                                    fontFamily: 'var(--font-inter), sans-serif',
+                                    fontSize: '0.75rem',
+                                    color: 'text.secondary',
+                                    borderTop: `1px solid ${theme.palette.divider}`,
+                                }}
+                            >
+                                <span style={{ fontWeight: 500 }}>{post.date}</span>
+                                <Box
+                                    component="a"
+                                    href="#"
+                                    sx={{
+                                        color: 'primary.main',
+                                        textDecoration: 'none',
+                                        fontWeight: 800,
+                                        fontFamily: 'var(--font-outfit), sans-serif',
+                                        fontSize: '0.85rem',
+                                        transition: 'all 0.2s',
+                                        '&:hover': { 
+                                            textShadow: isDark ? '0 0 12px rgba(0, 245, 255, 0.4)' : 'none',
+                                            transform: 'translateX(4px)'
+                                        },
+                                    }}
+                                >
+                                    Read →
                                 </Box>
                             </Box>
-                        </Grid>
+                        </Box>
                     ))}
-                </Grid>
+                </Box>
             </Container>
         </Box>
     );

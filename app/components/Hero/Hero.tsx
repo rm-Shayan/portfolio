@@ -49,31 +49,33 @@ const Hero = () => {
         padding: { xs: '6rem 0 3rem', md: '8rem 0 4rem' },
         overflow: 'hidden',
         zIndex: 1,
-        backgroundColor: isDark ? 'var(--bg0)' : '#ffffff',
+        backgroundColor: 'background.default',
       }}
     >
-      {/* Ambient Orbs - ONLY in Dark Mode */}
-      {isDark && (
-        <Box sx={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}>
-          <Box
-            sx={{
-              position: 'absolute', width: 520, height: 520, left: -160, top: -100,
-              background: 'radial-gradient(circle, rgba(0, 245, 255, 0.12), transparent 70%)',
-              filter: 'blur(90px)',
-              animation: 'orbPulse 6s ease-in-out infinite',
-              '@keyframes orbPulse': { '0%, 100%': { transform: 'scale(1)' }, '50%': { transform: 'scale(1.15)' } },
-            }}
-          />
-          <Box
-            sx={{
-              position: 'absolute', width: 400, height: 400, right: -100, bottom: 60,
-              background: 'radial-gradient(circle, rgba(255, 0, 200, 0.10), transparent 70%)',
-              filter: 'blur(90px)',
-              animation: 'orbPulse 6s ease-in-out infinite 3s',
-            }}
-          />
-        </Box>
-      )}
+      {/* Ambient Orbs - Dynamic for both modes */}
+      <Box sx={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}>
+        <Box
+          sx={{
+            position: 'absolute', width: isDark ? 520 : 600, height: isDark ? 520 : 600, left: -160, top: -100,
+            background: isDark 
+              ? 'radial-gradient(circle, rgba(0, 245, 255, 0.12), transparent 70%)'
+              : 'radial-gradient(circle, rgba(3, 105, 161, 0.08), transparent 70%)',
+            filter: 'blur(90px)',
+            animation: 'orbPulse 8s ease-in-out infinite',
+            '@keyframes orbPulse': { '0%, 100%': { transform: 'scale(1)' }, '50%': { transform: 'scale(1.1)' } },
+          }}
+        />
+        <Box
+          sx={{
+            position: 'absolute', width: isDark ? 400 : 500, height: isDark ? 400 : 500, right: -100, bottom: 60,
+            background: isDark
+              ? 'radial-gradient(circle, rgba(255, 0, 200, 0.10), transparent 70%)'
+              : 'radial-gradient(circle, rgba(147, 51, 234, 0.06), transparent 70%)',
+            filter: 'blur(90px)',
+            animation: 'orbPulse 8s ease-in-out infinite 4s',
+          }}
+        />
+      </Box>
 
       <Container maxWidth="lg">
         <motion.div
@@ -105,12 +107,12 @@ const Hero = () => {
                       display: 'inline-flex',
                       alignItems: 'center',
                       gap: '0.8rem',
-                      fontFamily: 'var(--font-share-tech-mono)',
-                      fontSize: '0.75rem',
+                      fontFamily: 'var(--font-outfit), sans-serif',
+                      fontSize: '0.85rem',
                       color: 'primary.main',
-                      letterSpacing: '0.22em',
+                      letterSpacing: '0.12em',
                       textTransform: 'uppercase',
-                      fontWeight: 700,
+                      fontWeight: 800,
                       justifyContent: { xs: 'center', md: 'flex-start' },
                       '&::before': {
                         content: '""',
@@ -130,27 +132,32 @@ const Hero = () => {
                     variant="h1"
                     sx={{
                       lineHeight: 1.05,
-                      letterSpacing: '-0.02em',
+                      letterSpacing: '-0.03em',
                       mb: 1,
+                      fontFamily: 'var(--font-outfit), sans-serif',
                       '& .line1': {
                         fontSize: { xs: '2.8rem', sm: '3.5rem', md: '5rem' },
-                        color: isDark ? '#fff' : '#1a202c',
+                        color: 'text.primary',
                         display: 'block',
+                        fontWeight: 900,
                         textShadow: isDark ? '0 0 40px rgba(255, 255, 255, 0.12)' : 'none',
                       },
                       '& .line2': {
                         fontSize: { xs: '2.8rem', sm: '3.5rem', md: '5rem' },
                         color: 'primary.main',
                         display: 'block',
+                        fontWeight: 900,
                         textShadow: isDark ? '0 0 60px #00f5ff, 0 0 120px rgba(0, 245, 255, 0.3)' : 'none',
                       },
                       '& .line3': {
-                        fontSize: { xs: '1.1rem', sm: '1.4rem', md: '1.8rem' },
+                        fontSize: { xs: '1rem', sm: '1.2rem', md: '1.4rem' },
                         color: 'secondary.main',
                         display: 'block',
-                        marginTop: '0.4rem',
+                        marginTop: '0.8rem',
                         textShadow: isDark ? '0 0 30px #ff00c8' : 'none',
-                        fontFamily: 'var(--font-share-tech-mono)',
+                        fontFamily: 'var(--font-outfit), sans-serif',
+                        letterSpacing: '0.12em',
+                        fontWeight: 700,
                       },
                     }}
                   >
@@ -186,13 +193,13 @@ const Hero = () => {
                       <Box
                         key={tech}
                         sx={{
-                          fontFamily: 'var(--font-share-tech-mono)',
-                          fontSize: '0.68rem',
+                          fontFamily: 'var(--font-inter), sans-serif',
+                          fontSize: '0.75rem',
                           color: isDark ? 'primary.light' : 'primary.main',
-                          border: `1px solid ${isDark ? 'rgba(0, 245, 255, 0.22)' : 'rgba(0, 184, 200, 0.2)'}`,
-                          padding: '0.4rem 1rem',
-                          letterSpacing: '0.1em',
-                          fontWeight: 700,
+                          border: `1px solid ${isDark ? 'rgba(0, 245, 255, 0.22)' : theme.palette.divider}`,
+                          padding: '0.5rem 1.2rem',
+                          letterSpacing: '0.02em',
+                          fontWeight: 600,
                           textTransform: 'uppercase',
                           clipPath: 'polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%)',
                           background: isDark ? 'rgba(0, 245, 255, 0.04)' : 'rgba(0, 184, 200, 0.03)',
@@ -229,10 +236,12 @@ const Hero = () => {
                       color="primary"
                       href="#projects"
                       sx={{
-                        padding: '1rem 2.8rem',
+                        padding: '1.1rem 3rem',
                         fontSize: '0.85rem',
-                        fontWeight: 900,
-                        minWidth: 180,
+                        fontWeight: 800,
+                        minWidth: 200,
+                        fontFamily: 'var(--font-outfit), sans-serif',
+                        color: '#fff',
                       }}
                     >
                       View Projects
@@ -242,11 +251,12 @@ const Hero = () => {
                       color="primary"
                       href="#contact"
                       sx={{
-                        padding: '1rem 2.8rem',
+                        padding: '1.1rem 3rem',
                         fontSize: '0.85rem',
                         fontWeight: 700,
-                        minWidth: 180,
+                        minWidth: 200,
                         borderWidth: '2px !important',
+                        fontFamily: 'var(--font-outfit), sans-serif',
                       }}
                     >
                       Hire Me
@@ -267,14 +277,18 @@ const Hero = () => {
                   animate={{ scale: 1, opacity: 1, rotate: 0 }}
                   transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
                 >
-                  <Box
+                      <Box
                     sx={{
                       position: 'relative',
                       width: { xs: 280, sm: 340, md: 400 },
                       height: { xs: 280, sm: 340, md: 400 },
-                      // MODIFIED: Combined and simplified negative margins to move the whole avatar group up.
-                      // This ensures a clean look where the avatar and rings are positioned vertically on the grid.
-                      mt: { xs: -4, md: -12, lg: -20 },
+                      mt: { xs: -4, md: -28, lg: -40 },
+                      '&:hover': {
+                        '& .hero-tag': {
+                            opacity: 1,
+                            transform: 'translateX(0)',
+                        }
+                      }
                     }}
                   >
                     {/* Glowing Aura */}
@@ -322,9 +336,15 @@ const Hero = () => {
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        background: isDark ? 'var(--bg2)' : '#e2e8f0',
-                        border: isDark ? 'none' : '2px solid #fff',
-                        boxShadow: isDark ? 'none' : '0 10px 40px rgba(0, 0, 0, 0.1)',
+                        background: 'background.paper',
+                        border: isDark ? 'none' : `1px solid ${theme.palette.divider}`,
+                        boxShadow: isDark ? 'none' : '0 20px 50px rgba(0, 0, 0, 0.1)',
+                        transition: 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
+                        '&:hover': {
+                          '& img': {
+                            transform: 'scale(1.22)',
+                          }
+                        },
                         '& img': {
                           width: '100%',
                           height: '100%',
@@ -332,6 +352,7 @@ const Hero = () => {
                           objectPosition: 'center 10%',
                           transform: 'scale(1.15)',
                           filter: isDark ? 'saturate(0.9) contrast(1.1)' : 'none',
+                          transition: 'transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)',
                         },
                         '&::after': {
                           content: '""',
@@ -339,56 +360,60 @@ const Hero = () => {
                           inset: 0,
                           background: isDark
                             ? 'linear-gradient(135deg, rgba(0, 245, 255, 0.1) 0%, transparent 50%, rgba(255, 0, 200, 0.08) 100%)'
-                            : 'none',
+                            : 'linear-gradient(135deg, rgba(3, 105, 161, 0.05) 0%, transparent 50%, rgba(147, 51, 234, 0.05) 100%)',
+                          opacity: 0,
+                          transition: 'opacity 0.4s ease',
                         },
                       }}
                     >
-                      
                       <img
                         src="/assets/shayan_portrait.jpg"
                         alt="Rao Muhammad Shayan"
                       />
                     </Box>
 
-                    
-                    <Stack
+                    {/* Floating Tags - Now outside the clipping circle but sensitive to parent hover */}
+                    <Box
+                      className="hero-tag"
                       sx={{
-                        position: 'absolute',
-                        width: '100%',
-                        height: '100%',
-                        top: 0,
-                        left: 0,
+                        position: 'absolute', top: '15%', right: -30,
+                        fontFamily: 'var(--font-outfit), sans-serif', fontSize: '0.75rem',
+                        color: 'primary.main', fontWeight: 800,
+                        background: isDark ? 'rgba(0, 10, 15, 0.95)' : 'rgba(255, 255, 255, 0.95)',
+                        border: `1px solid ${theme.palette.divider}`,
+                        padding: '0.5rem 1rem', clipPath: 'polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%)',
+                        boxShadow: isDark ? '0 0 15px rgba(0, 245, 255, 0.15)' : '0 4px 12px rgba(0, 0, 0, 0.05)',
+                        opacity: 0,
+                        transform: 'translateX(20px)',
+                        transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+                        zIndex: 10,
                         pointerEvents: 'none',
-                        zIndex: 2,
                       }}
                     >
-                      <Box
-                        sx={{
-                          position: 'absolute', top: '15%', right: -30,
-                          fontFamily: 'var(--font-share-tech-mono)', fontSize: '0.7rem',
-                          color: 'primary.main', letterSpacing: '0.1em',
-                          background: isDark ? 'rgba(0, 10, 15, 0.95)' : 'rgba(255, 255, 255, 0.95)',
-                          border: `1px solid ${theme.palette.divider}`,
-                          padding: '0.5rem 1rem', clipPath: 'polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%)',
-                          boxShadow: isDark ? '0 0 15px rgba(0, 245, 255, 0.15)' : '0 4px 12px rgba(0, 0, 0, 0.05)',
-                        }}
-                      >
-                        ⚡ MERN Specialist
-                      </Box>
-                      <Box
-                        sx={{
-                          position: 'absolute', bottom: '25%', left: -40,
-                          fontFamily: 'var(--font-share-tech-mono)', fontSize: '0.7rem',
-                          color: 'primary.main', letterSpacing: '0.1em',
-                          background: isDark ? 'rgba(0, 10, 15, 0.95)' : 'rgba(255, 255, 255, 0.95)',
-                          border: `1px solid ${theme.palette.divider}`,
-                          padding: '0.5rem 1rem', clipPath: 'polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%)',
-                          boxShadow: isDark ? '0 0 15px rgba(0, 245, 255, 0.15)' : '0 4px 12px rgba(0, 0, 0, 0.05)',
-                        }}
-                      >
-                        🚀 Startup Ready
-                      </Box>
-                    </Stack>
+                      ⚡ MERN Specialist
+                    </Box>
+                    <Box
+                      className="hero-tag"
+                      sx={{
+                        position: 'absolute', bottom: '25%', left: -30,
+                        fontFamily: 'var(--font-outfit), sans-serif', fontSize: '0.75rem',
+                        color: 'primary.main', fontWeight: 800,
+                        background: isDark ? 'rgba(0, 10, 15, 0.95)' : 'rgba(255, 255, 255, 0.95)',
+                        border: `1px solid ${theme.palette.divider}`,
+                        padding: '0.5rem 1rem', clipPath: 'polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%)',
+                        boxShadow: isDark ? '0 0 15px rgba(0, 245, 255, 0.15)' : '0 4px 12px rgba(0, 0, 0, 0.05)',
+                        opacity: 0,
+                        transform: 'translateX(-20px)',
+                        transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+                        zIndex: 10,
+                        pointerEvents: 'none',
+                      }}
+                    >
+                      🚀 Startup Ready
+                    </Box>
+
+                    
+
                   </Box>
                 </motion.div>
             </Box>
@@ -397,41 +422,40 @@ const Hero = () => {
       </Container>
 
      
-      {isDark && (
-        <Box sx={{ position: 'absolute', inset: 0, zIndex: -1, pointerEvents: 'none', opacity: 0.3 }}>
-          {[...Array(12)].map((_, i) => (
-             <motion.div
-               key={i}
-               animate={{
-                 y: [Math.random() * 800, Math.random() * 800],
-                 x: [Math.random() * 1200, Math.random() * 1200],
-                 opacity: [0.1, 0.4, 0.1],
-               }}
-               transition={{
-                 duration: 10 + Math.random() * 10,
-                 repeat: Infinity,
-                 ease: "linear"
-               }}
-               style={{
-                 position: 'absolute',
-                 width: '2px',
-                 height: '2px',
-                 backgroundColor: '#00f5ff',
-                 boxShadow: '0 0 8px #00f5ff',
-               }}
-             />
-          ))}
-        </Box>
-      )}
+      {/* Particles - Optimized for both modes */}
+      <Box sx={{ position: 'absolute', inset: 0, zIndex: -1, pointerEvents: 'none', opacity: isDark ? 0.3 : 0.15 }}>
+        {[...Array(15)].map((_, i) => (
+           <motion.div
+             key={i}
+             animate={{
+               y: [Math.random() * 800, Math.random() * 800],
+               x: [Math.random() * 1200, Math.random() * 1200],
+               opacity: [0.1, 0.4, 0.1],
+             }}
+             transition={{
+               duration: 15 + Math.random() * 10,
+               repeat: Infinity,
+               ease: "linear"
+             }}
+             style={{
+               position: 'absolute',
+               width: '2px',
+               height: '2px',
+               backgroundColor: isDark ? '#00f5ff' : '#0369a1',
+               boxShadow: isDark ? '0 0 8px #00f5ff' : 'none',
+             }}
+           />
+        ))}
+      </Box>
 
       {/* Scroll Hint */}
       <Box
         sx={{
           position: 'absolute', bottom: '2.5rem', left: '50%', transform: 'translateX(-50%)',
           display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.6rem',
-          fontFamily: 'var(--font-share-tech-mono)', fontSize: '0.65rem',
+          fontFamily: 'var(--font-outfit), sans-serif', fontSize: '0.75rem',
           color: isDark ? 'text.secondary' : 'primary.main',
-          letterSpacing: '0.3em', animation: 'bounce2 2s ease-in-out infinite',
+          letterSpacing: '0.15em', fontWeight: 700, animation: 'bounce2 2s ease-in-out infinite',
           '@keyframes bounce2': { '0%, 100%': { transform: 'translateX(-50%) translateY(0)' }, '50%': { transform: 'translateX(-50%) translateY(10px)' } },
           '&::after': {
             content: '""', width: '2px', height: '50px',

@@ -44,7 +44,7 @@ const Testimonials = () => {
     const isDark = mode === 'dark';
 
     return (
-        <Box id="testimonials" sx={{ py: '7rem', background: isDark ? 'transparent' : '#ffffff' }}>
+        <Box id="testimonials" sx={{ py: '7rem', background: 'background.default' }}>
             <Container maxWidth="lg">
                 <SectionHeader num="05" title="Client Voices" />
 
@@ -58,8 +58,8 @@ const Testimonials = () => {
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.6, delay: index * 0.1 }}
                                 sx={{
-                                    background: isDark ? 'var(--bg2)' : '#ffffff',
-                                    border: `1px solid ${isDark ? 'var(--border)' : 'rgba(15, 23, 42, 0.05)'}`,
+                                    background: 'background.paper',
+                                    border: `1px solid ${theme.palette.divider}`,
                                     padding: '2rem',
                                     position: 'relative',
                                     overflow: 'hidden',
@@ -77,8 +77,8 @@ const Testimonials = () => {
                                     },
                                     '&:hover': {
                                         borderColor: 'primary.main',
-                                        background: isDark ? 'rgba(0, 245, 255, 0.03)' : 'rgba(2, 132, 199, 0.02)',
-                                        boxShadow: isDark ? 'none' : '0 10px 40px rgba(15, 23, 42, 0.06)',
+                                        background: isDark ? 'rgba(0, 245, 255, 0.03)' : 'rgba(15, 23, 42, 0.01)',
+                                        boxShadow: isDark ? 'none' : '0 20px 40px -10px rgba(0, 0, 0, 0.05)',
                                     },
                                 }}
                             >
@@ -94,7 +94,8 @@ const Testimonials = () => {
                                         marginBottom: '1.5rem',
                                         position: 'relative',
                                         zIndex: 1,
-                                        fontSize: '0.95rem',
+                                        fontSize: '1rem',
+                                        fontFamily: 'var(--font-inter), sans-serif',
                                     }}
                                 >
                                     "{t.text}"
@@ -104,13 +105,15 @@ const Testimonials = () => {
                                         sx={{
                                             width: '40px',
                                             height: '40px',
-                                            background: 'linear-gradient(135deg, #00f5ff, #ff00c8)',
+                                            background: (theme) => theme.palette.mode === 'dark' 
+                                                ? 'linear-gradient(135deg, #00f5ff, #ff00c8)' 
+                                                : `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
                                             display: 'flex',
                                             alignItems: 'center',
                                             justifyContent: 'center',
-                                            fontFamily: 'var(--font-orbitron)',
-                                            fontSize: '0.8rem',
-                                            color: '#000',
+                                            fontFamily: 'var(--font-outfit), sans-serif',
+                                            fontSize: '0.9rem',
+                                            color: '#fff',
                                             fontWeight: 900,
                                             clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)',
                                         }}
@@ -120,19 +123,22 @@ const Testimonials = () => {
                                     <Box>
                                         <Typography
                                             sx={{
-                                                fontFamily: 'var(--font-share-tech-mono)',
-                                                fontSize: '0.78rem',
+                                                fontFamily: 'var(--font-outfit), sans-serif',
+                                                fontSize: '0.85rem',
                                                 color: 'primary.main',
-                                                letterSpacing: '0.1em',
+                                                letterSpacing: '0.02em',
+                                                fontWeight: 800,
                                             }}
                                         >
                                             {t.name}
                                         </Typography>
                                         <Typography
                                             sx={{
-                                                fontFamily: 'var(--font-share-tech-mono)',
-                                                fontSize: '0.62rem',
+                                                fontFamily: 'var(--font-inter), sans-serif',
+                                                fontSize: '0.75rem',
                                                 color: 'text.secondary',
+                                                fontWeight: 500,
+                                                letterSpacing: '0.01em',
                                             }}
                                         >
                                             {t.role}

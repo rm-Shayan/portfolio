@@ -3,10 +3,13 @@
 :root {
   --cyan: #00f5ff;
   --cyan-dim: #00b8c8;
-  --cyan-glow: rgba(0, 245, 255, 0.18);
   --magenta: #ff00c8;
-  --mag-glow: rgba(255, 0, 200, 0.18);
   --yellow: #ffe600;
+}
+
+[data-theme='dark'] {
+  --cyan-glow: rgba(0, 245, 255, 0.18);
+  --mag-glow: rgba(255, 0, 200, 0.18);
   --bg0: #020508;
   --bg1: #050c12;
   --bg2: #091520;
@@ -15,6 +18,19 @@
   --text: #cde8f0;
   --text-dim: #6a9aaa;
   --border: rgba(0, 245, 255, 0.18);
+}
+
+[data-theme='light'] {
+  --cyan-glow: rgba(3, 105, 161, 0.12);
+  --mag-glow: rgba(147, 51, 234, 0.12);
+  --bg0: #f8fafc;
+  --bg1: #ffffff;
+  --bg2: #f1f5f9;
+  --bg3: #e2e8f0;
+  --grid: rgba(15, 23, 42, 0.04);
+  --text: #1e293b;
+  --text-dim: #64748b;
+  --border: rgba(15, 23, 42, 0.08);
 }
 
 @theme inline {
@@ -27,6 +43,7 @@ html {
   scroll-behavior: smooth;
   scrollbar-width: thin;
   scrollbar-color: var(--cyan) var(--bg1);
+  background: var(--bg0);
 }
 
 body {
@@ -42,6 +59,7 @@ body {
 .noise {
   position: relative;
 }
+
 .noise::after {
   content: '';
   position: absolute;
@@ -56,15 +74,19 @@ body {
 ::-webkit-scrollbar {
   width: 6px;
 }
+
 ::-webkit-scrollbar-track {
   background: var(--bg1);
 }
+
 ::-webkit-scrollbar-thumb {
-  background: var(--cyan);
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
   background: var(--cyan-dim);
+  border-radius: 6px;
+  border: 2px solid var(--bg1);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--cyan);
 }
 
 /* Glitch Utility */
@@ -72,7 +94,9 @@ body {
   position: relative;
   display: inline-block;
 }
-.glitch-text::before, .glitch-text::after {
+
+.glitch-text::before,
+.glitch-text::after {
   content: attr(data-text);
   position: absolute;
   top: 0;
@@ -81,27 +105,67 @@ body {
   height: 100%;
   overflow: hidden;
 }
+
 .glitch-text::before {
   color: var(--cyan);
   clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
   animation: glitchTop 4s steps(1) infinite;
   opacity: 0.7;
 }
+
 .glitch-text::after {
   color: var(--magenta);
   clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
   animation: glitchBot 4s steps(1) infinite;
   opacity: 0.7;
 }
+
 @keyframes glitchTop {
-  0%, 90%, 100% { transform: none; opacity: 0; }
-  91% { transform: translateX(-4px); opacity: 0.7; }
-  93% { transform: translateX(4px); opacity: 0.7; }
-  95% { transform: none; opacity: 0; }
+
+  0%,
+  90%,
+  100% {
+    transform: none;
+    opacity: 0;
+  }
+
+  91% {
+    transform: translateX(-4px);
+    opacity: 0.7;
+  }
+
+  93% {
+    transform: translateX(4px);
+    opacity: 0.7;
+  }
+
+  95% {
+    transform: none;
+    opacity: 0;
+  }
 }
+
 @keyframes glitchBot {
-  0%, 92%, 100% { transform: none; opacity: 0; }
-  93% { transform: translateX(4px); opacity: 0.7; }
-  95% { transform: translateX(-4px); opacity: 0.7; }
-  97% { transform: none; opacity: 0; }
+
+  0%,
+  92%,
+  100% {
+    transform: none;
+    opacity: 0;
+  }
+
+  93% {
+    transform: translateX(4px);
+    opacity: 0.7;
+  }
+
+  95% {
+    transform: translateX(-4px);
+    opacity: 0.7;
+  }
+
+  97% {
+    transform: none;
+    opacity: 0;
+  }
 }

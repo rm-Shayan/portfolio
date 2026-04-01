@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Box, Typography, Container, Stack } from '@mui/material';
+import { Box, Typography, Container, Stack, useTheme } from '@mui/material';
 import { motion } from 'framer-motion';
 import SectionHeader from '../SectionHeader/SectionHeader';
 import { useSelector } from 'react-redux';
@@ -32,11 +32,12 @@ const experiences = [
 ];
 
 const Experience = () => {
+  const theme = useTheme();
   const mode = useSelector((state: RootState) => state.ui.mode);
   const isDark = mode === 'dark';
 
   return (
-    <Box id="experience" sx={{ py: '7rem', background: isDark ? 'var(--bg1)' : '#ffffff' }}>
+    <Box id="experience" sx={{ py: '7rem', background: 'background.default' }}>
       <Container maxWidth="lg">
         <SectionHeader num="04" title="My Journey" />
 
@@ -49,8 +50,10 @@ const Experience = () => {
               top: 0,
               bottom: 0,
               width: '1px',
-              background: 'linear-gradient(to bottom, #00f5ff, #ff00c8, transparent)',
-              boxShadow: '0 0 10px #00f5ff',
+              background: isDark 
+                ? 'linear-gradient(to bottom, #00f5ff, #ff00c8, transparent)'
+                : `linear-gradient(to bottom, ${theme.palette.primary.main}, ${theme.palette.secondary.main}, transparent)`,
+              boxShadow: isDark ? '0 0 10px #00f5ff' : 'none',
             }}
           />
 
@@ -76,19 +79,20 @@ const Experience = () => {
                   top: '12px',
                   width: '10px',
                   height: '10px',
-                  background: '#00f5ff',
-                  border: `2px solid ${isDark ? 'var(--bg1)' : '#ffffff'}`,
-                  boxShadow: isDark ? '0 0 16px #00f5ff' : '0 4px 10px rgba(0,0,0,0.1)',
+                  background: 'primary.main',
+                  border: `2px solid ${theme.palette.background.default}`,
+                  boxShadow: isDark ? '0 0 16px #00f5ff' : `0 0 12px ${theme.palette.primary.main}40`,
                   clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)',
                 }}
               />
 
               <Typography
                 sx={{
-                  fontFamily: 'var(--font-share-tech-mono)',
-                  fontSize: '0.65rem',
+                  fontFamily: 'var(--font-inter), sans-serif',
+                  fontSize: '0.75rem',
                   color: isDark ? 'secondary.main' : 'primary.main',
-                  letterSpacing: '0.15em',
+                  fontWeight: 700,
+                  letterSpacing: '0.05em',
                   marginBottom: '0.4rem',
                 }}
               >
@@ -97,21 +101,22 @@ const Experience = () => {
               <Typography
                 variant="h4"
                 sx={{
-                  fontFamily: 'var(--font-orbitron)',
-                  fontSize: '1.1rem',
-                  fontWeight: 700,
-                  color: isDark ? '#fff' : '#0f172a',
+                  fontFamily: 'var(--font-outfit), sans-serif',
+                  fontSize: '1.2rem',
+                  fontWeight: 800,
+                  color: 'text.primary',
                   marginBottom: '0.25rem',
+                  letterSpacing: '-0.01em',
                 }}
               >
                 {exp.role}
               </Typography>
               <Typography
                 sx={{
-                  fontFamily: 'var(--font-share-tech-mono)',
-                  fontSize: '0.75rem',
+                  fontFamily: 'var(--font-inter), sans-serif',
+                  fontSize: '0.85rem',
                   color: 'primary.main',
-                  letterSpacing: '0.1em',
+                  fontWeight: 600,
                   marginBottom: '0.8rem',
                 }}
               >
@@ -119,7 +124,13 @@ const Experience = () => {
               </Typography>
               <Typography
                 variant="body2"
-                sx={{ color: 'text.secondary', lineHeight: 1.7, fontSize: '0.9rem', maxWidth: '600px' }}
+                sx={{ 
+                  color: 'text.secondary', 
+                  lineHeight: 1.7, 
+                  fontSize: '0.95rem', 
+                  maxWidth: '700px',
+                  fontFamily: 'var(--font-inter), sans-serif',
+                }}
               >
                 {exp.desc}
               </Typography>
@@ -129,11 +140,14 @@ const Experience = () => {
                   <Box
                     key={tag}
                     sx={{
-                      fontFamily: 'var(--font-share-tech-mono)',
-                      fontSize: '0.6rem',
+                      fontFamily: 'var(--font-inter), sans-serif',
+                      fontSize: '0.7rem',
                       color: 'text.secondary',
-                      border: '1px solid rgba(0, 245, 255, 0.18)',
-                      padding: '0.2rem 0.6rem',
+                      border: `1px solid ${theme.palette.divider}`,
+                      background: isDark ? 'rgba(255, 255, 255, 0.03)' : 'rgba(15, 23, 42, 0.03)',
+                      padding: '0.3rem 0.8rem',
+                      borderRadius: '4px',
+                      fontWeight: 500,
                     }}
                   >
                     {tag}

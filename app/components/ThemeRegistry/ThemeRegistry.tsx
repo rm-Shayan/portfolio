@@ -12,6 +12,10 @@ export default function ThemeRegistry({ children }: { children: React.ReactNode 
     const mode = useSelector((state: RootState) => state.ui.mode);
     const theme = React.useMemo(() => createCustomTheme(mode), [mode]);
 
+    React.useEffect(() => {
+        document.documentElement.setAttribute('data-theme', mode);
+    }, [mode]);
+
     return (
         <NextAppDirEmotionCacheProvider options={{ key: 'mui' }}>
             <ThemeProvider theme={theme}>

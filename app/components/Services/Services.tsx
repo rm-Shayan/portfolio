@@ -67,7 +67,7 @@ const Services = () => {
     const isDark = mode === 'dark';
 
     return (
-        <Box id="services" sx={{ py: '7rem', background: isDark ? 'var(--bg1)' : 'rgba(2, 5, 8, 0.02)' }}>
+        <Box id="services" sx={{ py: '7rem', background: 'background.default' }}>
             <Container maxWidth="lg">
                 <SectionHeader num="02" title="Professional Services" />
 
@@ -92,16 +92,16 @@ const Services = () => {
                                     flexDirection: 'column',
                                     background: isDark 
                                       ? 'linear-gradient(145deg, rgba(13, 25, 38, 0.7) 0%, rgba(6, 14, 23, 0.9) 100%)' 
-                                      : 'linear-gradient(145deg, #ffffff 0%, #f8fafc 100%)',
+                                      : 'background.paper',
                                     backdropFilter: 'blur(12px)',
-                                    border: `1px solid ${isDark ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)'}`,
+                                    border: `1px solid ${theme.palette.divider}`,
                                     borderRadius: '16px',
                                     padding: '2.4rem',
                                     position: 'relative',
                                     overflow: 'hidden',
                                     transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
                                     cursor: 'default',
-                                    boxShadow: isDark ? '0 8px 32px rgba(0, 0, 0, 0.2)' : '0 8px 24px rgba(0,0,0,0.04)',
+                                    boxShadow: isDark ? '0 8px 32px rgba(0, 0, 0, 0.2)' : '0 10px 25px -5px rgba(0, 0, 0, 0.05)',
                                     '&::before': {
                                         content: '""',
                                         position: 'absolute',
@@ -139,23 +139,23 @@ const Services = () => {
                                         width: '64px',
                                         height: '64px',
                                         borderRadius: '16px',
-                                        background: isDark ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.02)',
-                                        border: `1px solid ${isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)'}`,
-                                        color: isDark ? 'text.secondary' : '#4a5568',
+                                        background: isDark ? 'rgba(255,255,255,0.03)' : 'rgba(15, 23, 42, 0.03)',
+                                        border: `1px solid ${theme.palette.divider}`,
+                                        color: 'text.secondary',
                                         transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
                                     }}
                                 >
                                     {service.icon}
                                 </Box>
-                                <Typography
+                                 <Typography
                                     variant="h3"
                                     sx={{
-                                        fontFamily: 'var(--font-orbitron)',
-                                        fontSize: '1.25rem',
+                                        fontFamily: 'var(--font-outfit), sans-serif',
+                                        fontSize: '1.4rem',
                                         fontWeight: 800,
-                                        color: isDark ? '#fff' : '#1a202c',
-                                        letterSpacing: '0.02em',
-                                        marginBottom: '1rem',
+                                        color: 'text.primary',
+                                        letterSpacing: '-0.01em',
+                                        marginBottom: '0.8rem',
                                     }}
                                 >
                                     {service.title}
@@ -164,8 +164,8 @@ const Services = () => {
                                     variant="body2"
                                     sx={{
                                         color: 'text.secondary',
-                                        lineHeight: 1.7,
-                                        fontFamily: 'var(--font-share-tech-mono)',
+                                        lineHeight: 1.6,
+                                        fontFamily: 'var(--font-inter), sans-serif',
                                         fontSize: '0.95rem',
                                         mb: 3,
                                     }}
@@ -173,26 +173,26 @@ const Services = () => {
                                     {service.desc}
                                 </Typography>
 
-                                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '0.6rem', marginTop: 'auto' }}>
+                                 <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '0.6rem', marginTop: 'auto' }}>
                                     {service.tags.map((tag) => (
-                                        <Box
-                                            key={tag}
-                                            sx={{
-                                                fontFamily: 'var(--font-share-tech-mono)',
-                                                fontSize: '0.65rem',
-                                                color: isDark ? '#cfd8dc' : '#4a5568',
-                                                border: `1px solid ${isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'}`,
-                                                borderRadius: '20px',
-                                                padding: '0.35rem 0.8rem',
-                                                letterSpacing: '0.05em',
-                                                fontWeight: 800,
-                                                textTransform: 'uppercase',
-                                                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                                            <Box
+                                                key={tag}
+                                                sx={{
+                                                    fontFamily: 'var(--font-inter), sans-serif',
+                                                    fontSize: '0.75rem',
+                                                    color: 'text.secondary',
+                                                    border: `1px solid ${theme.palette.divider}`,
+                                                    borderRadius: '6px',
+                                                    padding: '0.4rem 0.9rem',
+                                                    letterSpacing: '0.01em',
+                                                    fontWeight: 600,
+                                                    textTransform: 'uppercase',
+                                                    background: isDark ? 'rgba(255, 255, 255, 0.03)' : 'rgba(15, 23, 42, 0.03)',
+                                                transition: 'all 0.3s',
                                                 '&:hover': {
                                                     borderColor: service.color,
                                                     color: service.color,
-                                                    background: `${service.color}11`,
-                                                    transform: 'translateY(-2px)'
+                                                    background: `${service.color}08`,
                                                 }
                                             }}
                                         >

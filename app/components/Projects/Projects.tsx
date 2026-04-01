@@ -65,8 +65,7 @@ const Projects = () => {
   };
 
   return (
-    <Box id="projects" sx={{ py: '10rem', position: 'relative', overflow: 'hidden', background: isDark ? 'transparent' : '#f1f5f9' }}>
-      {/* Background Decorative Grid */}
+    <Box id="projects" sx={{ py: '10rem', position: 'relative', overflow: 'hidden', background: 'background.default' }}>
       <Box
         sx={{
           position: 'absolute', inset: 0, opacity: isDark ? 0.03 : 0.05, pointerEvents: 'none',
@@ -80,12 +79,13 @@ const Projects = () => {
           <Box>
             <SectionHeader num="03" title="Production Artifacts" />
             <Typography sx={{
-              fontFamily: 'var(--font-rajdhani)',
+              fontFamily: 'var(--font-outfit), sans-serif',
               color: 'primary.main',
               fontSize: '0.8rem',
-              fontWeight: 600,
-              letterSpacing: '0.3em',
-              mt: -3, mb: 2
+              fontWeight: 800,
+              letterSpacing: '0.2em',
+              mt: -3, mb: 2,
+              textTransform: 'uppercase'
             }}>
               EXPLORE SYSTEMS
             </Typography>
@@ -96,9 +96,13 @@ const Projects = () => {
               onClick={() => scroll('left')}
               sx={{
                 color: 'primary.main',
-                border: '1px solid rgba(0, 245, 255, 0.2)',
+                border: `1px solid ${theme.palette.divider}`,
                 borderRadius: 0,
-                '&:hover': { background: 'rgba(0, 245, 255, 0.1)', borderColor: 'primary.main' }
+                background: isDark ? 'rgba(0, 245, 255, 0.05)' : 'rgba(3, 105, 161, 0.03)',
+                '&:hover': { 
+                    background: isDark ? 'rgba(0, 245, 255, 0.15)' : 'rgba(3, 105, 161, 0.08)',
+                    borderColor: 'primary.main' 
+                }
               }}
             >
               <ArrowBackIosNewIcon fontSize="small" />
@@ -107,9 +111,13 @@ const Projects = () => {
               onClick={() => scroll('right')}
               sx={{
                 color: 'primary.main',
-                border: '1px solid rgba(0, 245, 255, 0.2)',
+                border: `1px solid ${theme.palette.divider}`,
                 borderRadius: 0,
-                '&:hover': { background: 'rgba(0, 245, 255, 0.1)', borderColor: 'primary.main' }
+                background: isDark ? 'rgba(0, 245, 255, 0.05)' : 'rgba(3, 105, 161, 0.03)',
+                '&:hover': { 
+                    background: isDark ? 'rgba(0, 245, 255, 0.15)' : 'rgba(3, 105, 161, 0.08)',
+                    borderColor: 'primary.main' 
+                }
               }}
             >
               <ArrowForwardIosIcon fontSize="small" />
@@ -159,8 +167,8 @@ const Projects = () => {
                     sx={{
                       display: 'flex',
                       flexDirection: { xs: 'column', md: 'row' },
-                      background: isDark ? 'var(--bg2)' : '#fff',
-                      border: `1px solid ${isDark ? 'rgba(0, 245, 255, 0.1)' : 'rgba(0, 0, 0, 0.05)'}`,
+                      background: 'background.paper',
+                      border: `1px solid ${isDark ? 'rgba(0, 245, 255, 0.1)' : 'rgba(15, 23, 42, 0.08)'}`,
                       overflow: 'hidden',
                       position: 'relative',
                       borderRadius: 0,
@@ -169,7 +177,7 @@ const Projects = () => {
                       transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
                       '&:hover': {
                         borderColor: 'primary.main',
-                        boxShadow: isDark ? '0 40px 80px rgba(0, 0, 0, 0.8)' : '0 25px 50px rgba(0, 0, 0, 0.05)',
+                        boxShadow: isDark ? '0 40px 80px rgba(0, 0, 0, 0.8)' : '0 30px 60px -12px rgba(15, 23, 42, 0.12), 0 18px 36px -18px rgba(15, 23, 42, 0.15)',
                         '& .project-media img': { scale: '1.08', filter: 'none' },
                         '&::after': { width: '100%', left: 0 }
                       },
@@ -186,7 +194,7 @@ const Projects = () => {
                         flex: { xs: '0 0 240px', md: '0 0 280px' },
                         position: 'relative',
                         overflow: 'hidden',
-                        background: isDark ? 'var(--bg1)' : '#ffffff',
+                        background: 'background.default',
                       }}
                     >
                       <Box
@@ -210,10 +218,10 @@ const Projects = () => {
                     <Box sx={{ p: 4, display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
                       <Typography
                         sx={{
-                          fontFamily: 'var(--font-share-tech-mono)',
-                          fontSize: '0.6rem',
+                          fontFamily: 'var(--font-inter), sans-serif',
+                          fontSize: '0.75rem',
                           color: 'primary.main',
-                          letterSpacing: '0.25em',
+                          letterSpacing: '0.05em',
                           textTransform: 'uppercase',
                           fontWeight: 700,
                           mb: 1,
@@ -224,12 +232,12 @@ const Projects = () => {
                       <Typography
                         variant="h3"
                         sx={{
-                          fontFamily: 'var(--font-orbitron)',
-                          fontSize: '1.25rem',
-                          fontWeight: 900,
-                          color: isDark ? '#fff' : '#1a202c',
-                          mb: 2,
-                          lineHeight: 1.3,
+                          fontFamily: 'var(--font-outfit), sans-serif',
+                          fontSize: '1.4rem',
+                          fontWeight: 800,
+                          color: 'text.primary',
+                          mb: 1.5,
+                          lineHeight: 1.2,
                         }}
                       >
                         {project.title}
@@ -238,9 +246,10 @@ const Projects = () => {
                         variant="body2"
                         sx={{
                           color: 'text.secondary',
-                          fontSize: '0.88rem',
-                          lineHeight: 1.8,
+                          fontSize: '0.9rem',
+                          lineHeight: 1.7,
                           mb: 4,
+                          fontFamily: 'var(--font-inter), sans-serif',
                         }}
                       >
                         {project.desc}
@@ -251,15 +260,15 @@ const Projects = () => {
                           <Box
                             key={t}
                             sx={{
-                              padding: '0.25rem 0.7rem',
-                              border: `1px solid ${isDark ? 'rgba(0, 245, 255, 0.15)' : 'rgba(0, 0, 0, 0.04)'}`,
-                              background: isDark ? 'rgba(255, 255, 255, 0.02)' : '#f8fafc',
+                              padding: '0.35rem 0.9rem',
+                              border: `1px solid ${isDark ? 'rgba(0, 245, 255, 0.15)' : theme.palette.divider}`,
+                              background: isDark ? 'rgba(255, 255, 255, 0.02)' : 'rgba(15, 23, 42, 0.03)',
                               color: isDark ? 'primary.light' : 'primary.main',
-                              fontSize: '0.58rem',
-                              fontFamily: 'var(--font-share-tech-mono)',
-                              fontWeight: 700,
+                              fontSize: '0.7rem',
+                              fontFamily: 'var(--font-inter), sans-serif',
+                              fontWeight: 600,
                               textTransform: 'uppercase',
-                              clipPath: 'polygon(4px 0, 100% 0, calc(100% - 4px) 100%, 0 100%)',
+                              borderRadius: '6px',
                             }}
                           >
                             {t}

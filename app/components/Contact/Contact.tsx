@@ -20,6 +20,7 @@ const contactLinks = [
 ];
 
 const Contact = () => {
+    const theme = useTheme();
     const [status, setStatus] = useState('Send Message');
     const mode = useSelector((state: RootState) => state.ui.mode);
     const isDark = mode === 'dark';
@@ -31,7 +32,7 @@ const Contact = () => {
     };
 
     return (
-        <Box id="contact" sx={{ py: '8rem', background: isDark ? 'transparent' : '#f8fafc' }}>
+        <Box id="contact" sx={{ py: '8rem', background: 'background.default' }}>
             <Container maxWidth="lg">
                 <SectionHeader num="07" title="Get In Touch" />
 
@@ -49,12 +50,16 @@ const Contact = () => {
                             <Typography
                                 variant="h3"
                                 sx={{
-                                    fontFamily: 'var(--font-orbitron)',
-                                    fontSize: { xs: '1.8rem', md: '2.5rem' },
-                                    fontWeight: 800,
-                                    color: isDark ? '#fff' : '#1a202c',
-                                    lineHeight: 1.2,
-                                    '& span': { color: 'primary.main', textShadow: isDark ? '0 0 30px #00f5ff' : 'none' },
+                                    fontFamily: 'var(--font-outfit), sans-serif',
+                                    fontSize: { xs: '2rem', md: '3rem' },
+                                    fontWeight: 900,
+                                    color: 'text.primary',
+                                    lineHeight: 1.1,
+                                    letterSpacing: '-0.02em',
+                                    '& span': { 
+                                        color: 'primary.main', 
+                                        textShadow: isDark ? '0 0 40px rgba(0, 245, 255, 0.4)' : 'none' 
+                                    },
                                 }}
                             >
                                 Let's build something <span>legendary</span> together.
@@ -63,9 +68,10 @@ const Contact = () => {
                                 variant="body1"
                                 sx={{
                                     color: 'text.secondary',
-                                    lineHeight: 1.8,
-                                    fontSize: '1.1rem',
-                                    maxWidth: '400px'
+                                    lineHeight: 1.7,
+                                    fontSize: '1.05rem',
+                                    maxWidth: '450px',
+                                    fontFamily: 'var(--font-inter), sans-serif',
                                 }}
                             >
                                 Whether you have a startup idea, need a developer for your team, or want to supercharge an existing product — I'm ready to ship.
@@ -83,8 +89,8 @@ const Contact = () => {
                                         sx={{
                                             color: 'text.secondary',
                                             textDecoration: 'none',
-                                            fontFamily: 'var(--font-share-tech-mono)',
-                                            fontSize: '0.9rem',
+                                            fontFamily: 'var(--font-inter), sans-serif',
+                                            fontSize: '1rem',
                                             transition: 'all 0.3s',
                                             '&:hover': {
                                                 color: 'primary.main',
@@ -133,11 +139,11 @@ const Contact = () => {
                             <Paper
                                 sx={{
                                     p: { xs: 3, md: 5 },
-                                    background: isDark ? 'var(--bg2)' : '#fff',
-                                    border: `1px solid ${isDark ? 'rgba(0, 245, 255, 0.12)' : 'rgba(0, 0, 0, 0.05)'}`,
+                                    background: 'background.paper',
+                                    border: `1px solid ${theme.palette.divider}`,
                                     borderRadius: 0,
                                     clipPath: 'polygon(0 0, calc(100% - 40px) 0, 100% 40px, 100% 100%, 40px 100%, 0 calc(100% - 40px))',
-                                    boxShadow: isDark ? 'none' : '0 20px 40px rgba(0,0,0,0.05)',
+                                    boxShadow: isDark ? 'none' : '0 25px 50px -12px rgba(0, 0, 0, 0.08)',
                                 }}
                             >
                                 <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 3 }}>
@@ -153,10 +159,10 @@ const Contact = () => {
                                             <Stack spacing={1}>
                                                 <Typography
                                                     sx={{
-                                                        fontFamily: 'var(--font-share-tech-mono)',
-                                                        fontSize: '0.7rem',
+                                                        fontFamily: 'var(--font-inter), sans-serif',
+                                                        fontSize: '0.75rem',
                                                         color: 'primary.main',
-                                                        letterSpacing: '0.15em',
+                                                        letterSpacing: '0.05em',
                                                         textTransform: 'uppercase',
                                                         fontWeight: 700,
                                                     }}
@@ -171,17 +177,18 @@ const Contact = () => {
                                                     InputProps={{
                                                         disableUnderline: true,
                                                         sx: {
-                                                            fontFamily: 'var(--font-rajdhani)',
-                                                            fontSize: '1rem',
-                                                            color: isDark ? '#fff' : '#1a202c',
-                                                            background: isDark ? 'rgba(255, 255, 255, 0.03)' : '#f8fafc',
-                                                            border: `1px solid ${isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.05)'}`,
-                                                            padding: '0.8rem 1.2rem',
+                                                            fontFamily: 'var(--font-inter), sans-serif',
+                                                            fontSize: '0.95rem',
+                                                            color: 'text.primary',
+                                                            background: isDark ? 'rgba(255, 255, 255, 0.03)' : 'rgba(15, 23, 42, 0.03)',
+                                                            border: `1px solid ${theme.palette.divider}`,
+                                                            padding: '0.9rem 1.4rem',
                                                             clipPath: 'polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%)',
                                                             transition: 'all 0.3s',
                                                             '&:focus-within': {
                                                                 borderColor: 'primary.main',
-                                                                background: isDark ? 'rgba(0, 245, 255, 0.03)' : '#fff',
+                                                                background: isDark ? 'rgba(0, 245, 255, 0.03)' : '#ffffff',
+                                                                boxShadow: isDark ? 'none' : '0 10px 20px -10px rgba(3, 105, 161, 0.1)',
                                                             },
                                                         },
                                                     }}
@@ -194,10 +201,10 @@ const Contact = () => {
                                         <Stack spacing={1}>
                                             <Typography
                                                 sx={{
-                                                    fontFamily: 'var(--font-share-tech-mono)',
-                                                    fontSize: '0.7rem',
+                                                    fontFamily: 'var(--font-inter), sans-serif',
+                                                    fontSize: '0.75rem',
                                                     color: 'primary.main',
-                                                    letterSpacing: '0.15em',
+                                                    letterSpacing: '0.05em',
                                                     textTransform: 'uppercase',
                                                     fontWeight: 700,
                                                 }}
@@ -213,17 +220,18 @@ const Contact = () => {
                                                 InputProps={{
                                                     disableUnderline: true,
                                                     sx: {
-                                                        fontFamily: 'var(--font-rajdhani)',
-                                                        fontSize: '1rem',
-                                                        color: isDark ? '#fff' : '#1a202c',
-                                                        background: isDark ? 'rgba(255, 255, 255, 0.03)' : '#f8fafc',
-                                                        border: `1px solid ${isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.05)'}`,
-                                                        padding: '0.8rem 1.2rem',
+                                                        fontFamily: 'var(--font-inter), sans-serif',
+                                                        fontSize: '0.95rem',
+                                                        color: 'text.primary',
+                                                        background: isDark ? 'rgba(255, 255, 255, 0.03)' : 'rgba(15, 23, 42, 0.03)',
+                                                        border: `1px solid ${theme.palette.divider}`,
+                                                        padding: '0.9rem 1.4rem',
                                                         clipPath: 'polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%)',
                                                         transition: 'all 0.3s',
                                                         '&:focus-within': {
                                                             borderColor: 'primary.main',
-                                                            background: isDark ? 'rgba(0, 245, 255, 0.03)' : '#fff',
+                                                            background: isDark ? 'rgba(0, 245, 255, 0.03)' : '#ffffff',
+                                                            boxShadow: isDark ? 'none' : '0 10px 20px -10px rgba(3, 105, 161, 0.1)',
                                                         },
                                                     },
                                                 }}
@@ -241,11 +249,14 @@ const Contact = () => {
                                             sx={{
                                                 padding: '1.2rem',
                                                 fontSize: '1rem',
-                                                fontWeight: 900,
+                                                fontWeight: 800,
+                                                fontFamily: 'var(--font-outfit), sans-serif',
+                                                color: '#fff',
                                                 background: status.includes('Sent') ? '#00c896' : 'primary.main',
                                                 '&:hover': {
                                                     background: status.includes('Sent') ? '#00c896' : 'primary.main',
                                                     transform: 'translateY(-3px)',
+                                                    boxShadow: isDark ? '0 0 30px rgba(0, 184, 200, 0.3)' : '0 10px 20px rgba(3, 105, 161, 0.25)',
                                                 }
                                             }}
                                         >
