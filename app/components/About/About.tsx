@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Box, Container, Typography, Paper, useTheme, useMediaQuery, Stack, LinearProgress } from '@mui/material';
+import { Box, Container, Typography, Paper, useTheme, useMediaQuery, Stack, LinearProgress, Button } from '@mui/material';
 import { motion, Variants } from 'framer-motion';
 import SectionHeader from '../SectionHeader/SectionHeader';
 import { useSelector } from 'react-redux';
@@ -11,6 +11,7 @@ import {
     SiExpress, SiPostgresql, SiDocker, SiGit, SiFramer, SiJavascript, SiRedux, SiFirebase,
     SiHtml5, SiCss3, SiAmazonwebservices
 } from 'react-icons/si';
+import { FiDownload } from 'react-icons/fi';
 
 const skills = [
     { name: 'React.js', icon: <SiReact />, color: '#61DAFB', pct: 95 },
@@ -102,6 +103,29 @@ const About = () => {
                             >
                                 I'm <strong>Rao Muhammad Shayan</strong>, based in Karachi. I specialize in building highly scalable, performant MERN applications that don't just work — they dominate. I believe every line of code should be a strategic asset.
                             </Typography>
+
+                            <Button
+                                variant="contained"
+                                color="secondary"
+                                href="/CV.pdf"
+                                download="Rao_Muhammad_Shayan_CV.pdf"
+                                startIcon={<FiDownload />}
+                                sx={{
+                                    padding: '0.8rem 2.2rem',
+                                    fontSize: '0.85rem',
+                                    fontWeight: 800,
+                                    fontFamily: 'var(--font-outfit), sans-serif',
+                                    color: '#fff',
+                                    clipPath: 'polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%)',
+                                    transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+                                    '&:hover': {
+                                        transform: 'translateY(-3px)',
+                                        boxShadow: isDark ? '0 0 20px rgba(255, 0, 200, 0.4)' : '0 10px 20px rgba(0, 0, 0, 0.1)',
+                                    }
+                                }}
+                            >
+                                Download CV
+                            </Button>
 
                             {/* Stats Grid */}
                             <Box sx={{ mt: 6, display: 'grid', gridTemplateColumns: { xs: 'repeat(2, 1fr)', md: 'repeat(4, 1fr)' }, gap: 3 }}>

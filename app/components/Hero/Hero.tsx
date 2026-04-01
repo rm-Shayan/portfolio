@@ -7,6 +7,7 @@ import { Box, Typography, Container, Button, Stack, useTheme, useMediaQuery } fr
 import { motion, Variants } from 'framer-motion';
 // TerminalWidget import assumed to be correct in your project structure
 import TerminalWidget from './TerminalWidget'; 
+import { FiDownload } from 'react-icons/fi';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../lib/store'; // Adjust import path as needed
 
@@ -58,7 +59,7 @@ const Hero = () => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: { xs: '6rem 0 3rem', md: '8rem 0 4rem' },
+        padding: { xs: '6rem 0 6rem', md: '8rem 0 8rem' },
         overflow: 'hidden',
         zIndex: 1,
         backgroundColor: 'background.default',
@@ -273,6 +274,29 @@ const Hero = () => {
                     >
                       Hire Me
                     </Button>
+                    <Button
+                      variant="outlined"
+                      color="secondary"
+                      href="/CV.pdf"
+                      download="Rao_Muhammad_Shayan_CV.pdf"
+                      startIcon={<FiDownload />}
+                      sx={{
+                        padding: '1.1rem 3rem',
+                        fontSize: '0.85rem',
+                        fontWeight: 700,
+                        minWidth: 200,
+                        borderWidth: '2px !important',
+                        fontFamily: 'var(--font-outfit), sans-serif',
+                        borderColor: 'secondary.main',
+                        '&:hover': {
+                          borderWidth: '2px !important',
+                          borderColor: 'secondary.light',
+                          boxShadow: isDark ? '0 0 20px rgba(255, 0, 200, 0.3)' : '0 4px 12px rgba(255, 0, 200, 0.1)',
+                        }
+                      }}
+                    >
+                      Download CV
+                    </Button>
                   </Stack>
                 </motion.div>
             </Box>
@@ -463,16 +487,19 @@ const Hero = () => {
       {/* Scroll Hint */}
       <Box
         sx={{
-          position: 'absolute', bottom: '2.5rem', left: '50%', transform: 'translateX(-50%)',
-          display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.6rem',
-          fontFamily: 'var(--font-outfit), sans-serif', fontSize: '0.75rem',
+          position: 'absolute', bottom: '1rem', left: '50%', transform: 'translateX(-50%)',
+          display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.4rem',
+          fontFamily: 'var(--font-outfit), sans-serif', fontSize: '0.65rem',
           color: isDark ? 'text.secondary' : 'primary.main',
-          letterSpacing: '0.15em', fontWeight: 700, animation: 'bounce2 2s ease-in-out infinite',
-          '@keyframes bounce2': { '0%, 100%': { transform: 'translateX(-50%) translateY(0)' }, '50%': { transform: 'translateX(-50%) translateY(10px)' } },
+          letterSpacing: '0.15em', fontWeight: 800, animation: 'bounce2 2s ease-in-out infinite',
+          '@keyframes bounce2': { '0%, 100%': { transform: 'translateX(-50%) translateY(0)' }, '50%': { transform: 'translateX(-50%) translateY(8px)' } },
+          zIndex: 0,
+          pointerEvents: 'none',
           '&::after': {
-            content: '""', width: '2px', height: '50px',
+            content: '""', width: '1px', height: '30px',
             background: `linear-gradient(to bottom, ${theme.palette.primary.main}, transparent)`,
             boxShadow: isDark ? '0 0 10px #00f5ff' : 'none',
+            opacity: 0.6,
           },
         }}
       >
