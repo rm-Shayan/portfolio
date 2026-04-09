@@ -78,10 +78,10 @@ const Footer = () => {
                     {/* Socials */}
                     <Stack direction="row" spacing={1.5}>
                         {[
-                            { icon: <LinkedInIcon sx={{ fontSize: '1rem' }} />, label: 'LinkedIn', href: 'https://linkedin.com/in/rao-muhammad-shayan-470a51344' },
-                            { icon: <GitHubIcon sx={{ fontSize: '1rem' }} />, label: 'GitHub', href: 'https://github.com/shayan' },
-                            { icon: <TwitterIcon sx={{ fontSize: '1rem' }} />, label: 'Twitter', href: '#' },
-                            { icon: <WhatsAppIcon sx={{ fontSize: '1rem' }} />, label: 'WhatsApp', href: '#' },
+                            { icon: <LinkedInIcon sx={{ fontSize: '1rem' }} />, label: 'LinkedIn', href: 'https://www.linkedin.com/in/rao-muhammad-shayan-470a51344?originalSubdomain=pk' },
+                            { icon: <GitHubIcon sx={{ fontSize: '1rem' }} />, label: 'GitHub', href: 'https://github.com/rm-shayan' },
+                            { icon: <TwitterIcon sx={{ fontSize: '1rem' }} />, label: 'Twitter', href: 'https://twitter.com/rm_shayan' },
+                            { icon: <WhatsAppIcon sx={{ fontSize: '1rem' }} />, label: 'WhatsApp', href: 'https://wa.me/923181196264?text=Hello%20I%20need%20help' },
                         ].map((social, i) => (
                             <IconButton
                                 key={i}
