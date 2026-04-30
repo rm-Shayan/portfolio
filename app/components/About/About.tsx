@@ -57,6 +57,26 @@ const About = () => {
     const mode = useSelector((state: RootState) => state.ui.mode);
     const isDark = mode === 'dark';
 
+    const handleDownloadCV = async () => {
+        try {
+            const response = await fetch('/api/cv/download');
+            if (!response.ok) throw new Error('Failed to download CV');
+            
+            const blob = await response.blob();
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'Rao_Muhammad_Shayan_CV.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(url);
+        } catch (error) {
+            console.error('Download error:', error);
+            alert('Failed to download CV. Please try again.');
+        }
+    };
+
     return (
         <Box id="about" sx={{ py: { xs: '5rem', md: '10rem' }, background: 'background.default', overflow: 'hidden' }}>
             <Container maxWidth="lg">
@@ -107,8 +127,7 @@ const About = () => {
                             <Button
                                 variant="contained"
                                 color="secondary"
-                                href="/mern.cv.pdf"
-                                download="Rao_Muhammad_Shayan_CV.pdf"
+                                onClick={handleDownloadCV}
                                 startIcon={<FiDownload />}
                                 sx={{
                                     padding: '0.8rem 2.2rem',
