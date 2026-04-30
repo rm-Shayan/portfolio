@@ -107,7 +107,7 @@ const About = () => {
                             <Button
                                 variant="contained"
                                 color="secondary"
-                                href="/MERN.cv.pdf"
+                                href="/mern.cv.pdf"
                                 download="Rao_Muhammad_Shayan_CV.pdf"
                                 startIcon={<FiDownload />}
                                 sx={{
