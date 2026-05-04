@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useRef } from 'react';
+import React from 'react';
+import { useRef } from 'react';
 import { Box, Typography, Container, Stack, useTheme, IconButton, Button } from '@mui/material';
 import { motion, AnimatePresence } from 'framer-motion';
 import SectionHeader from '../SectionHeader/SectionHeader';
@@ -48,6 +49,26 @@ const projects = [
     image: 'https://s0.wp.com/mshots/v1/https://healthmate-azure.vercel.app/?w=1000',
     url: 'https://healthmate-azure.vercel.app/',
   },
+  {
+    title: 'Live-stock Management',
+    category: 'Mobile App · Expo',
+    desc: 'A comprehensive livestock management system for tracking batches, branches, and allocations with real-time updates and secure data handling.',
+    tech: ['React Native', 'Expo', 'Redux', 'Node.js'],
+    icon: '🐏',
+    image: '/assets/livestock.png',
+    url: 'https://expo.dev/artifacts/eas/4ipcc69U8RLpM7XVMY29g2.apk',
+    repo: 'https://github.com/rm-Shayan/Live-stock---own',
+  },
+  {
+    title: 'SMIT – BMS Tracker',
+    category: 'Web App · Management',
+    desc: 'An intern and mentor tracking application featuring assignment checking, a real-time chat system, check-in/out functionality, and job updates.',
+    tech: ['React', 'Dashboard', 'Tracking'],
+    icon: '🎓',
+    image: 'https://s0.wp.com/mshots/v1/https://bms-frontend-eight.vercel.app/?w=1000',
+    url: 'https://bms-frontend-eight.vercel.app/',
+    repo: 'https://github.com/Mdusman398/BMS-Tracker-Team',
+  }
 ];
 
 const Projects = () => {
@@ -280,6 +301,8 @@ const Projects = () => {
                         <Button
                           variant="outlined"
                           size="small"
+                          href={project.repo || '#'}
+                          target={project.repo ? "_blank" : undefined}
                           startIcon={<CodeIcon />}
                           sx={{
                             fontSize: '0.7rem', fontWeight: 700, borderRadius: 0,
@@ -296,7 +319,7 @@ const Projects = () => {
                           startIcon={<VisibilityIcon />}
                           sx={{ fontSize: '0.7rem', fontWeight: 900, borderRadius: 0 }}
                         >
-                          Initiate
+                          {project.title === 'Live-stock Management' ? 'Download' : 'Initiate'}
                         </Button>
                       </Stack>
                     </Box>

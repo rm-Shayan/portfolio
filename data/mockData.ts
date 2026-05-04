@@ -59,6 +59,22 @@ export const portfolioData = {
       tech: ["React", "Node.js", "MongoDB", "Role-Based Access"],
       link: "https://finetech-frontened.vercel.app/",
     },
+    {
+      id: 4,
+      title: "Live-stock Management",
+      description:
+        "A comprehensive livestock management system built with React Native and Expo. Manage batches, branches, and allocations with real-time updates.",
+      tech: ["React Native", "Expo", "Redux", "Node.js"],
+      link: "https://expo.dev/artifacts/eas/4ipcc69U8RLpM7XVMY29g2.apk",
+    },
+    {
+      id: 5,
+      title: "SMIT – BMS Tracker",
+      description:
+        "An intern and mentor tracking application featuring assignment checking, a real-time chat system, check-in/out functionality, and job updates.",
+      tech: ["React", "Dashboard", "Tracking"],
+      link: "https://bms-frontend-eight.vercel.app/",
+    },
   ],
   skills: [
     "JavaScript",
