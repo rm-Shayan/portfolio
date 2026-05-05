@@ -56,7 +56,7 @@ const projects = [
     tech: ['React Native', 'Expo', 'Redux', 'Node.js'],
     icon: '🐏',
     image: '/assets/livestock.png',
-    url: 'https://expo.dev/artifacts/eas/4ipcc69U8RLpM7XVMY29g2.apk',
+    url: 'https://expo.dev/accounts/rm-shayan/projects/live-stock/builds/4164e791-9053-4803-8a33-718d26937b82',
     repo: 'https://github.com/rm-Shayan/Live-stock---own',
   },
   {
