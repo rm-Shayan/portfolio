@@ -50,6 +50,15 @@ const projects = [
     url: 'https://healthmate-azure.vercel.app/',
   },
   {
+    title: 'Meeting Mind',
+    category: 'AI · Meeting Intelligence',
+    desc: 'Secure meeting notes platform with AI-powered summaries and action item tracking. Automatically generates meeting summaries, tracks attendance, and provides AI insights. Schedule recurring meetings and access previous meeting summaries for context.',
+    tech: ['React', 'AI', 'Node.js', 'Database'],
+    icon: '📋',
+    image: '/assets/meeting-mind.png',
+    url: 'https://meeting-mind-olive.vercel.app/',
+  },
+  {
     title: 'Live-stock Management',
     category: 'Mobile App · Expo',
     desc: 'A comprehensive livestock management system for tracking batches, branches, and allocations with real-time updates and secure data handling.',

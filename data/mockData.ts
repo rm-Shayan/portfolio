@@ -61,6 +61,14 @@ export const portfolioData = {
     },
     {
       id: 4,
+      title: "Meeting Mind",
+      description:
+        "Secure meeting notes platform with AI-powered summaries and intelligent action item tracking. Automatically generates meeting summaries from discussions, tracks attendance, and provides AI insights. Schedule recurring meetings and access previous meeting context for better continuity.",
+      tech: ["React", "AI", "Node.js", "Database"],
+      link: "https://meeting-mind-olive.vercel.app/",
+    },
+    {
+      id: 5,
       title: "Live-stock Management",
       description:
         "A comprehensive livestock management system built with React Native and Expo. Manage batches, branches, and allocations with real-time updates.",
@@ -68,7 +76,7 @@ export const portfolioData = {
       link: "https://expo.dev/artifacts/eas/4ipcc69U8RLpM7XVMY29g2.apk",
     },
     {
-      id: 5,
+      id: 6,
       title: "SMIT – BMS Tracker",
       description:
         "An intern and mentor tracking application featuring assignment checking, a real-time chat system, check-in/out functionality, and job updates.",

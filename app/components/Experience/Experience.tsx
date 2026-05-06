@@ -9,26 +9,48 @@ import { RootState } from '../../../lib/store';
 
 const experiences = [
   {
-    period: '2023 — Present',
+    period: '2024 — 2025',
+    role: 'Self-Learning Frontend Developer',
+    company: 'S.M.I.T · Karachi, Pakistan',
+    desc: 'Mastered HTML, CSS, JavaScript, and React through structured self-learning, online courses, and building personal projects. Developed strong foundations in responsive design and modern JS.',
+    tags: ['HTML/CSS', 'JavaScript', 'React', 'Tailwind'],
+  },
+  {
+    period: '2025-2026',
+    role: 'Self-Learning Backened Developer',
+    company: 'S.M.I.T · Karachi, Pakistan',
+    desc: 'Gained proficiency in Node.js, Express, and MongoDB through self-directed learning and project development. Built RESTful APIs and full-stack applications to solidify backend skills.',
+    tags: ['Node.js', 'Express', 'MongoDB', 'REST APIs'], 
+  },
+  {
+    period: '2025 — 2026',
+      role: 'Full Stack Developer',
+      company: 'S.M.I.T · Karachi, Pakistan',
+      desc: 'Combined frontend and backend skills to build full-stack applications. Developed projects that integrated React with Node.js and MongoDB, demonstrating the ability to create end-to-end solutions.',
+      tags: ['React', 'Node.js', 'MongoDB', 'Full Stack Development,AWS, GCP'],
+  },
+  {
+    period: '2025 — 2026',
+    role: 'Mobile App Developer',
+    company: 'S.M.I.T · Karachi, Pakistan',
+    desc: 'Explored mobile development with React Native, building cross-platform applications that provide seamless user experiences on both iOS and Android devices.',
+    tags: ['React Native', 'JavaScript', 'Mobile Development'],
+  },
+  {
+    period: '2025 — Present',
     role: 'Freelance MERN Stack Developer',
     company: 'Self-Employed · Remote',
     desc: 'Delivered 15+ full-stack projects for international clients including e-commerce platforms, SaaS dashboards, and REST APIs. Specialized in fast delivery and pixel-perfect UI implementation.',
     tags: ['React', 'Next.js', 'Node.js', 'MongoDB'],
   },
   {
-    period: '2022 — 2023',
+    period: '2026 — Present',
     role: 'Web Development Trainee',
-    company: 'Saylani Mass I.T Training (S.M.I.T) · Karachi',
+    company: 'Saylani Tech Liited · Karachi, Pakistan',
     desc: 'Completed intensive full-stack MERN program covering React, Node.js, Express, MongoDB, and modern deployment workflows. Built 5 real-world capstone projects with mentorship from senior developers.',
     tags: ['MERN Stack', 'Git', 'REST APIs', 'Deployment'],
   },
-  {
-    period: '2021 — 2022',
-    role: 'Self-Taught Frontend Developer',
-    company: 'Independent Learning',
-    desc: 'Mastered HTML, CSS, JavaScript, and React through structured self-learning, online courses, and building personal projects. Developed strong foundations in responsive design and modern JS.',
-    tags: ['HTML/CSS', 'JavaScript', 'React', 'Tailwind'],
-  },
+  
 ];
 
 const Experience = () => {
