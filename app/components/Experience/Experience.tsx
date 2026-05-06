@@ -45,7 +45,7 @@ const experiences = [
   },
   {
     period: '2026 — Present',
-    role: 'Web Development Trainee',
+    role: 'Web Developer ',
     company: 'Saylani Tech Liited · Karachi, Pakistan',
     desc: 'Completed intensive full-stack MERN program covering React, Node.js, Express, MongoDB, and modern deployment workflows. Built 5 real-world capstone projects with mentorship from senior developers.',
     tags: ['MERN Stack', 'Git', 'REST APIs', 'Deployment'],
