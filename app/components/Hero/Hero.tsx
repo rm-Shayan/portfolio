@@ -103,7 +103,7 @@ const Hero = () => {
                 display: 'grid',
                 gridTemplateColumns: isMobile ? '1fr' : '1.4fr 1fr',
                 alignItems: 'center',
-                gap: isMobile ? '3rem' : '5rem',
+                gap: isMobile ? '6rem' : '5rem',
             }}
           >
             {/* Left Column (Content) */}
@@ -112,7 +112,8 @@ const Hero = () => {
                 display: 'flex', 
                 flexDirection: 'column', 
                 gap: '1.6rem', 
-                textAlign: { xs: 'center', md: 'left' } 
+                textAlign: { xs: 'center', md: 'left' },
+                order: { xs: 2, md: 1 }
             }}>
                 <motion.div variants={itemVariants}>
                   <Box
@@ -306,7 +307,8 @@ const Hero = () => {
                 width: '100%', 
                 display: 'flex', 
                 justifyContent: 'center', 
-                alignItems: 'center' 
+                alignItems: 'center',
+                order: { xs: 1, md: 2 }
             }}>
                 <motion.div
                   initial={{ scale: 0.8, opacity: 0, rotate: -5 }}
@@ -318,7 +320,7 @@ const Hero = () => {
                       position: 'relative',
                       width: { xs: 280, sm: 340, md: 400 },
                       height: { xs: 280, sm: 340, md: 400 },
-                      mt: { xs: -4, md: -28, lg: -40 },
+                      mt: { xs: 2, md: -28, lg: -40 },
                       '&:hover': {
                         '& .hero-tag': {
                             opacity: 1,
