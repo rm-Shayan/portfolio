@@ -52,9 +52,9 @@ const CustomAlert = ({ open, type, message, onClose }: CustomAlertProps) => {
                             maxWidth: '100%',
                             boxSizing: 'border-box',
                             background: '#020508',
-                            border: `2px solid ${isSuccess ? '#00f5ff' : '#ff3e3e'}`,
+                            border: `2px solid ${isSuccess ? '#00c896' : '#ff00c8'}`,
                             padding: { xs: '0.8rem 1rem', sm: '1.2rem' },
-                            boxShadow: `0 0 30px ${isSuccess ? 'rgba(0, 245, 255, 0.2)' : 'rgba(255, 62, 62, 0.2)'}`,
+                            boxShadow: `0 0 30px ${isSuccess ? 'rgba(0, 200, 150, 0.2)' : 'rgba(255, 0, 200, 0.2)'}`,
                             display: 'flex',
                             alignItems: 'center',
                             gap: { xs: 1.25, sm: 2 },
@@ -76,11 +76,11 @@ const CustomAlert = ({ open, type, message, onClose }: CustomAlertProps) => {
                                 bottom: 0,
                                 left: 0,
                                 height: '3px',
-                                background: isSuccess ? '#00f5ff' : '#ff3e3e',
+                                background: isSuccess ? '#00c896' : '#ff00c8',
                             }}
                         />
 
-                        <Box sx={{ color: isSuccess ? '#00f5ff' : '#ff3e3e', display: 'flex', fontSize: { xs: '1.4rem', sm: '2rem' }, flexShrink: 0 }}>
+                        <Box sx={{ color: isSuccess ? '#00c896' : '#ff00c8', display: 'flex', fontSize: { xs: '1.4rem', sm: '2rem' }, flexShrink: 0 }}>
                             {isSuccess ? <MdCheckCircle /> : <MdError />}
                         </Box>
 
@@ -91,7 +91,7 @@ const CustomAlert = ({ open, type, message, onClose }: CustomAlertProps) => {
                                 textTransform: 'uppercase', 
                                 fontSize: { xs: '0.75rem', sm: '0.9rem' },
                                 letterSpacing: '0.08em',
-                                color: isSuccess ? '#00f5ff' : '#ff3e3e'
+                                color: isSuccess ? '#00c896' : '#ff00c8'
                             }}>
                                 {isSuccess ? 'Inquiry Delivered' : 'Delivery Failed'}
                             </Typography>
