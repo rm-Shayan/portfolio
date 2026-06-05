@@ -2,7 +2,7 @@
 
 import React, { useEffect } from 'react';
 import { Box, Typography, Stack, IconButton } from '@mui/material';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { MdCheckCircle, MdError, MdClose } from 'react-icons/md';
 
 interface CustomAlertProps {
@@ -31,7 +31,7 @@ const CustomAlert = ({ open, type, message, onClose }: CustomAlertProps) => {
     const secondaryColor = '#ff00c8'; // Magenta accent
 
     // Framer Motion Variants
-    const containerVariants = {
+    const containerVariants: Variants = {
         hidden: { 
             opacity: 0, 
             scale: 0.85, 
@@ -63,7 +63,7 @@ const CustomAlert = ({ open, type, message, onClose }: CustomAlertProps) => {
         }
     };
 
-    const itemVariants = {
+    const itemVariants: Variants = {
         hidden: { opacity: 0, y: 10 },
         visible: { 
             opacity: 1, 
