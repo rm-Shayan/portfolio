@@ -323,11 +323,25 @@ const customInputProps = (isDark: boolean, theme: any) => ({
     sx: {
         fontFamily: 'var(--font-inter), sans-serif',
         fontSize: '0.95rem',
-        color: 'text.primary',
-        background: isDark ? 'rgba(255, 255, 255, 0.03)' : 'rgba(15, 23, 42, 0.03)',
+        color: isDark ? '#e6f7ff' : '#0f172a',
+        background: isDark ? 'rgba(2,6,12,0.7)' : 'rgba(255,255,255,0.03)',
         border: `1px solid ${theme.palette.divider}`,
-        padding: '0.9rem 1.4rem',
         clipPath: 'polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%)',
+        // Ensure the actual input/textarea inherits these styles and has padding
+        '& .MuiInputBase-input, & input, & textarea': {
+            padding: '0.9rem 1.4rem',
+            color: isDark ? '#e6f7ff' : '#0f172a',
+            backgroundColor: 'transparent',
+            background: 'transparent',
+            '&:-webkit-autofill, &:-webkit-autofill:hover, &:-webkit-autofill:focus, &:-webkit-autofill:active': {
+                WebkitBoxShadow: `0 0 0 100px ${isDark ? '#040a12' : '#f8fafc'} inset !important`,
+                WebkitTextFillColor: `${isDark ? '#e6f7ff' : '#0f172a'} !important`,
+                transition: 'background-color 5000s ease-in-out 0s',
+            },
+        },
+        '& input::placeholder, & textarea::placeholder': {
+            color: isDark ? 'rgba(230,247,255,0.45)' : 'rgba(15,23,42,0.45)'
+        },
         transition: 'all 0.3s',
         '&:focus-within': {
             borderColor: 'primary.main',
