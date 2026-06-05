@@ -273,9 +273,9 @@ const Contact = () => {
                                                 fontWeight: 800,
                                                 fontFamily: 'var(--font-outfit), sans-serif',
                                                 color: '#fff',
-                                                background: alert.open && alert.type === 'success' ? '#00c896' : 'primary.main',
+                                                background: alert.open && alert.type === 'success' ? (isDark ? '#00f5ff' : 'primary.main') : 'primary.main',
                                                 '&:hover': {
-                                                    background: alert.open && alert.type === 'success' ? '#00c896' : 'primary.main',
+                                                    background: alert.open && alert.type === 'success' ? (isDark ? '#00f5ff' : 'primary.main') : 'primary.main',
                                                     transform: 'translateY(-3px)',
                                                     boxShadow: isDark ? '0 0 30px rgba(0, 184, 200, 0.3)' : '0 10px 20px rgba(3, 105, 161, 0.25)',
                                                 },
