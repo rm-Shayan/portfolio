@@ -13,11 +13,9 @@ import { toggleTheme } from '../../../lib/features/uiSlice';
 
 const navLinks = [
   { name: 'About', href: '#about' },
-  { name: 'Services', href: '#services' },
   { name: 'Projects', href: '#projects' },
   { name: 'Experience', href: '#experience' },
-  { name: 'Testimonials', href: '#testimonials' },
-  { name: 'Blog', href: '#blog' },
+  { name: 'Certifications', href: '#certifications' },
   { name: 'Contact', href: '#contact' },
 ];
 
@@ -73,40 +71,47 @@ const Navbar = () => {
           {/* Desktop Links */}
           <Stack
             direction="row"
-            spacing={4}
+            spacing={{ lg: 3, xl: 4 }}
             alignItems="center"
-            sx={{ display: { xs: 'none', md: 'flex' }, ml: 'auto' }}
+            sx={{ display: { xs: 'none', lg: 'flex' }, ml: 'auto' }}
           >
             {navLinks.map((link) => (
               <Box
                 key={link.name}
-                component="a"
+                component={motion.a}
                 href={link.href}
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
                 sx={{
                   fontFamily: 'var(--font-outfit), sans-serif',
                   fontSize: '0.85rem',
-                  fontWeight: 600,
+                  fontWeight: 700,
                   color: 'text.secondary',
                   textDecoration: 'none',
-                  letterSpacing: '0.02em',
-                  textTransform: 'capitalize',
+                  letterSpacing: '0.08em',
+                  textTransform: 'uppercase',
                   position: 'relative',
-                  transition: 'all 0.3s',
+                  padding: '0.4rem 0.8rem',
+                  transition: 'color 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
                   '&::after': {
                     content: '""',
                     position: 'absolute',
-                    bottom: '-4px',
-                    left: '50%',
-                    width: 0,
+                    bottom: 0,
+                    left: 0,
+                    width: '100%',
                     height: '2px',
-                    background: theme.palette.primary.main,
-                    transition: 'all 0.3s',
-                    transform: 'translateX(-50%)',
+                    background: `linear-gradient(90deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main || theme.palette.primary.main})`,
+                    transform: 'scaleX(0)',
+                    transformOrigin: 'right',
+                    transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
                   },
                   '&:hover': {
                     color: 'primary.main',
-                    textShadow: isDark ? '0 0 12px rgba(0, 245, 255, 0.3)' : 'none',
-                    '&::after': { width: '100%' },
+                    textShadow: isDark ? '0 0 12px rgba(0, 245, 255, 0.6)' : 'none',
+                    '&::after': {
+                      transform: 'scaleX(1)',
+                      transformOrigin: 'left',
+                    },
                   },
                 }}
               >
@@ -124,12 +129,16 @@ const Navbar = () => {
                   borderRadius: '0',
                   clipPath: 'polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%)',
                   background: isDark ? 'rgba(0, 245, 255, 0.05)' : 'rgba(0, 184, 200, 0.05)',
+                  transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
                   '&:hover': {
                     background: isDark ? 'rgba(0, 245, 255, 0.15)' : 'rgba(0, 184, 200, 0.1)',
+                    borderColor: 'primary.main',
+                    boxShadow: isDark ? '0 0 15px rgba(0, 245, 255, 0.3)' : 'none',
+                    transform: 'translateY(-1px)',
                   }
                 }}
               >
-                {isDark ? <LightModeIcon sx={{ fontSize: '1.2rem' }} /> : <DarkModeIcon sx={{ fontSize: '1.2rem' }} />}
+                {isDark ? <LightModeIcon sx={{ fontSize: '1.1rem' }} /> : <DarkModeIcon sx={{ fontSize: '1.1rem' }} />}
               </IconButton>
             </Tooltip>
 
@@ -139,11 +148,11 @@ const Navbar = () => {
               href="#contact"
               sx={{
                 fontFamily: 'var(--font-outfit), sans-serif',
-                fontSize: '0.8rem',
+                fontSize: '0.75rem',
                 color: isDark ? 'primary.main' : 'text.primary',
                 background: isDark ? 'transparent' : 'rgba(15, 23, 42, 0.04)',
                 border: `1px solid ${theme.palette.primary.main}`,
-                padding: '0.7rem 1.8rem',
+                padding: '0.6rem 1.4rem',
                 textDecoration: 'none',
                 letterSpacing: '0.05em',
                 textTransform: 'uppercase',
@@ -167,7 +176,7 @@ const Navbar = () => {
           </Stack>
 
           {/* Mobile Actions */}
-          <Stack direction="row" spacing={1} sx={{ display: { xs: 'flex', md: 'none' } }}>
+          <Stack direction="row" spacing={1} sx={{ display: { xs: 'flex', lg: 'none' } }}>
             <IconButton onClick={() => dispatch(toggleTheme())} sx={{ color: 'primary.main' }}>
               {isDark ? <LightModeIcon /> : <DarkModeIcon />}
             </IconButton>
@@ -186,54 +195,89 @@ const Navbar = () => {
         PaperProps={{
           sx: {
             width: '280px',
-            background: isDark ? 'rgba(2, 5, 8, 0.98)' : '#fff',
-            backdropFilter: 'blur(10px)',
+            background: isDark ? 'rgba(5, 12, 18, 0.98)' : '#fff',
+            backdropFilter: 'blur(16px)',
             borderLeft: `1px solid ${theme.palette.divider}`,
-            padding: '2rem 1rem',
+            padding: '2rem 1.5rem',
           }
         }}
       >
         <Stack direction="row" justifyContent="flex-end" sx={{ mb: 4 }}>
-          <IconButton onClick={() => setIsOpen(false)} sx={{ color: 'primary.main' }}>
+          <IconButton
+            onClick={() => setIsOpen(false)}
+            sx={{
+              color: 'primary.main',
+              border: `1px solid ${theme.palette.divider}`,
+              borderRadius: 0,
+              '&:hover': {
+                borderColor: 'primary.main',
+                background: isDark ? 'rgba(0, 245, 255, 0.05)' : 'rgba(0, 184, 200, 0.05)',
+              }
+            }}
+          >
             <CloseIcon />
           </IconButton>
         </Stack>
 
-        <List>
-          {navLinks.map((link) => (
+        <List sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
+          {navLinks.map((link, index) => (
             <ListItem
               key={link.name}
-              component="a"
+              component={motion.a}
               href={link.href}
               onClick={() => setIsOpen(false)}
+              whileHover={{ x: 8 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
               sx={{
-                padding: '1rem',
-                borderBottom: `1px solid ${theme.palette.divider}`,
-                '&:hover': { background: isDark ? 'rgba(0, 245, 255, 0.05)' : 'rgba(0, 184, 200, 0.05)' }
+                padding: '0.8rem 1.2rem',
+                borderRadius: 0,
+                borderLeft: `3px solid transparent`,
+                background: isDark ? 'rgba(255, 255, 255, 0.01)' : 'rgba(0, 0, 0, 0.01)',
+                transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+                cursor: 'pointer',
+                '&:hover': {
+                  background: isDark ? 'rgba(0, 245, 255, 0.06)' : 'rgba(3, 105, 161, 0.04)',
+                  borderLeftColor: 'primary.main',
+                  '& .MuiTypography-root': {
+                    color: 'primary.main',
+                    textShadow: isDark ? '0 0 10px rgba(0, 245, 255, 0.3)' : 'none'
+                  }
+                }
               }}
             >
               <ListItemText
                 primary={link.name}
                 primaryTypographyProps={{
                   fontFamily: 'var(--font-outfit), sans-serif',
-                  fontSize: '1.1rem',
-                  fontWeight: 600,
-                  color: 'text.primary',
-                  textTransform: 'capitalize',
+                  fontSize: '1rem',
+                  fontWeight: 700,
+                  color: 'text.secondary',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.08em',
+                  sx: {
+                    transition: 'color 0.3s ease',
+                  }
                 }}
               />
             </ListItem>
           ))}
         </List>
 
-        <Box sx={{ mt: 'auto', p: 2 }}>
+        <Box sx={{ mt: 'auto', pt: 4 }}>
           <Button
             fullWidth
             href="#contact"
             onClick={() => setIsOpen(false)}
             variant="contained"
             color="primary"
-            sx={{ py: 1.5, fontWeight: 700 }}
+            sx={{
+              py: 1.5,
+              fontWeight: 800,
+              borderRadius: 0,
+              textTransform: 'uppercase',
+              letterSpacing: '0.1em',
+              clipPath: 'polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%)',
+            }}
           >
             Hire Me
           </Button>

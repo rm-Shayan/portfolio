@@ -21,6 +21,7 @@ const projects = [
     icon: '🕌',
     image: 'https://s0.wp.com/mshots/v1/https://celebrated-gelato-f04291.netlify.app/?w=1000',
     url: 'https://celebrated-gelato-f04291.netlify.app/',
+    repo:"https://github.com/rm-Shayan/nasr-ul-islam"
   },
   {
     title: 'Investocrafy — AI Advisor',
@@ -30,6 +31,7 @@ const projects = [
     icon: '📈',
     image: 'https://s0.wp.com/mshots/v1/https://ai-saas-inky-eight.vercel.app/?w=1000',
     url: 'https://ai-saas-inky-eight.vercel.app/',
+    repo: 'https://github.com/rm-Shayan/ai-saas'
   },
   {
     title: 'FinTech Fraud Reporting',
@@ -39,6 +41,7 @@ const projects = [
     icon: '🛡️',
     image: 'https://s0.wp.com/mshots/v1/https://finetech-frontened.vercel.app/?w=1000',
     url: 'https://finetech-frontened.vercel.app/',
+    repo: 'https://github.com/rm-Shayan?tab=repositories&q=finete&type=&language=&sort='
   },
   {
     title: 'HealthMate',
@@ -48,6 +51,7 @@ const projects = [
     icon: '⚕️',
     image: 'https://s0.wp.com/mshots/v1/https://healthmate-azure.vercel.app/?w=1000',
     url: 'https://healthmate-azure.vercel.app/',
+    repo: 'https://github.com/rm-Shayan/healthmate'
   },
   {
     title: 'Meeting Mind',
@@ -57,6 +61,7 @@ const projects = [
     icon: '📋',
     image: '/assets/meeting-mind.png',
     url: 'https://meeting-mind-olive.vercel.app/',
+    repo: 'https://github.com/rm-Shayan/Meeting-Mind'
   },
   {
     title: 'Live-stock Management',
@@ -192,6 +197,9 @@ const Projects = () => {
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                  whileHover={{ y: -8 }}
+                  whileTap={{ scale: 0.98 }}
+                  style={{ height: '100%' }}
                 >
                   <Box
                     sx={{
@@ -207,21 +215,42 @@ const Projects = () => {
                       transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
                       '&:hover': {
                         borderColor: 'primary.main',
-                        boxShadow: isDark ? '0 40px 80px rgba(0, 0, 0, 0.8)' : '0 30px 60px -12px rgba(15, 23, 42, 0.12), 0 18px 36px -18px rgba(15, 23, 42, 0.15)',
+                        boxShadow: isDark 
+                          ? '0 0 25px rgba(0, 245, 255, 0.2), inset 0 0 15px rgba(0, 245, 255, 0.05)' 
+                          : '0 20px 40px -12px rgba(15, 23, 42, 0.12), 0 0 20px rgba(3, 105, 161, 0.05)',
                         '& .project-media img': { scale: '1.08', filter: 'none' },
-                        '&::after': { width: '100%', left: 0 }
+                        '&::after': { width: '100%', left: 0 },
+                        '& .project-shimmer': { left: '125%' }
                       },
                       '&::after': {
                         content: '""', position: 'absolute', bottom: 0, left: '50%', width: 0, height: '3px',
                         background: 'linear-gradient(to right, primary.main, secondary.main)', transition: 'all 0.5s',
+                        zIndex: 3
                       }
                     }}
                   >
+                    {/* Metallic swipe effect */}
+                    <Box
+                      className="project-shimmer"
+                      sx={{
+                        content: '""',
+                        position: 'absolute',
+                        top: 0,
+                        left: '-75%',
+                        width: '50%',
+                        height: '100%',
+                        background: 'linear-gradient(to right, transparent, rgba(255, 255, 255, 0.12), transparent)',
+                        transform: 'skewX(-25deg)',
+                        transition: 'left 0.75s ease-in-out',
+                        zIndex: 2,
+                        pointerEvents: 'none'
+                      }}
+                    />
                     {/* Media Container */}
                     <Box
                       className="project-media"
                       sx={{
-                        flex: { xs: '0 0 240px', md: '0 0 280px' },
+                        flex: { xs: '0 0 220px', md: '0 0 260px', lg: '0 0 280px' },
                         position: 'relative',
                         overflow: 'hidden',
                         background: 'background.default',
@@ -245,92 +274,104 @@ const Projects = () => {
                     </Box>
 
                     {/* Content */}
-                    <Box sx={{ p: 4, display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
-                      <Typography
-                        sx={{
-                          fontFamily: 'var(--font-inter), sans-serif',
-                          fontSize: '0.75rem',
-                          color: 'primary.main',
-                          letterSpacing: '0.05em',
-                          textTransform: 'uppercase',
-                          fontWeight: 700,
-                          mb: 1,
-                        }}
-                      >
-                        {project.category}
-                      </Typography>
-                      <Typography
-                        variant="h3"
-                        sx={{
-                          fontFamily: 'var(--font-outfit), sans-serif',
-                          fontSize: '1.4rem',
-                          fontWeight: 800,
-                          color: 'text.primary',
-                          mb: 1.5,
-                          lineHeight: 1.2,
-                        }}
-                      >
-                        {project.title}
-                      </Typography>
-                      <Typography
-                        variant="body2"
-                        sx={{
-                          color: 'text.secondary',
-                          fontSize: '0.9rem',
-                          lineHeight: 1.7,
-                          mb: 4,
-                          fontFamily: 'var(--font-inter), sans-serif',
-                        }}
-                      >
-                        {project.desc}
-                      </Typography>
-
-                      <Stack direction="row" spacing={1} flexWrap="wrap" gap={1} sx={{ mt: 'auto', mb: 3 }}>
-                        {project.tech.map((t) => (
-                          <Box
-                            key={t}
-                            sx={{
-                              padding: '0.35rem 0.9rem',
-                              border: `1px solid ${isDark ? 'rgba(0, 245, 255, 0.15)' : theme.palette.divider}`,
-                              background: isDark ? 'rgba(255, 255, 255, 0.02)' : 'rgba(15, 23, 42, 0.03)',
-                              color: isDark ? 'primary.light' : 'primary.main',
-                              fontSize: '0.7rem',
-                              fontFamily: 'var(--font-inter), sans-serif',
-                              fontWeight: 600,
-                              textTransform: 'uppercase',
-                              borderRadius: '6px',
-                            }}
-                          >
-                            {t}
-                          </Box>
-                        ))}
-                      </Stack>
-
-                      <Stack direction="row" spacing={2}>
-                        <Button
-                          variant="outlined"
-                          size="small"
-                          href={project.repo || '#'}
-                          target={project.repo ? "_blank" : undefined}
-                          startIcon={<CodeIcon />}
+                    <Box sx={{ p: { xs: 3, md: 4 }, display: 'flex', flexDirection: 'column', flexGrow: 1, justifyContent: 'space-between' }}>
+                      <Box>
+                        <Typography
                           sx={{
-                            fontSize: '0.7rem', fontWeight: 700, borderRadius: 0,
-                            borderColor: 'rgba(0,245,255,0.3)', color: 'text.primary'
+                            fontFamily: 'var(--font-inter), sans-serif',
+                            fontSize: '0.75rem',
+                            color: 'primary.main',
+                            letterSpacing: '0.05em',
+                            textTransform: 'uppercase',
+                            fontWeight: 700,
+                            mb: 0.5,
                           }}
                         >
-                          Artifact
-                        </Button>
-                        <Button
-                          variant="contained"
-                          size="small"
-                          href={project.url}
-                          target="_blank"
-                          startIcon={<VisibilityIcon />}
-                          sx={{ fontSize: '0.7rem', fontWeight: 900, borderRadius: 0 }}
+                          {project.category}
+                        </Typography>
+                        <Typography
+                          variant="h3"
+                          sx={{
+                            fontFamily: 'var(--font-outfit), sans-serif',
+                            fontSize: { xs: '1.2rem', md: '1.4rem' },
+                            fontWeight: 800,
+                            color: 'text.primary',
+                            mb: 1,
+                            lineHeight: 1.2,
+                          }}
                         >
-                          {project.title === 'Live-stock Management' ? 'Download' : 'Initiate'}
-                        </Button>
-                      </Stack>
+                          {project.title}
+                        </Typography>
+                        <Typography
+                          variant="body2"
+                          sx={{
+                            color: 'text.secondary',
+                            fontSize: '0.85rem',
+                            lineHeight: 1.6,
+                            mb: { xs: 2.5, md: 3 },
+                            fontFamily: 'var(--font-inter), sans-serif',
+                          }}
+                        >
+                          {project.desc}
+                        </Typography>
+                      </Box>
+
+                      <Box>
+                        <Stack direction="row" spacing={1} flexWrap="wrap" gap={1} sx={{ mb: 3 }}>
+                          {project.tech.map((t) => (
+                            <Box
+                              key={t}
+                              component={motion.div}
+                              whileHover={{ scale: 1.15, y: -2 }}
+                              transition={{ type: 'spring', stiffness: 400, damping: 10 }}
+                              sx={{
+                                padding: '0.35rem 0.85rem',
+                                border: `1px solid ${isDark ? 'rgba(0, 245, 255, 0.15)' : theme.palette.divider}`,
+                                background: isDark ? 'rgba(0, 245, 255, 0.03)' : 'rgba(15, 23, 42, 0.02)',
+                                color: isDark ? 'primary.light' : 'primary.main',
+                                fontSize: '0.65rem',
+                                fontFamily: 'var(--font-inter), sans-serif',
+                                fontWeight: 700,
+                                textTransform: 'uppercase',
+                                borderRadius: '4px',
+                                cursor: 'default',
+                                transition: 'border-color 0.2s',
+                                '&:hover': {
+                                  borderColor: 'primary.main'
+                                }
+                              }}
+                            >
+                              {t}
+                            </Box>
+                          ))}
+                        </Stack>
+
+                        <Stack direction="row" spacing={2}>
+                          <Button
+                            variant="outlined"
+                            size="small"
+                            href={project.repo || '#'}
+                            target={project.repo ? "_blank" : undefined}
+                            startIcon={<CodeIcon />}
+                            sx={{
+                              fontSize: '0.7rem', fontWeight: 700, borderRadius: 0,
+                              borderColor: 'rgba(0,245,255,0.3)', color: 'text.primary'
+                            }}
+                          >
+                            Artifact
+                          </Button>
+                          <Button
+                            variant="contained"
+                            size="small"
+                            href={project.url}
+                            target="_blank"
+                            startIcon={<VisibilityIcon />}
+                            sx={{ fontSize: '0.7rem', fontWeight: 900, borderRadius: 0 }}
+                          >
+                            {project.title === 'Live-stock Management' ? 'Download' : 'Initiate'}
+                          </Button>
+                        </Stack>
+                      </Box>
                     </Box>
                   </Box>
                 </motion.div>

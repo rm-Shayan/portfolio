@@ -13,6 +13,7 @@ const blogPosts = [
         cat: 'Next.js · Performance',
         excerpt: 'The exact techniques I used — image lazy loading, route splitting, ISR caching, and font optimization — to deliver blazing results.',
         date: 'Mar 2024 · 8 min read',
+        image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80',
         icon: '⚡',
     },
     {
@@ -20,6 +21,7 @@ const blogPosts = [
         cat: 'Architecture · MERN',
         excerpt: 'A battle-tested folder structure, API conventions, and error handling patterns I use in every production MERN project.',
         date: 'Feb 2024 · 12 min read',
+        image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&q=80',
         icon: '🏗️',
     },
     {
@@ -27,6 +29,7 @@ const blogPosts = [
         cat: 'Security · Node.js',
         excerpt: 'Stop implementing broken auth. Here\'s the complete production-grade JWT authentication flow with refresh token rotation.',
         date: 'Jan 2024 · 10 min read',
+        image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=600&q=80',
         icon: '🔐',
     },
 ];
@@ -79,23 +82,55 @@ const Blog = () => {
                                 '&:hover': {
                                     borderColor: 'primary.main',
                                     transform: 'translateY(-5px)',
-                                    boxShadow: isDark ? 'none' : '0 20px 40px -10px rgba(0, 0, 0, 0.05)',
+                                    boxShadow: isDark 
+                                        ? '0 0 20px rgba(0, 245, 255, 0.15)' 
+                                        : '0 20px 40px -10px rgba(0, 0, 0, 0.05)',
+                                    '& img': { transform: 'scale(1.05)' }
                                 },
-                            }}
+                             }}
                         >
                             {/* Card Media Section */}
                             <Box
                                 sx={{
-                                    height: '140px',
-                                    background: isDark ? 'linear-gradient(135deg, var(--bg3), var(--bg0))' : '#f8fafc',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    fontSize: '2.5rem',
+                                    height: '180px',
                                     position: 'relative',
+                                    overflow: 'hidden',
                                 }}
                             >
-                                {post.icon}
+                                <Box
+                                    component="img"
+                                    src={post.image}
+                                    alt={post.title}
+                                    sx={{
+                                        width: '100%',
+                                        height: '100%',
+                                        objectFit: 'cover',
+                                        transition: 'transform 0.5s ease',
+                                    }}
+                                />
+                                <Box
+                                    sx={{
+                                        position: 'absolute',
+                                        inset: 0,
+                                        background: isDark
+                                            ? 'linear-gradient(to bottom, transparent 30%, var(--bg1) 100%)'
+                                            : 'linear-gradient(to bottom, transparent 30%, rgba(255, 255, 255, 0.9) 100%)',
+                                    }}
+                                />
+                                <Box
+                                    sx={{
+                                        position: 'absolute',
+                                        top: 12,
+                                        left: 12,
+                                        background: 'rgba(2, 5, 8, 0.75)',
+                                        backdropFilter: 'blur(4px)',
+                                        padding: '4px 8px',
+                                        borderRadius: '4px',
+                                        fontSize: '1.2rem',
+                                    }}
+                                >
+                                    {post.icon}
+                                </Box>
                                 <Box
                                     sx={{
                                         position: 'absolute',

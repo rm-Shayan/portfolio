@@ -8,6 +8,7 @@ import About from './components/About/About';
 import Services from './components/Services/Services';
 import Projects from './components/Projects/Projects';
 import Experience from './components/Experience/Experience';
+import Certifications from './components/Certifications/Certifications';
 import Testimonials from './components/Testimonials/Testimonials';
 import Blog from './components/Blog/Blog';
 import Contact from './components/Contact/Contact';
@@ -50,6 +51,9 @@ export default function Home() {
                 <SectionDivider />
 
                 <Experience />
+                <SectionDivider />
+
+                <Certifications />
                 <SectionDivider />
 
                 <Testimonials />

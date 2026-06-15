@@ -101,9 +101,9 @@ const Hero = () => {
           <Box
             sx={{
                 display: 'grid',
-                gridTemplateColumns: isMobile ? '1fr' : '1.4fr 1fr',
+                gridTemplateColumns: { xs: '1fr', md: '1.2fr 1fr', lg: '1.4fr 1fr' },
                 alignItems: 'center',
-                gap: isMobile ? '6rem' : '5rem',
+                gap: { xs: 4, sm: 6, md: 5 },
             }}
           >
             {/* Left Column (Content) */}
@@ -150,21 +150,21 @@ const Hero = () => {
                       mb: 1,
                       fontFamily: 'var(--font-outfit), sans-serif',
                       '& .line1': {
-                        fontSize: { xs: '2.8rem', sm: '3.5rem', md: '5rem' },
+                        fontSize: { xs: '2.4rem', sm: '3.5rem', md: '4.5rem', lg: '5rem' },
                         color: 'text.primary',
                         display: 'block',
                         fontWeight: 900,
                         textShadow: isDark ? '0 0 40px rgba(255, 255, 255, 0.12)' : 'none',
                       },
                       '& .line2': {
-                        fontSize: { xs: '2.8rem', sm: '3.5rem', md: '5rem' },
+                        fontSize: { xs: '2.4rem', sm: '3.5rem', md: '4.5rem', lg: '5rem' },
                         color: 'primary.main',
                         display: 'block',
                         fontWeight: 900,
                         textShadow: isDark ? '0 0 60px #00f5ff, 0 0 120px rgba(0, 245, 255, 0.3)' : 'none',
                       },
                       '& .line3': {
-                        fontSize: { xs: '1rem', sm: '1.2rem', md: '1.4rem' },
+                        fontSize: { xs: '0.9rem', sm: '1.1rem', md: '1.3rem', lg: '1.4rem' },
                         color: 'secondary.main',
                         display: 'block',
                         marginTop: '0.8rem',
@@ -188,7 +188,7 @@ const Hero = () => {
                       color: 'text.secondary',
                       maxWidth: 540,
                       mx: { xs: 'auto', md: 0 },
-                      fontSize: { xs: '1rem', md: '1.1rem' },
+                      fontSize: { xs: '0.95rem', md: '1.1rem' },
                       lineHeight: 1.8,
                     }}
                   >
@@ -241,9 +241,11 @@ const Hero = () => {
                 <motion.div variants={itemVariants}>
                   <Stack
                     direction={{ xs: 'column', sm: 'row' }}
-                    spacing={3}
+                    spacing={2}
+                    flexWrap="wrap"
                     justifyContent={{ xs: 'center', md: 'flex-start' }}
-                    alignItems={{ xs: 'center', sm: 'center' }}
+                    alignItems={{ xs: 'stretch', sm: 'center' }}
+                    gap={1.5}
                   >
                     <Button
                       variant="contained"
@@ -253,7 +255,8 @@ const Hero = () => {
                         padding: '1.1rem 3rem',
                         fontSize: '0.85rem',
                         fontWeight: 800,
-                        minWidth: 200,
+                        flex: { xs: '1 1 auto', sm: 'none' },
+                        minWidth: { xs: '100%', sm: 160, md: 180 },
                         fontFamily: 'var(--font-outfit), sans-serif',
                         color: '#fff',
                       }}
@@ -268,7 +271,8 @@ const Hero = () => {
                         padding: '1.1rem 3rem',
                         fontSize: '0.85rem',
                         fontWeight: 700,
-                        minWidth: 200,
+                        flex: { xs: '1 1 auto', sm: 'none' },
+                        minWidth: { xs: '100%', sm: 160, md: 180 },
                         borderWidth: '2px !important',
                         fontFamily: 'var(--font-outfit), sans-serif',
                       }}
@@ -282,10 +286,11 @@ const Hero = () => {
                       download="Rao_Muhammad_Shayan_CV.pdf"
                       startIcon={<FiDownload />}
                       sx={{
-                        padding: '1.1rem 3rem',
+                        padding: '1.1rem 2.5rem',
                         fontSize: '0.85rem',
                         fontWeight: 700,
-                        minWidth: 200,
+                        flex: { xs: '1 1 auto', sm: 'none' },
+                        minWidth: { xs: '100%', sm: 160, md: 180 },
                         borderWidth: '2px !important',
                         fontFamily: 'var(--font-outfit), sans-serif',
                         borderColor: 'secondary.main',
@@ -318,9 +323,10 @@ const Hero = () => {
                       <Box
                     sx={{
                       position: 'relative',
-                      width: { xs: 280, sm: 340, md: 400 },
-                      height: { xs: 280, sm: 340, md: 400 },
-                      mt: { xs: 2, md: -28, lg: -40 },
+                      width: { xs: 260, sm: 320, md: 360, lg: 400 },
+                      height: { xs: 260, sm: 320, md: 360, lg: 400 },
+                      mt: { xs: 2, md: 0 },
+                      mb: { xs: 4, md: 0 },
                       '&:hover': {
                         '& .hero-tag': {
                             opacity: 1,
