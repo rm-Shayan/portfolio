@@ -8,6 +8,7 @@ import { motion, Variants } from 'framer-motion';
 // TerminalWidget import assumed to be correct in your project structure
 import TerminalWidget from './TerminalWidget'; 
 import { FiDownload } from 'react-icons/fi';
+import { MdPhone, MdLocationOn, MdEmail } from 'react-icons/md';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../lib/store'; // Adjust import path as needed
 
@@ -137,7 +138,21 @@ const Hero = () => {
                       },
                     }}
                   >
-                    Full-Stack MERN Developer
+                    Software Engineer — MERN Stack
+                    <Box
+                      component="span"
+                      sx={{
+                        display: 'block',
+                        fontSize: '0.7rem',
+                        color: 'text.secondary',
+                        fontWeight: 600,
+                        letterSpacing: '0.1em',
+                        mt: 0.3,
+                        textTransform: 'uppercase',
+                      }}
+                    >
+                      @ STL, ZA IT PARK
+                    </Box>
                   </Box>
                 </motion.div>
 
@@ -220,6 +235,33 @@ const Hero = () => {
                   >
                     I engineer <Box component="span" sx={{ color: 'primary.main', fontWeight: 600 }}>high-performance web products</Box> that blend cutting-edge aesthetics with robust backend logic. Passionate about <Box component="span" sx={{ color: 'secondary.main', fontWeight: 500 }}>scalability, speed, and user experience</Box>.
                   </Typography>
+                </motion.div>
+
+                <motion.div variants={itemVariants}>
+                  <Stack
+                    direction={{ xs: 'column', sm: 'row' }}
+                    flexWrap="wrap"
+                    gap={{ xs: 1.5, sm: 3 }}
+                    justifyContent={{ xs: 'center', md: 'flex-start' }}
+                    sx={{
+                      fontFamily: 'var(--font-inter), sans-serif',
+                      fontSize: '0.8rem',
+                      color: 'text.secondary',
+                    }}
+                  >
+                    <Stack direction="row" alignItems="center" gap={0.8}>
+                      <MdPhone style={{ color: isDark ? '#00f5ff' : '#0369a1', fontSize: '1rem' }} />
+                      <Box component="span">+92 318 1196264</Box>
+                    </Stack>
+                    <Stack direction="row" alignItems="center" gap={0.8}>
+                      <MdLocationOn style={{ color: isDark ? '#00f5ff' : '#0369a1', fontSize: '1rem' }} />
+                      <Box component="span">Karachi, Pakistan</Box>
+                    </Stack>
+                    <Stack direction="row" alignItems="center" gap={0.8}>
+                      <MdEmail style={{ color: isDark ? '#00f5ff' : '#0369a1', fontSize: '1rem' }} />
+                      <Box component="span">raomuhammadshayan897@gmail.com</Box>
+                    </Stack>
+                  </Stack>
                 </motion.div>
 
                 <motion.div variants={itemVariants}>

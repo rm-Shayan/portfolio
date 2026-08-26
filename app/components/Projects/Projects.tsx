@@ -14,6 +14,16 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 const projects = [
   {
+    title: 'Web3Energi — Solar & Grid',
+    category: 'Next.js · Solar Engineering',
+    desc: 'Premium solar installation agency portfolio featuring real-time energy telemetry, intelligent load calculator, autonomous load balancing, and decentralized grid injection. Includes a full solar system calculator with battery backup planning.',
+    tech: ['Next.js', 'MUI', 'Solar Calculator', 'Grid Integration'],
+    icon: '⚡',
+    image: '/assets/web3Energi.png',
+    url: 'https://web3-energi.vercel.app/',
+    repo: 'https://github.com/rm-Shayan/Web3Energi'
+  },
+  {
     title: 'Namaz Tracker',
     category: 'React · Firebase',
     desc: 'React + Firebase app for tracking daily prayers. Users can log their prayers and monitor progress. Designed for seamless user experience and easy tracking of Islamic prayers.',
@@ -205,22 +215,28 @@ const Projects = () => {
                     sx={{
                       display: 'flex',
                       flexDirection: { xs: 'column', md: 'row' },
-                      background: 'background.paper',
-                      border: `1px solid ${isDark ? 'rgba(0, 245, 255, 0.1)' : 'rgba(15, 23, 42, 0.08)'}`,
+                      background: isDark 
+                        ? 'linear-gradient(145deg, rgba(5, 12, 18, 0.95), rgba(10, 20, 30, 0.9))'
+                        : 'linear-gradient(145deg, #ffffff, #f8fafc)',
+                      border: `1px solid ${isDark ? 'rgba(0, 245, 255, 0.08)' : 'rgba(15, 23, 42, 0.06)'}`,
                       overflow: 'hidden',
                       position: 'relative',
                       borderRadius: 0,
                       clipPath: 'polygon(0 0, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%)',
-                      height: { xs: 'auto', md: 380 },
-                      transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+                      height: { xs: 'auto', md: 400 },
+                      transition: 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
+                      boxShadow: isDark
+                        ? '0 4px 20px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(0, 245, 255, 0.05)'
+                        : '0 4px 24px rgba(15, 23, 42, 0.06)',
                       '&:hover': {
                         borderColor: 'primary.main',
                         boxShadow: isDark 
-                          ? '0 0 25px rgba(0, 245, 255, 0.2), inset 0 0 15px rgba(0, 245, 255, 0.05)' 
-                          : '0 20px 40px -12px rgba(15, 23, 42, 0.12), 0 0 20px rgba(3, 105, 161, 0.05)',
-                        '& .project-media img': { scale: '1.08', filter: 'none' },
+                          ? '0 0 30px rgba(0, 245, 255, 0.25), inset 0 0 20px rgba(0, 245, 255, 0.05), 0 8px 32px rgba(0, 0, 0, 0.4)'
+                          : '0 20px 50px -12px rgba(15, 23, 42, 0.15), 0 0 25px rgba(3, 105, 161, 0.08)',
+                        '& .project-media img': { transform: 'scale(1.1)', filter: isDark ? 'saturate(0.85) contrast(1.1) brightness(1.05)' : 'saturate(1.15) contrast(1.05)' },
                         '&::after': { width: '100%', left: 0 },
-                        '& .project-shimmer': { left: '125%' }
+                        '& .project-shimmer': { left: '125%' },
+                        '& .project-overlay': { opacity: 0.6 },
                       },
                       '&::after': {
                         content: '""', position: 'absolute', bottom: 0, left: '50%', width: 0, height: '3px',
@@ -239,9 +255,9 @@ const Projects = () => {
                         left: '-75%',
                         width: '50%',
                         height: '100%',
-                        background: 'linear-gradient(to right, transparent, rgba(255, 255, 255, 0.12), transparent)',
+                        background: 'linear-gradient(to right, transparent, rgba(255, 255, 255, 0.08), transparent)',
                         transform: 'skewX(-25deg)',
-                        transition: 'left 0.75s ease-in-out',
+                        transition: 'left 0.8s cubic-bezier(0.16, 1, 0.3, 1)',
                         zIndex: 2,
                         pointerEvents: 'none'
                       }}
@@ -250,10 +266,13 @@ const Projects = () => {
                     <Box
                       className="project-media"
                       sx={{
-                        flex: { xs: '0 0 220px', md: '0 0 260px', lg: '0 0 280px' },
+                        flex: { xs: '0 0 220px', md: '0 0 280px', lg: '0 0 300px' },
                         position: 'relative',
                         overflow: 'hidden',
-                        background: 'background.default',
+                        background: isDark ? '#0a0f14' : '#f1f5f9',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
                       }}
                     >
                       <Box
@@ -263,12 +282,37 @@ const Projects = () => {
                         sx={{
                           width: '100%',
                           height: '100%',
-                          objectFit: 'cover',
+                          objectFit: 'scale-down',
                           transition: 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
-                          filter: isDark ? 'saturate(0.6) contrast(1.1)' : 'none',
+                          filter: isDark ? 'saturate(0.85) contrast(1.02)' : 'none',
+                          '&:hover': {
+                            transform: 'scale(1.05)',
+                            filter: isDark ? 'saturate(1) contrast(1.05) brightness(1.05)' : 'saturate(1.1) brightness(1.02)',
+                          },
                         }}
                       />
-                      <Box sx={{ position: 'absolute', top: 15, left: 15, fontSize: '1.5rem', filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.5))' }}>
+                      {/* Subtle vignette - very light */}
+                      <Box
+                        sx={{
+                          position: 'absolute',
+                          inset: 0,
+                          background: 'radial-gradient(ellipse at center, transparent 60%, rgba(0,0,0,0.15) 100%)',
+                          pointerEvents: 'none',
+                        }}
+                      />
+                      {/* Top accent line */}
+                      <Box
+                        sx={{
+                          position: 'absolute',
+                          top: 0,
+                          left: 0,
+                          width: '50%',
+                          height: '2px',
+                          background: 'linear-gradient(to right, primary.main, transparent)',
+                          opacity: 0.5,
+                        }}
+                      />
+                      <Box sx={{ position: 'absolute', top: 12, left: 12, fontSize: '1.4rem', filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.4))', zIndex: 2 }}>
                         {project.icon}
                       </Box>
                     </Box>

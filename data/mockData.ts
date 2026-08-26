@@ -98,8 +98,8 @@ export const portfolioData = {
     "Docker",
   ],
   contact: {
-    email: "shayan@example.com",
+    email: "raomuhammadshayan897@gmail.com",
     linkedin: "https://www.linkedin.com/in/rao-muhammad-shayan-470a51344",
-    github: "https://github.com/shayan",
+    github: "https://github.com/rm-Shayan",
   },
 };
