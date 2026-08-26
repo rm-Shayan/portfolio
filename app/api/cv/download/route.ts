@@ -4,7 +4,7 @@ import { join } from 'path';
 
 export async function GET(request: NextRequest) {
   try {
-    const filePath = join(process.cwd(), 'public', 'mern.cv.pdf');
+    const filePath = join(process.cwd(), 'public', 'cv.pdf');
     const fileBuffer = await readFile(filePath);
 
     const response = new NextResponse(fileBuffer, {

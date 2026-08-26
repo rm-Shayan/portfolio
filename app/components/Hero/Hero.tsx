@@ -346,7 +346,7 @@ const Hero = () => {
                     <Button
                       variant="outlined"
                       color="secondary"
-                      href="/MERN.cv.pdf"
+                      href="/cv.pdf"
                       download="Rao_Muhammad_Shayan_CV.pdf"
                       startIcon={<FiDownload />}
                       sx={{
