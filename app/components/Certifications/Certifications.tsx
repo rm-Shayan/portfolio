@@ -40,16 +40,16 @@ interface Certification {
 const certifications: Certification[] = [
   {
     id: 1,
-    title: 'MERN Stack Development',
+    title: 'Modern Web Application Development',
     issuer: 'SMIT — Saylani Mass IT Training',
-    date: '2024',
+    date: '2025',
     credentialType: 'pdf',
     file: '/assets/324139.pdf',
     preview: '/assets/324139.pdf',
     badge: '🎓',
     skills: ['MongoDB', 'Express.js', 'React', 'Node.js'],
     description:
-      'Verified MERN Stack Development Certification issued upon successful completion of intensive full-stack training with grade sheet.',
+      'Certificate for completing the one-year Modern Web Application Development training programme, Batch 14.',
     color: '#00f5ff',
   },
   {
@@ -277,7 +277,8 @@ const Certifications = () => {
                   <Box
                     sx={{
                       position: 'relative',
-                      height: '200px',
+                      height: cert.credentialType === 'pdf' ? 'auto' : '200px',
+                      aspectRatio: cert.credentialType === 'pdf' ? '842.13 / 595.52' : undefined,
                       overflow: 'hidden',
                       background: isDark ? '#020508' : '#f1f5f9',
                       borderBottom: `1px solid ${isDark ? 'rgba(255,255,255,0.04)' : 'rgba(15,23,42,0.05)'}`,
@@ -317,9 +318,11 @@ const Certifications = () => {
                       sx={{
                         position: 'absolute',
                         inset: 0,
-                        background: isDark
-                          ? `linear-gradient(to bottom, ${cert.color}11 0%, transparent 30%, rgba(6,14,23,0.85) 100%)`
-                          : 'linear-gradient(to bottom, transparent 30%, rgba(255,255,255,0.98) 100%)',
+                        background: cert.credentialType === 'pdf'
+                          ? 'transparent'
+                          : isDark
+                            ? `linear-gradient(to bottom, ${cert.color}11 0%, transparent 30%, rgba(6,14,23,0.85) 100%)`
+                            : 'linear-gradient(to bottom, transparent 30%, rgba(255,255,255,0.98) 100%)',
                       }}
                     />
 
