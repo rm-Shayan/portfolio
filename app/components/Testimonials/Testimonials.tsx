@@ -77,7 +77,7 @@ const Testimonials = () => {
 
     return (
         <Box id="testimonials" sx={{ py: '7rem', background: 'background.default' }}>
-            <Container maxWidth="lg">
+            <Container maxWidth={false} sx={{ px: { xs: 2, sm: 3, md: 4, lg: 6 } }}>
                 <Stack 
                     direction={{ xs: 'column', sm: 'row' }} 
                     justifyContent="space-between" 

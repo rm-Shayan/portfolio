@@ -78,7 +78,7 @@ const Contact = () => {
 
     return (
         <Box id="contact" sx={{ py: '8rem', background: 'background.default' }}>
-            <Container maxWidth="lg">
+            <Container maxWidth={false} sx={{ px: { xs: 2, sm: 3, md: 4, lg: 6 } }}>
                 <SectionHeader num="07" title="Get In Touch" />
 
                 <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: { xs: 6, md: 10 } }}>

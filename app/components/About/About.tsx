@@ -126,7 +126,7 @@ const About = () => {
         overflow: "hidden",
       }}
     >
-      <Container maxWidth="lg">
+      <Container maxWidth={false} sx={{ px: { xs: 2, sm: 3, md: 4, lg: 6 } }}>
         <SectionHeader num="01" title="About & Systems" />
 
         <Box sx={{ display: "flex", flexDirection: "column", gap: { xs: 8, md: 10 } }}>

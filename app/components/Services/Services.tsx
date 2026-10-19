@@ -68,7 +68,7 @@ const Services = () => {
 
     return (
         <Box id="services" sx={{ py: { xs: '5rem', md: '8rem' }, background: 'background.default' }}>
-            <Container maxWidth="lg">
+            <Container maxWidth={false} sx={{ px: { xs: 2, sm: 3, md: 4, lg: 6 } }}>
                 <SectionHeader num="02" title="Professional Services" />
 
                 <Box 

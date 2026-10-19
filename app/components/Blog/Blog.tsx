@@ -41,7 +41,7 @@ const Blog = () => {
 
     return (
         <Box id="blog" sx={{ py: '7rem', background: 'background.default' }}>
-            <Container maxWidth="lg">
+            <Container maxWidth={false} sx={{ px: { xs: 2, sm: 3, md: 4, lg: 6 } }}>
                 <SectionHeader num="06" title="Digital Insights" />
 
                 {/* --- FLEX CONTAINER --- */}

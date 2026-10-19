@@ -68,7 +68,7 @@ const Experience = () => {
         overflow: 'hidden'
       }}
     >
-      <Container maxWidth="lg">
+      <Container maxWidth={false} sx={{ px: { xs: 2, sm: 3, md: 4, lg: 6 } }}>
         <SectionHeader num="04" title="My Journey" />
 
         <Box sx={{ position: 'relative', mt: { xs: 4, md: 8 } }}>

@@ -119,7 +119,7 @@ const Projects = () => {
         }}
       />
 
-      <Container maxWidth="lg">
+      <Container maxWidth={false} sx={{ px: { xs: 2, sm: 3, md: 4, lg: 6 } }}>
         <Stack direction="row" alignItems="flex-end" justifyContent="space-between" sx={{ mb: 6, position: 'relative', zIndex: 1 }}>
           <Box>
             <SectionHeader num="03" title="Production Artifacts" />

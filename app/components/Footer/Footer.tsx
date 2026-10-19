@@ -25,7 +25,7 @@ const Footer = () => {
                 zIndex: 1,
             }}
         >
-            <Container maxWidth="lg">
+            <Container maxWidth={false} sx={{ px: { xs: 2, sm: 3, md: 4, lg: 6 } }}>
                 <Stack
                     direction={{ xs: 'column', md: 'row' }}
                     spacing={4}

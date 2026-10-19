@@ -146,7 +146,7 @@ const Certifications = () => {
         }}
       />
 
-      <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
+      <Container maxWidth={false} sx={{ position: 'relative', zIndex: 1, px: { xs: 2, sm: 3, md: 4, lg: 6 } }}>
         <SectionHeader num="05" title="Credentials & Certs" />
 
         {/* Subtitle badge */}
@@ -288,13 +288,15 @@ const Certifications = () => {
                     {cert.preview.toLowerCase().endsWith('.pdf') ? (
                       <Box
                         component="iframe"
-                        src={cert.preview}
+                        src={`${cert.preview}#toolbar=0&navpanes=0&scrollbar=0&statusbar=0&messages=0&view=Fit`}
                         title={`${cert.title} preview`}
+                        scrolling="no"
                         sx={{
                           width: '100%',
                           height: '100%',
                           border: 'none',
                           display: 'block',
+                          pointerEvents: 'none',
                         }}
                       />
                     ) : (

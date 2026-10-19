@@ -40,7 +40,7 @@ const Navbar = () => {
         zIndex: 1100,
       }}
     >
-      <Container maxWidth="xl">
+      <Container maxWidth={false} sx={{ px: { xs: 2, sm: 3, md: 4, lg: 6 } }}>
         <Toolbar disableGutters sx={{ justifyContent: 'space-between' }}>
           {/* Logo */}
           <Typography
